@@ -1,4 +1,5 @@
 import 'Components/view/index.scss';
+import './scss/main.scss';
 import englishImg from './assets/images/english.jpg';
 import { headerCreate } from './components/view/header/header';
 
