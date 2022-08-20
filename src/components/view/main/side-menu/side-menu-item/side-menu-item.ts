@@ -4,6 +4,7 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     const listItem = new Control(sideMenuList, 'li', 'side-menu-item');
     const listItemLink = new Control(listItem.node, 'a');
     listItemLink.node.setAttribute('href', `/${title.toLowerCase()}`);
+    listItemLink.node.onclick = route;
 
     new Control(listItemLink.node, 'b');
     new Control(listItemLink.node, 'b');
@@ -13,11 +14,10 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     new Control(listItemLink.node, 'span', 'side-menu-item__title', title);
 };
 
-// const route = (event: Event) => {
-//     event = event || window.event;
-//     event.preventDefault();
-//     const target = event.target as EventTarget;
-//     window.history.pushState({}, '', target.href);
-// };
-
-// window.route = route;
+const route = (event: Event) => {
+    event = event || window.event;
+    event.preventDefault();
+    const target = event.target as HTMLAnchorElement;
+    console.log(target);
+    window.history.pushState({}, '', target.href);
+};
