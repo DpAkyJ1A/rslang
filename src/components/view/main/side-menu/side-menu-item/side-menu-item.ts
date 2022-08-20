@@ -19,4 +19,29 @@ const route = (event: Event) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLAnchorElement;
     window.history.pushState({}, '', target.href);
+    handleLocation();
 };
+
+interface IRoutes {
+    404: string;
+    [key: string]: string;
+}
+
+const routes: IRoutes = {
+    404: '',
+    '/главная': '',
+    '/учебник': '',
+    '/словарь': '',
+    '/игры': '',
+    '/статистика': '',
+    '/команда': '',
+};
+
+const handleLocation = async () => {
+    const path: string = window.location.pathname;
+    const route = routes[path] || routes['404'];
+    const html = await fetch(route).then((data) => data.text());
+    document.getElementById('main')!.innerHTML = html;
+};
+
+handleLocation();
