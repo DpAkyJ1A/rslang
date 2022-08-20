@@ -1,4 +1,5 @@
 import Control from 'control';
+import { handleLocation } from '../../../controller/handleLocation';
 
 export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, iconName: string) => {
     const listItem = new Control(sideMenuList, 'li', 'side-menu-item');
@@ -12,6 +13,8 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     const icon = new Control(listItemIconBox.node, 'ion-icon');
     icon.node.setAttribute('name', iconName);
     new Control(listItemLink.node, 'span', 'side-menu-item__title', title);
+
+    handleLocation();
 };
 
 const route = (event: Event) => {
@@ -21,27 +24,3 @@ const route = (event: Event) => {
     window.history.pushState({}, '', target.href);
     handleLocation();
 };
-
-interface IRoutes {
-    404: string;
-    [key: string]: string;
-}
-
-const routes: IRoutes = {
-    404: '',
-    '/главная': '',
-    '/учебник': '',
-    '/словарь': '',
-    '/игры': '',
-    '/статистика': '',
-    '/команда': '',
-};
-
-const handleLocation = async () => {
-    const path: string = window.location.pathname;
-    const route = routes[path] || routes['404'];
-    const html = await fetch(route).then((data) => data.text());
-    document.getElementById('main')!.innerHTML = html;
-};
-
-handleLocation();
