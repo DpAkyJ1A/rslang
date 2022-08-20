@@ -17,7 +17,6 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
 const route = (event: Event) => {
     event = event || window.event;
     event.preventDefault();
-    const target = event.target as HTMLAnchorElement;
-    console.log(target);
+    const target = event.currentTarget as HTMLAnchorElement;
     window.history.pushState({}, '', target.href);
 };
