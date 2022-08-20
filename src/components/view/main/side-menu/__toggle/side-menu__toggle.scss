@@ -1,0 +1,39 @@
+.side-menu__toggle{
+  position: fixed;
+  top: 60px;
+  left: 25px;
+  width: 50px;
+  height: 50px;
+  background-color: #4d5bf9;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: left 0.5s ease;
+}
+
+.side-menu__toggle.active{
+  left: 255px;
+}
+
+.side-menu__toggle ion-icon{
+  position: absolute;
+  color: #fff;
+  font-size: 34px;
+  display: none;
+}
+
+.side-menu__toggle.active{
+  background: #ff4d89;
+}
+
+.side-menu__toggle .side-menu__toggle_open,
+.side-menu__toggle.active .side-menu__toggle_close{
+  display: block;
+}
+
+.side-menu__toggle .side-menu__toggle_close,
+.side-menu__toggle.active .side-menu__toggle_open{
+  display: none;
+}

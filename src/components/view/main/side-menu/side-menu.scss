@@ -1,0 +1,26 @@
+@import './side-menu-item/side-menu-item.scss';
+@import './__toggle/side-menu__toggle.scss';
+
+.side-menu{
+  position: fixed;
+  top: 120px;
+  bottom: 100px;
+  left: 0;
+  width: 70px;
+  overflow: hidden;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: initial;
+  border-left: 5px solid #4d5bf9;
+  background: #4d5bf9;
+  transition: width 0.5s ease;
+  ul{
+    padding-left: 5px;
+    padding-top: 20px;
+    width: 100%;
+  }
+}
+
+.side-menu.active{
+  width: 300px;
+}
