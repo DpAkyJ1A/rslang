@@ -1,11 +1,9 @@
+@import "Scss/main.scss";
+
 @import "./header/header.scss";
 @import "./side-menu/side-menu.scss";
 @import "./main/main.scss";
 @import "./footer/footer.scss";
-
-body{
-
-}
 
 #root{
   display: flex;

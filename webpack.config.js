@@ -45,6 +45,7 @@ const baseConfig = {
         alias: {
             Components: path.resolve(__dirname, 'src/components'),
             Assets: path.resolve(__dirname, 'src/assets'),
+            Scss: path.resolve(__dirname, 'src/scss'),
             control$: path.resolve(__dirname, 'src/components/view/control.ts'),
         },
     },

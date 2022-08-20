@@ -10,7 +10,7 @@
   a {
     display: flex;
     text-decoration: none;
-    color: white;
+    color: $color-light-xl;
     width: 100%;
   }
 }
@@ -39,13 +39,13 @@
 
 .side-menu-item:hover{
   z-index: 1;
-  background: lighten(#4d5bf9, 10%);
+  background: lighten($color-primary, 10%);
 }
 
 .side-menu-item.active{
-  background: #fff;
+  background: $color-light-xl;
   *{
-    color: #333;
+    color: $color-dark-l;
   }
 }
 
@@ -54,7 +54,7 @@
   position: absolute;
   height: 20px;
   width: 100%;
-  background: #fff;
+  background: $color-light-xl;
   display: none;
 }
 
@@ -74,7 +74,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #4d5bf9;
+  background: $color-primary;
 }
 
 .side-menu-item b:nth-child(1)::before{

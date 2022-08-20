@@ -1,5 +1,5 @@
 import 'Components/view/index.scss';
-import './scss/main.scss';
+
 import { createHeader } from './components/view/header/header';
 import { createSideMenu } from './components/view/side-menu/side-menu';
 import { createMain } from './components/view/main/main';
