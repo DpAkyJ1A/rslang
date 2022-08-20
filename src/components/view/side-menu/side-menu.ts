@@ -2,8 +2,8 @@ import Control from 'control';
 import { createSideMenuItem } from './side-menu-item/side-menu-item';
 import { createSideMenuToggle } from './__toggle/side-menu__toggle';
 
-export const createSideMenu = (main: HTMLElement) => {
-    const sideMenu = new Control(main, 'nav', 'side-menu');
+export const createSideMenu = (root: HTMLElement) => {
+    const sideMenu = new Control(root, 'nav', 'side-menu');
 
     createSideMenuToggle(sideMenu.node);
 

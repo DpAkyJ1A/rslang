@@ -1,7 +1,7 @@
 import Control from 'control';
-import { headerH1Create } from './__h1/header__h1';
+import { createHeaderH1 } from './__h1/header__h1';
 
-export const headerCreate = (root: HTMLElement) => {
+export const createHeader = (root: HTMLElement) => {
     const header = new Control(root, 'header', 'header');
-    headerH1Create(header.node);
+    createHeaderH1(header.node);
 };

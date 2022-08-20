@@ -1,7 +1,13 @@
 @import "./header/header.scss";
+@import "./side-menu/side-menu.scss";
 @import "./main/main.scss";
+@import "./footer/footer.scss";
 
 body{
-  background-color: aqua;
-  background-image: url(../../assets/icons/rss-logo.svg);
+
+}
+
+#root{
+  display: flex;
+  flex-wrap: wrap;
 }

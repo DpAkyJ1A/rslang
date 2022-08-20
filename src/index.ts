@@ -1,15 +1,13 @@
 import 'Components/view/index.scss';
 import './scss/main.scss';
-import englishImg from './assets/images/english.jpg';
-import { headerCreate } from './components/view/header/header';
-import { createSideMenu } from './components/view/main/side-menu/side-menu';
+import { createHeader } from './components/view/header/header';
+import { createSideMenu } from './components/view/side-menu/side-menu';
+import { createMain } from './components/view/main/main';
+import { createFooter } from './components/view/footer/footer';
 
 const root = document.querySelector('#root')! as HTMLElement;
 
-headerCreate(root);
+createHeader(root);
 createSideMenu(root);
-
-const img = document.createElement('img') as HTMLImageElement;
-img.src = englishImg;
-
-root.append(img);
+createMain(root);
+createFooter(root);
