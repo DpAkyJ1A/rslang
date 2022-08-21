@@ -14,7 +14,7 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     icon.node.setAttribute('name', iconName);
     new Control(listItemLink.node, 'span', 'side-menu-item__title', title);
 
-    handleLocation();
+    //handleLocation();
 };
 
 const route = (event: Event) => {
