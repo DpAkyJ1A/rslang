@@ -29,11 +29,11 @@ export default class Textbook {
         this.node = new Control(null, 'div', 'textbook', undefined);
     }
 
-    draw() {
+    draw(container: HTMLElement) {
         const header = createTextbookHeader('TextBook');
         this.node.node.append(header);
         this.drawCards();
-        return this.node.node;
+        container.append(this.node.node);
     }
 
     drawCards(data?: IWord[]) {
