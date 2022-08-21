@@ -5,7 +5,15 @@
 @import "./main/main.scss";
 @import "./footer/footer.scss";
 
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
 #root{
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
 }

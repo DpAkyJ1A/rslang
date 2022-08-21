@@ -6,7 +6,6 @@
   cursor: pointer;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  margin-bottom: 16px;
   a {
     display: flex;
     text-decoration: none;
@@ -38,8 +37,9 @@
 }
 
 .side-menu-item:hover{
-  z-index: 1;
-  background: lighten($color-primary, 10%);
+  *{
+    color: $color-dark-l;
+  }
 }
 
 .side-menu-item.active{
