@@ -1,9 +1,9 @@
 import Control from 'control';
 
 export const createTextbookHeader = (title: string) => {
-    const header = new Control(null, 'div', 'textbook__header', undefined);
+    const header = new Control(null, 'div', 'textbook__header');
     new Control(header.node, 'h2', 'textbook__title', `${title}`);
-    const settingsToggle = new Control(header.node, 'div', 'textbook__settings settings', undefined);
+    const settingsToggle = new Control(header.node, 'div', 'textbook__settings settings');
     settingsToggle.node.innerHTML = `
       <span class="settings__label">Show translation</span>
       <div class="settings__toggle-wrapper">

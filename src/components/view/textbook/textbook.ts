@@ -26,7 +26,7 @@ export default class Textbook {
 
     constructor() {
         this.cardsOnPage = [];
-        this.node = new Control(null, 'div', 'textbook', undefined);
+        this.node = new Control(null, 'div', 'textbook');
     }
 
     draw(container: HTMLElement) {
@@ -37,7 +37,7 @@ export default class Textbook {
     }
 
     drawCards(data?: IWord[]) {
-        const cardList = new Control(this.node.node, 'div', 'textbook__words', undefined);
+        const cardList = new Control(this.node.node, 'div', 'textbook__words');
         if (!data) {
             const arr = [example, example];
             arr.forEach((i) => {

@@ -39,13 +39,13 @@ export default class Card {
     }
 
     render() {
-        const preview = new Control(this.node, 'div', 'card__preview', undefined);
+        const preview = new Control(this.node, 'div', 'card__preview');
         preview.node.innerHTML = `
             <img class="card__img" src="${this.image}" alt="${this.word}">
         `;
 
-        const content = new Control(this.node, 'div', 'card__content', undefined);
-        const header = new Control(content.node, 'div', 'card__header', undefined);
+        const content = new Control(this.node, 'div', 'card__content');
+        const header = new Control(content.node, 'div', 'card__header');
         header.node.innerHTML = `
             <svg class="card__icon card__icon_folder" height="25px" width="25px"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>
             <h3 class="card__word">${this.word} - ${this.transcription}</h3>
@@ -56,21 +56,21 @@ export default class Card {
         `;
         (header.node.querySelector('.card__icon_play') as HTMLElement).onclick = this.playAudio;
         new Control(content.node, 'h4', 'card__translation', `${this.wordTranslate}`);
-        const meaning = new Control(content.node, 'div', 'card__example', undefined);
+        const meaning = new Control(content.node, 'div', 'card__example');
         meaning.node.innerHTML = `
             <h3>${this.textMeaning}</h3>
             <h4 class="card__translation">
             ${this.textMeaningTranslate}
             </h4>          
         `;
-        const example = new Control(content.node, 'div', 'card__example', undefined);
+        const example = new Control(content.node, 'div', 'card__example');
         example.node.innerHTML = `
             <h3>${this.textExample}</h3>
             <h4 class="card__translation">
             ${this.textExampleTranslate}
             </h4>          
         `;
-        const controls = new Control(content.node, 'div', 'card__controls', undefined);
+        const controls = new Control(content.node, 'div', 'card__controls');
         controls.node.innerHTML = `
             <button class="btn-reset">hard</button>
             <button class="btn-reset">learned</button>
