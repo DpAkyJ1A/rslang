@@ -4,15 +4,16 @@ import Card from '../common/card/card';
 import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 // пока без апи
+const URL = 'https://rs-lang-team-156.herokuapp.com/';
 const example = {
     id: '2',
     group: 1,
     page: 1,
     word: 'chanel',
-    image: 'https://rs-lang-react.herokuapp.com/files/01_1205.jpg',
-    audio: 'https://rs-lang-react.herokuapp.com/files/01_1205.mp3',
-    audioMeaning: 'https://rs-lang-react.herokuapp.com/files/01_1205_meaning.mp3',
-    audioExample: 'https://rs-lang-react.herokuapp.com/files/01_1205_example.mp3',
+    image: 'files/01_1205.jpg',
+    audio: 'files/01_1205.mp3',
+    audioMeaning: 'files/01_1205_meaning.mp3',
+    audioExample: 'files/01_1205_example.mp3',
     textMeaning: 'A channel is a long, deep space between two edges.',
     textExample: 'The river cut a channel through the rocks.',
     transcription: '[ʧǽnl]',
@@ -39,7 +40,7 @@ export default class Textbook extends Page {
             const arr = [example, example];
             arr.forEach((i) => {
                 const obj = i as IWord;
-                const card = new Card(obj);
+                const card = new Card(obj, URL);
                 cardList.node.append(card.render());
             });
         }
