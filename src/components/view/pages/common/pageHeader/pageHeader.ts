@@ -1,6 +1,6 @@
 import Control from 'control';
 
-export const createTextbookHeader = (title: string) => {
+export const createPageHeader = (title: string) => {
     const header = new Control(null, 'div', 'textbook__header');
     new Control(header.node, 'h2', 'textbook__title', `${title}`);
     const settingsToggle = new Control(header.node, 'div', 'textbook__settings settings');

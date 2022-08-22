@@ -1,6 +1,7 @@
 import Control from 'control';
-import Card from './card/card';
-import { createTextbookHeader } from './__header/header';
+import Page from '../page';
+import Card from '../common/card/card';
+import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 // пока без апи
 const example = {
@@ -20,33 +21,29 @@ const example = {
     textExampleTranslate: 'Река пробила канал сквозь скалы',
 };
 
-export default class Textbook {
-    public node: Control;
-    private cardsOnPage: Array<HTMLElement>;
-
-    constructor() {
-        this.cardsOnPage = [];
-        this.node = new Control(null, 'div', 'textbook');
+export default class Textbook extends Page {
+    constructor(className: string) {
+        super(className);
     }
 
-    draw(container: HTMLElement) {
-        const header = createTextbookHeader('TextBook');
-        this.node.node.append(header);
-        this.drawCards();
-        container.append(this.node.node);
+    render(container: HTMLElement, data?: IWord[]) {
+        const header = createPageHeader('TextBook');
+        const cardList = this.drawCards(data || undefined);
+        this.container.append(header, cardList.node);
+        container.append(this.container);
     }
 
-    drawCards(data?: IWord[]) {
-        const cardList = new Control(this.node.node, 'div', 'textbook__words');
+    drawCards(data: IWord[] | undefined) {
+        const cardList = new Control(this.container, 'div', 'textbook__words');
         if (!data) {
             const arr = [example, example];
             arr.forEach((i) => {
                 const obj = i as IWord;
                 const card = new Card(obj);
                 cardList.node.append(card.render());
-                this.cardsOnPage.push(card.render());
             });
         }
+        return cardList;
     }
 }
 
