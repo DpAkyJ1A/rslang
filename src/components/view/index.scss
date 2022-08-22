@@ -1,7 +1,7 @@
 @import "./header/header.scss";
-@import "./textbook/card/card.scss";
-@import "./textbook/__header/header.scss";
-@import "./textbook/textbook.scss";
+@import "./pages/common/card/card.scss";
+@import "./pages/textbook/textbook.scss";
+@import "./pages/common/pageHeader/pageHeader.scss";
 
 body{
   background-color: aqua;
