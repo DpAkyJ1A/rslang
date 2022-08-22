@@ -1,6 +1,19 @@
-@import "./header/header.scss";
+@import "Scss/main.scss";
 
-body{
-  background-color: aqua;
-  background-image: url(../../assets/icons/rss-logo.svg);
+@import "./header/header.scss";
+@import "./side-menu/side-menu.scss";
+@import "./main/main.scss";
+@import "./footer/footer.scss";
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+#root{
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -1,7 +1,9 @@
 import Control from 'control';
-import { headerH1Create } from './__h1/header__h1';
+import { createHeaderAuth } from './__auth/header__auth';
 
-export const headerCreate = (root: HTMLElement) => {
+export const createHeader = (root: HTMLElement) => {
     const header = new Control(root, 'header', 'header');
-    headerH1Create(header.node);
+    const headerWrapper = new Control(header.node, 'div', 'header__h1-wrapper');
+    new Control(headerWrapper.node, 'h1', 'header__h1', 'RSLang');
+    createHeaderAuth(header.node);
 };
