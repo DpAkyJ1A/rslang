@@ -2,6 +2,8 @@ import Control from 'control';
 import Page from '../page';
 import Card from '../common/card/card';
 import { createPageHeader } from '../common/pageHeader/pageHeader';
+import { createLevels } from './__levels/levels';
+import { createPgnEl } from './__pagination/pagination';
 
 // пока без апи
 const URL = 'https://rs-lang-team-156.herokuapp.com/';
@@ -27,10 +29,12 @@ export default class Textbook extends Page {
         super(className);
     }
 
-    render(container: HTMLElement, data?: IWord[]) {
+    public render(container: HTMLElement, data?: IWord[]) {
         const header = createPageHeader('TextBook');
+        const levels = createLevels();
         const cardList = this.drawCards(data || undefined);
-        this.container.append(header, cardList.node);
+        const pgn = createPgnEl(6);
+        this.container.append(header, levels, pgn, cardList.node);
         container.append(this.container);
     }
 
