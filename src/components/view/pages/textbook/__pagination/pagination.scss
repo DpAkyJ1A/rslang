@@ -6,6 +6,7 @@
 }
 
 .pagination__icon {
+  cursor: pointer;
   height: 48px;
   width: 48px;
 }
@@ -18,6 +19,7 @@
 }
 
 .pagination__item {
+  cursor: pointer;
   box-sizing: border-box;
   display: flex;
   -webkit-box-pack: center;
@@ -37,4 +39,12 @@
 .pagination__item_active {
   border: 2px solid rgb(250, 170, 186);
   color: rgb(250, 170, 186);
+}
+
+.pagination__item_disabled {
+  pointer-events: none;
+}
+
+.pagination__item_disabled svg {
+  fill: grey;
 }

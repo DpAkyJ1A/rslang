@@ -33,7 +33,7 @@ export default class Textbook extends Page {
         const header = createPageHeader('TextBook');
         const levels = createLevels();
         const cardList = this.drawCards(data || undefined);
-        const pgn = createPgnEl(6);
+        const pgn = createPgnEl(29);
         this.container.append(header, levels, pgn, cardList.node);
         container.append(this.container);
     }
