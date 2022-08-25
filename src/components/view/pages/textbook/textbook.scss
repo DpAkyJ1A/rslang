@@ -1,0 +1,30 @@
+@import './__levels/levels.scss';
+@import './__pagination/pagination.scss';
+@import '../common/card/card.scss';
+@import '../common/pageHeader/pageHeader.scss';
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.btn-reset {
+  // background: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.textbook {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.textbook__words {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

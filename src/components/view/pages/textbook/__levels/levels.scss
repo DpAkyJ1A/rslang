@@ -1,0 +1,14 @@
+.textbook__level-wrapper {
+  margin-bottom: 30px;
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.textbook__level-btn {
+  padding: 15px 15px;
+  color: #fff;
+  border: 1px solid #eb4f37;
+  background-color: #eb4f37;
+  border-radius: 15px;
+}
