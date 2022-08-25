@@ -1,6 +1,7 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
-import { createLayout } from './components/view/app';
+// import { createLayout } from './components/view/appView';
+import { App } from './components/app/app';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -17,4 +18,5 @@ const ionIconNoModule = new Control(body, 'script');
 ionIconNoModule.node.setAttribute('nomodule', '');
 ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
-createLayout(root);
+const app = new App(root);
+app.start();
