@@ -50,16 +50,16 @@ export const createPgnEl = (page: number) => {
                         link.node.innerHTML = '...';
                         break;
                     case 4:
-                        link.node.innerHTML = 26 + '';
+                        link.node.innerHTML = NUMBER_OF_PAGES - 4 + '';
                         break;
                     case 5:
-                        link.node.innerHTML = 27 + '';
+                        link.node.innerHTML = NUMBER_OF_PAGES - 3 + '';
                         break;
                     case 6:
-                        link.node.innerHTML = 28 + '';
+                        link.node.innerHTML = NUMBER_OF_PAGES - 2 + '';
                         break;
                     case 7:
-                        link.node.innerHTML = 29 + '';
+                        link.node.innerHTML = NUMBER_OF_PAGES - 1 + '';
                         break;
                 }
             } else {
