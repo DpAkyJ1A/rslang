@@ -1,13 +1,20 @@
 import 'Components/view/index.scss';
-import './scss/main.scss';
-import englishImg from './assets/images/english.jpg';
-import { headerCreate } from './components/view/header/header';
+import Control from './components/view/control';
+import { createLayout } from './components/view/app';
 
-const root = document.querySelector('#root')! as HTMLElement;
+const body = document.body as HTMLBodyElement;
+let root = document.querySelector('#root') as HTMLElement | null;
+if (root === null) {
+    root = new Control(body, 'div').node;
+    root.id = 'root';
+}
 
-headerCreate(root);
+const ionIconModule = new Control(body, 'script');
+ionIconModule.node.setAttribute('type', 'module');
+ionIconModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js');
 
-const img = document.createElement('img') as HTMLImageElement;
-img.src = englishImg;
+const ionIconNoModule = new Control(body, 'script');
+ionIconNoModule.node.setAttribute('nomodule', '');
+ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
-root.append(img);
+createLayout(root);

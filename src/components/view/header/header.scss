@@ -1,7 +1,25 @@
-@import "__h1/header__h1.scss";
+@import "./__auth/header__auth.scss";
 
 .header{
-  background-color: bisque;
+  background-color: $color-primary;
+  color: $color-light-xl;
   width: 100%;
-  height: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.header__h1-wrapper{
+  height: 50px;
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__h1-wrapper:hover{
+  color: $color-dark-l;
+  cursor: pointer;
+}
+

@@ -1,0 +1,28 @@
+.footer__git-container{
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 20px;
+  color: $color-light-xl;
+  text-decoration: none;
+}
+
+.footer__git-container:hover{
+  color: $color-dark-l;
+}
+
+.footer__git{
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.footer__git-name{
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 5px;
+}
