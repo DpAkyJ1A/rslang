@@ -3,6 +3,8 @@ import { createSideMenu } from './side-menu/side-menu';
 import { createFooter } from './footer/footer';
 import Textbook from './pages/textbook/textbook';
 import Control from './control';
+import { IState } from '../controller/controller';
+import { IWord } from '../api/interfaces';
 
 export default class AppView {
     private root: HTMLElement;
@@ -21,8 +23,8 @@ export default class AppView {
         createFooter(this.root);
     }
 
-    drawCurrentView() {
-        this.main.node.innerHTML = '';
+    drawCurrentView(state: IState, data?: IWord[]) {
+        this.main.node.innerHTML = ``;
         this.textbook.render(this.main.node);
     }
 }
