@@ -1,4 +1,5 @@
 import Control from 'control';
+import { route } from '../../../side-menu/side-menu-item/side-menu-item';
 
 const NUMBER_OF_PAGES = 30;
 const TOTAL_ELEMENTS_TO_DISPLAY = 9;
@@ -10,6 +11,7 @@ export const createPgnEl = (page: number) => {
     for (let i = 1; i <= TOTAL_ELEMENTS_TO_DISPLAY; i++) {
         const item = new Control(list.node, 'li', 'pagination__item');
         const link = new Control(item.node, 'a');
+        link.node.onclick = route;
 
         if (i === 1) {
             link.node.innerHTML = `
