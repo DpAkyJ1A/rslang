@@ -30,6 +30,7 @@ export default class Textbook extends Page {
     }
 
     public render(container: HTMLElement, data?: IWord[]) {
+        this.container.innerHTML = '';
         const header = createPageHeader('TextBook');
         const levels = createLevels();
         const cardList = this.drawCards(data || undefined);
