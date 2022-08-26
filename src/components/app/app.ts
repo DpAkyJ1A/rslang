@@ -1,15 +1,18 @@
+import Controller, { IState } from '../controller/controller';
 import AppView from '../view/appView';
 
 export class App {
     private root: HTMLElement;
     private view: AppView;
-    constructor(root: HTMLElement) {
+    private controller: Controller;
+    constructor(root: HTMLElement, state: IState) {
         this.root = root;
         this.view = new AppView(root);
+        this.controller = new Controller(state, (state, data?) => this.view.drawCurrentView(state, data));
     }
 
     start() {
         this.view.drawStaticInterface();
-        this.view.drawCurrentView(); //здесь я передам это метод в качестве колбека в контроллер, пока по дефолту грузит страницу учебника, тк готова
+        this.controller.handleLocation();
     }
 }
