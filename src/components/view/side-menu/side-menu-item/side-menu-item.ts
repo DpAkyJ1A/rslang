@@ -17,10 +17,13 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     //handleLocation();
 };
 
-const route = (event: Event) => {
+export const route = (event: Event) => {
     event = event || window.event;
     event.preventDefault();
     const target = event.currentTarget as HTMLAnchorElement;
     window.history.pushState({}, '', target.href);
-    handleLocation();
+    // handleLocation();
+    document.dispatchEvent(test);
 };
+
+const test = new Event('event');
