@@ -17,6 +17,7 @@ export const createSideMenu = (root: HTMLElement) => {
     createSideMenuItem(sideMenuList.node, 'Команда', 'people-outline');
 
     addActiveClassToSelectedListItem(sideMenuList.node);
+    return sideMenu.node;
 };
 
 function addActiveClassToSelectedListItem(sideMenuList: HTMLElement) {
