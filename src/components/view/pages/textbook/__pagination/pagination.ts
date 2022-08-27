@@ -4,7 +4,7 @@ import { route } from '../../../side-menu/side-menu-item/side-menu-item';
 const NUMBER_OF_PAGES = 30;
 const TOTAL_ELEMENTS_TO_DISPLAY = 9;
 
-export const createPgnEl = (page: number) => {
+export const createPgnEl = (page: number, group: number) => {
     const wrapper = new Control(null, 'div', 'textbook__pagination pagination');
     const list = new Control(wrapper.node, 'ul', 'pagination__list');
 
@@ -18,11 +18,13 @@ export const createPgnEl = (page: number) => {
               <svg class="pagination__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M14 7l-5 5 5 5V7z"></path></svg>
             `;
             if (page === 1) item.node.classList.add('pagination__item_disabled');
+            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page - 1}`;
         } else if (i === TOTAL_ELEMENTS_TO_DISPLAY) {
             link.node.innerHTML = `
               <svg class="pagination__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5v10z"></path></svg>
             `;
             if (page === NUMBER_OF_PAGES) item.node.classList.add('pagination__item_disabled');
+            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page + 1}`;
         } else if (i === TOTAL_ELEMENTS_TO_DISPLAY - 1) {
             link.node.innerHTML = NUMBER_OF_PAGES + '';
         } else if (i === 2) {
@@ -44,12 +46,14 @@ export const createPgnEl = (page: number) => {
                         break;
                     case 7:
                         link.node.innerHTML = '...';
+                        (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page + 3}`;
                         break;
                 }
             } else if (page > NUMBER_OF_PAGES - 4) {
                 switch (i) {
                     case 3:
                         link.node.innerHTML = '...';
+                        (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page - 3}`;
                         break;
                     case 4:
                         link.node.innerHTML = NUMBER_OF_PAGES - 4 + '';
@@ -68,6 +72,7 @@ export const createPgnEl = (page: number) => {
                 switch (i) {
                     case 3:
                         link.node.innerHTML = '...';
+                        (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page - 3}`;
                         break;
                     case 4:
                         link.node.innerHTML = page - 1 + '';
@@ -80,11 +85,15 @@ export const createPgnEl = (page: number) => {
                         break;
                     case 7:
                         link.node.innerHTML = '...';
+                        (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page + 3}`;
                         break;
                 }
             }
         }
         if (Number(link.node.innerHTML) === page) item.node.classList.add('pagination__item_active');
+        if (!(link.node as HTMLAnchorElement).href) {
+            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${link.node.innerHTML}`;
+        }
     }
     return wrapper.node;
 };
