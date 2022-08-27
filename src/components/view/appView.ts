@@ -25,7 +25,14 @@ export default class AppView {
 
     drawCurrentView(state: IState, data?: IWord[]) {
         this.main.node.innerHTML = ``;
-        this.textbook.render(this.main.node);
+        const wordArr = data ? data : [];
+        switch (state.view) {
+            case 'textbook':
+                this.textbook.render(this.main.node, wordArr);
+                break;
+            default:
+                new Control(this.main.node, 'div', `${state.view}`, `Hello!! I'm ${state.view} page`);
+        }
     }
 }
 
