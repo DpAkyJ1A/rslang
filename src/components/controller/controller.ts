@@ -1,6 +1,7 @@
 import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
 import { routes } from '../model/routes';
+import { parseHashString } from '../utils/parseHashString';
 
 export default class Controller extends ApiService {
     state: IState;
@@ -18,11 +19,25 @@ export default class Controller extends ApiService {
     }
 
     handleLocation() {
-        const path: string = window.location.pathname;
-        const view = decodeURI(path).slice(1);
-        console.log(view);
+        const params = parseHashString(window.location.href);
+        this.updateState(params);
+        this.drawMain(params.view);
+    }
+
+    updateState(params: { [N: string]: string }) {
+        this.setViewState = params.view;
+        if (params['view'] === 'textbook') {
+            this.setTextbookState = { group: params.group || '1', page: params.page || '1' };
+        }
+    }
+
+    set setViewState(view: string) {
         this.state.view = view;
-        this.drawMain();
+    }
+
+    set setTextbookState(params: { group: string; page: string }) {
+        this.state.textbook.group = +params.group;
+        this.state.textbook.page = +params.page;
     }
 
     // public async getWords(page: number, group: number) {
@@ -34,9 +49,13 @@ export default class Controller extends ApiService {
     //     });
     // }
 
-    public drawMain() {
-        console.log('рисуем' + ' ' + this.state.view);
-        this.drawView(this.state);
+    public async drawMain(view: string) {
+        if (view === 'textbook') {
+            const data = await super.getWords(this.state.textbook.page, this.state.textbook.group);
+            this.drawView(this.state, data);
+        } else {
+            this.drawView(this.state);
+        }
     }
 }
 
