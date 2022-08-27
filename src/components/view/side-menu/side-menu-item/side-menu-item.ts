@@ -4,7 +4,7 @@ import { handleLocation } from '../../../controller/handleLocation';
 export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, iconName: string) => {
     const listItem = new Control(sideMenuList, 'li', 'side-menu-item');
     const listItemLink = new Control(listItem.node, 'a');
-    listItemLink.node.setAttribute('href', `/${title.toLowerCase()}`);
+    listItemLink.node.setAttribute('href', `/#${title.toLowerCase()}`);
     listItemLink.node.onclick = route;
 
     new Control(listItemLink.node, 'b');
