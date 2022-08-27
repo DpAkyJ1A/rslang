@@ -32,7 +32,6 @@ export default class Textbook extends Page {
     public render(container: HTMLElement, data?: IWord[]) {
         this.container.innerHTML = '';
         const header = createPageHeader('TextBook');
-        const levels = createLevels();
         let group, page;
         if (!data) {
             group = 1;
@@ -40,6 +39,7 @@ export default class Textbook extends Page {
         } else {
             group = (data as IWord[])[0].group;
             page = (data as IWord[])[0].page;
+            const levels = createLevels(group);
             const pgn = createPgnEl(page, group);
             const cardList = this.drawCards(data || []);
             this.container.append(header, levels, pgn, cardList.node);
