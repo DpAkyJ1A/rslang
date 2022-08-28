@@ -30,19 +30,29 @@ export default class Textbook extends Page {
     }
 
     public render(container: HTMLElement, data?: IWord[]) {
+        this.container.innerHTML = '';
         const header = createPageHeader('TextBook');
-        const levels = createLevels();
-        const cardList = this.drawCards(data || undefined);
-        const pgn = createPgnEl(29);
-        this.container.append(header, levels, pgn, cardList.node);
-        container.append(this.container);
+        let group, page;
+        if (!data) {
+            group = 1;
+            page = 1;
+        } else {
+            group = (data as IWord[])[0].group;
+            page = (data as IWord[])[0].page;
+            const levels = createLevels(group);
+            const pgn = createPgnEl(page, group);
+            const cardList = this.drawCards(data || []);
+            this.container.append(header, levels, pgn, cardList.node);
+            container.append(this.container);
+        }
     }
 
-    drawCards(data: IWord[] | undefined) {
+    drawCards(data: IWord[] | []) {
         const cardList = new Control(this.container, 'div', 'textbook__words');
-        if (!data) {
-            const arr = [example, example];
-            arr.forEach((i) => {
+        if (!data?.length) {
+            new Control(cardList.node, 'div', 'textbook__error', 'Ooops..something went wrong. Check you connection');
+        } else {
+            data.forEach((i) => {
                 const obj = i as IWord;
                 const card = new Card(obj, URL);
                 cardList.node.append(card.render());

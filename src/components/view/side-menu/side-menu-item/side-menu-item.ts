@@ -4,7 +4,7 @@ import { handleLocation } from '../../../controller/handleLocation';
 export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, iconName: string) => {
     const listItem = new Control(sideMenuList, 'li', 'side-menu-item');
     const listItemLink = new Control(listItem.node, 'a');
-    listItemLink.node.setAttribute('href', `/${title.toLowerCase()}`);
+    listItemLink.node.setAttribute('href', `/#${title.toLowerCase()}`);
     listItemLink.node.onclick = route;
 
     new Control(listItemLink.node, 'b');
@@ -17,10 +17,13 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     //handleLocation();
 };
 
-const route = (event: Event) => {
+export const route = (event: Event) => {
     event = event || window.event;
     event.preventDefault();
     const target = event.currentTarget as HTMLAnchorElement;
     window.history.pushState({}, '', target.href);
-    handleLocation();
+    // handleLocation();
+    document.dispatchEvent(test);
 };
+
+const test = new Event('event');

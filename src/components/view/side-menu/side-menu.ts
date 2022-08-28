@@ -9,12 +9,12 @@ export const createSideMenu = (root: HTMLElement) => {
 
     const sideMenuList = new Control(sideMenu.node, 'ul');
 
-    createSideMenuItem(sideMenuList.node, 'Главная', 'home-outline');
-    createSideMenuItem(sideMenuList.node, 'Учебник', 'book-outline');
-    createSideMenuItem(sideMenuList.node, 'Словарь', 'globe-outline');
-    createSideMenuItem(sideMenuList.node, 'Игры', 'game-controller-outline');
-    createSideMenuItem(sideMenuList.node, 'Статистика', 'stats-chart-outline');
-    createSideMenuItem(sideMenuList.node, 'Команда', 'people-outline');
+    createSideMenuItem(sideMenuList.node, 'Main', 'home-outline');
+    createSideMenuItem(sideMenuList.node, 'Textbook', 'book-outline');
+    createSideMenuItem(sideMenuList.node, 'Dictionary', 'globe-outline');
+    createSideMenuItem(sideMenuList.node, 'Games', 'game-controller-outline');
+    createSideMenuItem(sideMenuList.node, 'Stats', 'stats-chart-outline');
+    createSideMenuItem(sideMenuList.node, 'Team', 'people-outline');
 
     addActiveClassToSelectedListItem(sideMenuList.node);
 };
