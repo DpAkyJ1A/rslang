@@ -1,6 +1,8 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
 import { createLayout } from './components/view/app';
+import AuthView from './components/view/pages/auth/auth-page';
+import SignInView from './components/view/pages/auth/sing-in-page';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -18,3 +20,6 @@ ionIconNoModule.node.setAttribute('nomodule', '');
 ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
 createLayout(root);
+
+// const main = document.querySelector('.main') as HTMLElement;
+// new SignInView(main);
