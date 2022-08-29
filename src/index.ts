@@ -1,8 +1,7 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
 import { createLayout } from './components/view/app';
-import AuthView from './components/view/pages/auth/auth-page';
-import SignInView from './components/view/pages/auth/sing-in-page';
+import AuthInit from './components/view/pages/auth/index';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -21,5 +20,5 @@ ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/
 
 createLayout(root);
 
-// const main = document.querySelector('.main') as HTMLElement;
-// new SignInView(main);
+const el = new AuthInit(); //передача функции на клик по кнопке логин
+el.start();

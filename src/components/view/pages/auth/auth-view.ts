@@ -1,23 +1,26 @@
 import Control from "../../control";
-import Page from "../page";
+import SignInView from "./sign-view";
 
 export default class AuthView extends Control {
         h2;
-        inputMail;
-        inputPass;
+        inputMail: Control<HTMLInputElement>;
+        errMail;
+        inputPass: Control<HTMLInputElement>;
+        errPass;
         buttonSubmit;
         registration;
     constructor(parentNode: HTMLElement) {
-        super(parentNode, 'section', 'auth__wrapper');
+        super(parentNode, 'div', 'auth__wrapper');
         this.h2 = new Control(this.node, 'h2', 'auth__h2', 'Войдите в личный кабинет, чтобы получить расширенный доступ к изучению языка');
-        this.inputMail = new Control<HTMLInputElement>(this.node, 'input', 'auth__input');
+        this.inputMail = new Control(this.node, 'input', 'auth__input');
         Object.assign(this.inputMail.node, {
             placeholder: 'E-mail',
-            id: 'username',
+            id: 'usermail',
             required: true,
             type: 'email',
             value: ''
         });
+        this.errMail = new Control(this.node, 'p', 'auth__err-mail');
         this.inputPass = new Control(this.node, 'input', 'auth__input');
         Object.assign(this.inputPass.node, {
             placeholder: 'Пароль',
@@ -27,8 +30,11 @@ export default class AuthView extends Control {
             value: '',
             minlength: '8'
         });
+        this.errPass = new Control(this.node, 'p', 'auth__err-pass');
         this.buttonSubmit = new Control(this.node, 'button', 'auth__button colored', 'Войти');
         this.buttonSubmit.node.setAttribute('type', 'submit');
         this.registration = new Control(this.node, 'p', 'auth__registration', 'Регистрация');
     }
 }
+
+//что за page? как в него влезть?

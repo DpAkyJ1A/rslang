@@ -1,11 +1,16 @@
-.auth__wrapper {
+.authorizationView {
+    width: 35%;
+    margin: 0 auto;
+    display: flex;
+}
+.auth__wrapper,
+.sign__wrapper {
     display: flex;
     position: relative;
-    width: 35%;
+    width: 100%;
     flex-direction: column;
-    margin: 0 auto;
     padding: 2em;
-    gap: 1em;
+    gap: 0.5em;
 }
 .auth__h2 {
     text-align: center;
@@ -22,7 +27,6 @@
     font-family: sans-serif;
     color: #323232;
     font-size: 1.5em;
-    margin-bottom: 1em;
 }
 .auth__button {
     width: 100%;
@@ -54,9 +58,10 @@
 .colored:hover {
     background-position: 0;
 }
-.auth__registration {
+.auth__registration,
+.sign__registration {
     color: #323232;
-    font-size: 1.5em;
+    font-size: 1.1em;
     letter-spacing: 1px;
     cursor: pointer;
     padding-left: 0.5em;
@@ -64,4 +69,12 @@
 }
 .auth__registration:hover {
     color:#4d5bf9;
+}
+.auth__err-pass,
+.auth__err-mail,
+.auth__err-name {
+    font-size: 1em;
+    color: red;
+    margin-bottom: 1em;
+    padding-left: 0.5em;
 }
