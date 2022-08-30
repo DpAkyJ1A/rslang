@@ -2,8 +2,8 @@ import Control from 'control';
 import Page from '../page';
 import Card from '../common/card/card';
 import { createPageHeader } from '../common/pageHeader/pageHeader';
-import { createLevels } from './__levels/levels';
-import { createPgnEl } from './__pagination/pagination';
+import { createLevels } from '../common/levels/levels';
+import { createPgnEl } from '../common/pagination/pagination';
 
 // пока без апи
 const URL = 'https://rs-lang-team-156.herokuapp.com/';
