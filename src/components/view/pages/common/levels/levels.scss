@@ -1,0 +1,76 @@
+.textbook__level-wrapper {
+  margin-bottom: 30px;
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.textbook__level-link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #eb4f37;
+  border-radius: 25px;
+}
+
+.textbook__level-link:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.textbook__level-link_active:hover {
+  pointer-events: none;
+}
+
+.textbook__level-link_active div {
+  background-color: inherit !important;
+  color: #fff;
+}
+
+.textbook__level-link span {
+  color: #fff;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbook__level-link div {
+  text-align: center;
+  background-color: #fff;
+  padding: 15px 15px;
+  border-radius: inherit;
+  height: 100%;
+  min-width: 85%;
+}
+
+.textbook__level-link_0 {
+  border-color: #6281a7;
+  background-color: #6281a7;
+}
+
+.textbook__level-link_1 {
+  border-color: #355070;
+  background-color: #355070;
+}
+
+.textbook__level-link_2 {
+  border-color: #6d597a;
+  background-color: #6d597a;
+}
+
+.textbook__level-link_3 {
+  border-color: #b56576;
+  background-color: #b56576;
+}
+
+.textbook__level-link_4 {
+  border-color: #e56b6f;
+  background-color: #e56b6f;
+}
+
+.textbook__level-link_5 {
+  border-color: #eaac8b;
+  background-color: #eaac8b;
+}

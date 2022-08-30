@@ -4,7 +4,10 @@
 @import "./side-menu/side-menu.scss";
 @import "./main/main.scss";
 @import "./footer/footer.scss";
+
+@import "./pages/common/common.scss";
 @import "./pages/textbook/textbook.scss";
+@import "./pages/dictionary-page/dictionary-page.scss";
 @import "./pages/error-page/error-page.scss";
 
 html {
