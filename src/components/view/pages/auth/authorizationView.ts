@@ -9,8 +9,6 @@ export default class AuthorizationView extends Control{
         super(document.body, 'section', 'authorizationView');
         this.authView = new AuthView(this.node);
         this.signInView = new SignInView(null);
-
-        console.log('kek1');
     }
     drawSignInView() {
         this.authView.destroy();

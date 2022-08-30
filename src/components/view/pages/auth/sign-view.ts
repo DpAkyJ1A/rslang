@@ -2,6 +2,7 @@ import Control from "../../control";
 
 export default class SignInView extends Control {
         h2;
+        form: Control<HTMLInputElement>;
         inputName: Control<HTMLInputElement>;
         errName;
         inputMail: Control<HTMLInputElement>;
@@ -9,11 +10,12 @@ export default class SignInView extends Control {
         inputPass: Control<HTMLInputElement>;
         errPass;
         buttonSubmit;
-        login;
+        registration;
     constructor(parentNode: HTMLElement | null) {
         super(parentNode, 'div', 'sign__wrapper');
         this.h2 = new Control(this.node, 'h2', 'auth__h2', 'Введите данные для регистрации');
-        this.inputName = new Control(this.node, 'input', 'auth__input');
+        this.form = new Control(this.node, 'form', 'auth__form');
+        this.inputName = new Control(this.form.node, 'input', 'auth__input');
         Object.assign(this.inputName.node, {
             placeholder: 'Name',
             id: 'username',
@@ -21,8 +23,8 @@ export default class SignInView extends Control {
             type: 'text',
             value: ''
         });
-        this.errName = new Control(this.node, 'p', 'auth__err-name');
-        this.inputMail = new Control(this.node, 'input', 'auth__input');
+        this.errName = new Control(this.form.node, 'p', 'auth__err-name');
+        this.inputMail = new Control(this.form.node, 'input', 'auth__input');
         Object.assign(this.inputMail.node, {
             placeholder: 'E-mail',
             id: 'usermail',
@@ -30,8 +32,8 @@ export default class SignInView extends Control {
             type: 'email',
             value: ''
         });
-        this.errMail = new Control(this.node, 'p', 'auth__err-mail');
-        this.inputPass = new Control(this.node, 'input', 'auth__input');
+        this.errMail = new Control(this.form.node, 'p', 'auth__err-mail');
+        this.inputPass = new Control(this.form.node, 'input', 'auth__input');
         Object.assign(this.inputPass.node, {
             placeholder: 'Пароль',
             id: 'password',
@@ -40,9 +42,9 @@ export default class SignInView extends Control {
             value: '',
             minlength: '8'
         });
-        this.errPass = new Control(this.node, 'p', 'auth__err-pass');
-        this.buttonSubmit = new Control(this.node, 'button', 'auth__button colored', 'Создать аккаунт');
+        this.errPass = new Control(this.form.node, 'p', 'auth__err-pass');
+        this.buttonSubmit = new Control(this.form.node, 'button', 'auth__button colored', 'Создать аккаунт');
         this.buttonSubmit.node.setAttribute('type', 'submit');
-        this.login = new Control(this.node, 'p', 'sign__registration', 'Вернуться на страницу логина');
+        this.registration = new Control(this.node, 'p', 'sign__registration', 'Вернуться на страницу логина');
     }
 }
