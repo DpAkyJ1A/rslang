@@ -12,10 +12,12 @@
   justify-content: space-between;
   border: 2px solid #eb4f37;
   border-radius: 25px;
+  cursor: default;
 }
 
-.textbook__level-link:hover {
+.textbook__level-link:not(.textbook__level-link_active):hover {
   background-color: rgba(0,0,0,0.5);
+  cursor: pointer;
 }
 
 .textbook__level-link_active:hover {
