@@ -13,12 +13,12 @@ li {
   outline: none;
 }
 
-.textbook {
+.textbook-page {
   // max-width: 80vw;
   margin: 0 auto;
 }
 
-.textbook__words {
+.textbook-page__words {
   gap: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;

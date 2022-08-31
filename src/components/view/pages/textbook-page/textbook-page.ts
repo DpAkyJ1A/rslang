@@ -26,7 +26,7 @@ const example = {
 
 export default class TextbookPage extends Page {
     constructor() {
-        super('textbook');
+        super('textbook-page');
     }
 
     public render(container: HTMLElement, data?: IWord[]) {
@@ -48,9 +48,9 @@ export default class TextbookPage extends Page {
     }
 
     drawCards(data: IWord[] | []) {
-        const cardList = new Control(this.container, 'div', 'textbook__words');
+        const cardList = new Control(this.container, 'div', 'textbook-page__words');
         if (!data?.length) {
-            new Control(cardList.node, 'div', 'textbook__error', 'Ooops..something went wrong. Check you connection');
+            new Control(cardList.node, 'div', 'textbook-page__error', 'Ooops..something went wrong. Check you connection');
         } else {
             data.forEach((i) => {
                 const obj = i as IWord;
