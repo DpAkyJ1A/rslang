@@ -4,10 +4,16 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: 0 20px;
   color: $color-light-xl;
   text-decoration: none;
 }
+
+// .footer__git-container + .footer__git-container {
+//   margin-left: 40px;
+//   @include media-tablet{
+//     margin-left: 20px;
+//   }
+// }
 
 .footer__git-container:hover{
   color: $color-dark-l;
@@ -19,6 +25,12 @@
   border-radius: 15px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media (max-width: 500px) {
+  .footer__git{
+    display: none;
+  }
 }
 
 .footer__git-name{

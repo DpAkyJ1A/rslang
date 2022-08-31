@@ -11,6 +11,9 @@
   justify-content: center;
   align-items: center;
   transition: left 0.5s ease;
+  @include media-tablet{
+    display: none;
+  }
 }
 
 .side-menu__toggle:hover{

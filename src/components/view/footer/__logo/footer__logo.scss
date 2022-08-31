@@ -8,6 +8,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include media-tablet{
+    left: 0;
+  }
 }
 
 .footer__logo{
