@@ -11,12 +11,15 @@
   //   margin-left: 70px;
   // }
   @include media-tablet{
-    height: calc(100vh - 150px);
+    height: calc(100vh - 145px);
   }
 }
 
 ::-webkit-scrollbar {
   width: 15px;
+  @include media-tablet{
+    width: 0;
+  }
 }
 
 ::-webkit-scrollbar-track {

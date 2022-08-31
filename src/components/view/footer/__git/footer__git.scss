@@ -25,10 +25,7 @@
   border-radius: 15px;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-@media (max-width: 500px) {
-  .footer__git{
+  @include media-tablet{
     display: none;
   }
 }

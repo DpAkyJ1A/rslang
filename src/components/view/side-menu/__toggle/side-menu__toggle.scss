@@ -4,13 +4,14 @@
   left: 20px;
   width: 40px;
   height: 40px;
-  background-color: $color-primary;
+  background-color: initial;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: left 0.5s ease;
+  z-index: 2;
   @include media-tablet{
     display: none;
   }
@@ -27,10 +28,6 @@
   color: $color-light-xl;
   font-size: 34px;
   display: none;
-}
-
-.side-menu__toggle.active{
-  background: $color-primary;
 }
 
 .side-menu__toggle .side-menu__toggle_open,
