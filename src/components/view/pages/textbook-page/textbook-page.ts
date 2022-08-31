@@ -24,7 +24,7 @@ const example = {
     textExampleTranslate: 'Река пробила канал сквозь скалы',
 };
 
-export default class Textbook extends Page {
+export default class TextbookPage extends Page {
     constructor(className: string) {
         super(className);
     }

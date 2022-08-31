@@ -1,7 +1,7 @@
 import { createHeader } from './header/header';
 import { createSideMenu } from './side-menu/side-menu';
 import { createFooter } from './footer/footer';
-import Textbook from './pages/textbook/textbook';
+import TextbookPage from './pages/textbook-page/textbook-page';
 import DictionaryPage from './pages/dictionary-page/dictionary-page';
 import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
@@ -10,13 +10,13 @@ import { IWord } from '../api/interfaces';
 
 export default class AppView {
     private root: HTMLElement;
-    private textbook: Textbook;
+    private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
     private errorPage: ErrorPage;
     main: Control;
     constructor(root: HTMLElement) {
         this.root = root;
-        this.textbook = new Textbook('textbook');
+        this.textbook = new TextbookPage('textbook');
         this.dictionaryPage = new DictionaryPage();
         this.errorPage = new ErrorPage('error-page');
         this.main = new Control(null, 'div', 'main');
