@@ -6,14 +6,10 @@
   cursor: pointer;
   color: $color-light-xl;
   text-decoration: none;
+  @include media-tablet{
+    height: 30px;
+  }
 }
-
-// .footer__git-container + .footer__git-container {
-//   margin-left: 40px;
-//   @include media-tablet{
-//     margin-left: 20px;
-//   }
-// }
 
 .footer__git-container:hover{
   color: $color-dark-l;
