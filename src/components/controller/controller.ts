@@ -1,6 +1,7 @@
 import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
 import { parseHashString } from '../utils/parseHashString';
+import { updateSideMenu } from '../view/side-menu/side-menu';
 
 export default class Controller extends ApiService {
     state: IState;
@@ -49,6 +50,7 @@ export default class Controller extends ApiService {
     // }
 
     public async drawMain(view: string) {
+        updateSideMenu(view);
         if (view === 'textbook') {
             const data = await super.getWords(this.state.textbook.page, this.state.textbook.group);
             this.drawView(this.state, data);
