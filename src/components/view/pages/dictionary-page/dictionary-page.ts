@@ -10,39 +10,44 @@ import { IWord } from '../../../api/interfaces';
 const URL = 'https://rs-lang-team-156.herokuapp.com/';
 
 export default class DictionaryPage extends Page {
-  constructor() {
-    super('dictionary-page');
-  }
-
-  public render(container: HTMLElement, data?: IWord[]) {
-    this.container.innerHTML = '';
-    const header = createPageHeader('Dictionary');
-    let group, page;
-    if (!data) {
-      group = 0;
-      page = 0;
-    } else {
-      group = (data as IWord[])[0].group;
-      page = (data as IWord[])[0].page;
-      const levels = createLevels(group);
-      const pgn = createPgnEl(page, group);
-      const cardList = this.drawCards(data || []);
-      this.container.append(header, levels, pgn, cardList.node);
-      container.append(this.container);
+    constructor() {
+        super('dictionary-page');
     }
-  }
 
-  drawCards(data: IWord[] | []) {
-    const cardList = new Control(this.container, 'div', 'textbook-page__words');
-    if (!data?.length) {
-      new Control(cardList.node, 'div', 'textbook-page__error', 'Ooops..something went wrong. Check you connection');
-    } else {
-      data.forEach((i) => {
-        const obj = i as IWord;
-        const card = new Card(obj, URL);
-        cardList.node.append(card.render());
-      });
+    public render(container: HTMLElement, data?: IWord[]) {
+        this.container.innerHTML = '';
+        const header = createPageHeader('Dictionary');
+        let group, page;
+        if (!data) {
+            group = 0;
+            page = 0;
+        } else {
+            group = (data as IWord[])[0].group;
+            page = (data as IWord[])[0].page;
+            const levels = createLevels(group);
+            const pgn = createPgnEl(page, group);
+            const cardList = this.drawCards(data || []);
+            this.container.append(header, levels, pgn, cardList.node);
+            container.append(this.container);
+        }
     }
-    return cardList;
-  }
+
+    drawCards(data: IWord[] | []) {
+        const cardList = new Control(this.container, 'div', 'textbook-page__words');
+        if (!data?.length) {
+            new Control(
+                cardList.node,
+                'div',
+                'textbook-page__error',
+                'Ooops..something went wrong. Check you connection'
+            );
+        } else {
+            data.forEach((i) => {
+                const obj = i as IWord;
+                const card = new Card(obj, URL);
+                cardList.node.append(card.render());
+            });
+        }
+        return cardList;
+    }
 }

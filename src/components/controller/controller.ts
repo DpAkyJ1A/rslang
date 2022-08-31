@@ -1,6 +1,5 @@
 import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
-import { routes } from '../model/routes';
 import { parseHashString } from '../utils/parseHashString';
 
 export default class Controller extends ApiService {

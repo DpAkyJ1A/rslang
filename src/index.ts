@@ -1,8 +1,6 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
-// import { createLayout } from './components/view/appView';
 import { App } from './components/app/app';
-import { IState } from './components/controller/controller';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -22,15 +20,15 @@ ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/
 const state = localStorage['state']
     ? JSON.parse(localStorage.getItem('state') as string)
     : {
-        view: 'main',
-        textbook: {
-            page: 1,
-            group: 1,
-        },
-        dictionary: {
-            page: 0,
-            group: 0,
-        }
+          view: 'main',
+          textbook: {
+              page: 1,
+              group: 1,
+          },
+          dictionary: {
+              page: 0,
+              group: 0,
+          },
       };
 
 const app = new App(root, state);
