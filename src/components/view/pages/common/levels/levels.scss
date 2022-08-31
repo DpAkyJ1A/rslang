@@ -7,16 +7,16 @@
 
 .textbook__level-link {
   text-decoration: none;
-  color: black;
+  color: white;
   display: flex;
   justify-content: space-between;
   border: 2px solid #eb4f37;
   border-radius: 25px;
   cursor: default;
+  transition: background-color 0.2s ease;
 }
 
 .textbook__level-link:not(.textbook__level-link_active):hover {
-  background-color: rgba(0,0,0,0.5);
   cursor: pointer;
 }
 
@@ -25,8 +25,8 @@
 }
 
 .textbook__level-link_active div {
-  background-color: inherit !important;
-  color: #fff;
+  color: black;
+  background-color: #fff;
 }
 
 .textbook__level-link span {
@@ -40,7 +40,6 @@
 
 .textbook__level-link div {
   text-align: center;
-  background-color: #fff;
   padding: 15px 15px;
   border-radius: inherit;
   height: 100%;
@@ -48,31 +47,55 @@
 }
 
 .textbook__level-link_0 {
-  border-color: #6281a7;
-  background-color: #6281a7;
+  border-color: $colorLink0;
+  background-color: $colorLink0;
+}
+
+.textbook__level-link_0:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink0, 10%);
 }
 
 .textbook__level-link_1 {
-  border-color: #355070;
-  background-color: #355070;
+  border-color: $colorLink1;
+  background-color: $colorLink1;
+}
+
+.textbook__level-link_1:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink1, 10%);
 }
 
 .textbook__level-link_2 {
-  border-color: #6d597a;
-  background-color: #6d597a;
+  border-color: $colorLink2;
+  background-color: $colorLink2;
+}
+
+.textbook__level-link_2:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink2, 10%);
 }
 
 .textbook__level-link_3 {
-  border-color: #b56576;
-  background-color: #b56576;
+  border-color: $colorLink3;
+  background-color: $colorLink3;
+}
+
+.textbook__level-link_3:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink3, 10%);
 }
 
 .textbook__level-link_4 {
-  border-color: #e56b6f;
-  background-color: #e56b6f;
+  border-color: $colorLink4;
+  background-color: $colorLink4;
+}
+
+.textbook__level-link_4:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink4, 10%);
 }
 
 .textbook__level-link_5 {
-  border-color: #eaac8b;
-  background-color: #eaac8b;
+  border-color: $colorLink5;
+  background-color: $colorLink5;
+}
+
+.textbook__level-link_5:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink5, 10%);
 }
