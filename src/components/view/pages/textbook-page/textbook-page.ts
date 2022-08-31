@@ -25,8 +25,8 @@ const example = {
 };
 
 export default class TextbookPage extends Page {
-    constructor(className: string) {
-        super(className);
+    constructor() {
+        super('textbook');
     }
 
     public render(container: HTMLElement, data?: IWord[]) {

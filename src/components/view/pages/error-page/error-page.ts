@@ -2,8 +2,8 @@ import Control from 'control';
 import Page from '../page';
 
 export default class ErrorPage extends Page {
-    constructor(className: string) {
-        super(className);
+    constructor() {
+        super('error-page');
     }
 
     public render(container: HTMLElement) {

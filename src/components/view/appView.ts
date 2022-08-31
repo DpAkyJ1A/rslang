@@ -16,9 +16,9 @@ export default class AppView {
     main: Control;
     constructor(root: HTMLElement) {
         this.root = root;
-        this.textbook = new TextbookPage('textbook');
+        this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
-        this.errorPage = new ErrorPage('error-page');
+        this.errorPage = new ErrorPage();
         this.main = new Control(null, 'div', 'main');
     }
 
