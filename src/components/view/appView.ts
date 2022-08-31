@@ -7,6 +7,7 @@ import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
 import { IWord } from '../api/interfaces';
+import { updateSideMenu } from './side-menu/side-menu';
 
 export default class AppView {
     private root: HTMLElement;
@@ -42,6 +43,7 @@ export default class AppView {
             default:
                 this.errorPage.render(this.main.node);
         }
+        updateSideMenu(state.view);
     }
 }
 
