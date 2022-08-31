@@ -22,11 +22,15 @@ ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/
 const state = localStorage['state']
     ? JSON.parse(localStorage.getItem('state') as string)
     : {
-          view: 'main',
-          textbook: {
-              page: 1,
-              group: 1,
-          },
+        view: 'main',
+        textbook: {
+            page: 1,
+            group: 1,
+        },
+        dictionary: {
+            page: 0,
+            group: 0,
+        }
       };
 
 const app = new App(root, state);

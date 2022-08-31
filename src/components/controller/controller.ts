@@ -53,6 +53,9 @@ export default class Controller extends ApiService {
         if (view === 'textbook') {
             const data = await super.getWords(this.state.textbook.page, this.state.textbook.group);
             this.drawView(this.state, data);
+        } else if (view === 'dictionary') {
+            const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
+            this.drawView(this.state, data);
         } else {
             this.drawView(this.state);
         }
@@ -62,6 +65,10 @@ export default class Controller extends ApiService {
 export interface IState {
     view: string;
     textbook: {
+        page: number;
+        group: number;
+    };
+    dictionary: {
         page: number;
         group: number;
     };
