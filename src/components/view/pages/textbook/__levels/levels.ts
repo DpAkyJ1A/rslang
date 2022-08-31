@@ -1,7 +1,7 @@
 import Control from 'control';
 import { route } from '../../../side-menu/side-menu-item/side-menu-item';
 
-const levelList: LevelList = {
+export const levelList: LevelList = {
     0: 'A1 Elementary',
     1: 'A2 Pre-Intermediate',
     2: 'B1 Intermediate',
