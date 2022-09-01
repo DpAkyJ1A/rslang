@@ -20,5 +20,4 @@ ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/
 
 createLayout(root);
 
-const el = new AuthInit().start(); //передача функции на клик по кнопке логин
-
+new AuthInit().start(); //передача функции на клик по кнопке логин

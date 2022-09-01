@@ -6,9 +6,8 @@ const state = {
         refreshToken: '',
         userId: '',
         name: '',
-        email: ''
+        email: '',
     },
 };
 
 export default state;
-

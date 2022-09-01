@@ -1,8 +1,5 @@
-import { IUser } from "../api/interfaces";
-import AuthModel from "../model/auth-model";
-import state from "../utils/state";
-import AuthorizationView from "../view/pages/auth/authorizationView";
-import SignInView from "../view/pages/auth/sign-view";
+import AuthModel from '../model/auth-model';
+import AuthorizationView from '../view/pages/auth/authorizationView';
 
 export default class AuthController {
     view: AuthorizationView;
@@ -19,17 +16,16 @@ export default class AuthController {
     }
     goToSignIn = () => {
         this.view.drawSignInView();
-    }
+    };
     goToAuth = () => {
         this.view.drawAuthInView();
-    }
+    };
     submitAuthBtnHandler = (event: Event) => {
         event.preventDefault();
-       
-    }
+    };
     submitSignBtnHandler = (event: Event) => {
         event.preventDefault();
-        
+
         const name = this.view.signInView.inputName.node.value;
         const email = this.view.signInView.inputMail.node.value;
         const password = this.view.signInView.inputPass.node.value;
@@ -37,18 +33,16 @@ export default class AuthController {
         if (this.model.isValidName(name)) {
             this.view.signInView.inputName.node.style.border = 'none';
             this.view.signInView.errName.node.textContent = '';
-        }
-        else {
+        } else {
             this.view.signInView.errName.node.textContent = 'Поле должно содержать только буквы';
             this.view.signInView.inputName.node.style.border = '2px solid red';
             return;
         }
-         //проверка на отсутствие пробелов, наличие улитки, точки, пустой строки
-         if (this.model.isValidMail(email)) {
+        //проверка на отсутствие пробелов, наличие улитки, точки, пустой строки
+        if (this.model.isValidMail(email)) {
             this.view.signInView.inputMail.node.style.border = 'none';
             this.view.signInView.errMail.node.textContent = '';
-        }
-        else {
+        } else {
             this.view.signInView.errMail.node.textContent = 'Некорректный e-mail, введите корректный';
             this.view.signInView.inputMail.node.style.border = '2px solid red';
             return;
@@ -57,39 +51,38 @@ export default class AuthController {
         if (this.model.isValidPassword(password)) {
             this.view.signInView.inputPass.node.style.border = 'none';
             this.view.signInView.errPass.node.textContent = '';
-        }
-        else {
-            this.view.signInView.errPass.node.textContent = 'Пароль должен содержать 8 символов и иметь хотя бы одну цифру';
+        } else {
+            this.view.signInView.errPass.node.textContent =
+                'Пароль должен содержать 8 символов и иметь хотя бы одну цифру';
             this.view.signInView.inputPass.node.style.border = '2px solid red';
             return;
         }
 
-        this.model.sendUserDataToBase({name, email, password}).then( () => {
+        this.model.sendUserDataToBase({ name, email, password }).then(() => {
             this.view.signInView.inputName.node.value = '';
             this.view.signInView.inputMail.node.value = '';
             this.view.signInView.inputPass.node.value = '';
-            }
-        );
+            console.log('res');
+        });
 
         this.view.drawAuthInView();
         //проверка на успешный ответ от базы - может сделать задержку/спиннер?
         this.view.authView.successSign.node.textContent = 'Регистрация успешна! Выполните вход';
-    }
+    };
     loginUser = (event: Event) => {
         event.preventDefault();
         const email = this.view.authView.inputMail.node.value;
         const password = this.view.authView.inputPass.node.value;
-        this.model.sendSighInUserDataToBase({ email, password }).then( () => {
+        this.model.sendSighInUserDataToBase({ email, password }).then((res) => {
             this.view.authView.inputMail.node.value = '';
             this.view.authView.inputPass.node.value = '';
-            console.log('happy!');
+            console.log(res);
             //переход на страницу учебника (спинер)
-        }); 
+        });
         if (this.model.isValidMail(email)) {
             this.view.authView.inputMail.node.style.border = 'none';
             this.view.authView.errMail.node.textContent = '';
-        }
-        else {
+        } else {
             this.view.authView.errMail.node.textContent = 'Некорректный e-mail, введите корректный';
             this.view.authView.inputMail.node.style.border = '2px solid red';
             return;
@@ -97,14 +90,13 @@ export default class AuthController {
         if (this.model.isValidPassword(password)) {
             this.view.authView.inputPass.node.style.border = 'none';
             this.view.authView.errPass.node.textContent = '';
-        }
-        else {
+        } else {
             this.view.authView.errPass.node.textContent = 'Пароль должен содержать 8 символов';
             this.view.authView.inputPass.node.style.border = '2px solid red';
             return;
         }
         this.view.authView.successSign.node.textContent = '';
-    }
+    };
 
     logOutUser() {
         document.querySelector('.header__auth-wrapper');

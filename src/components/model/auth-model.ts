@@ -1,6 +1,6 @@
-import ApiService from "../api/api";
-import { ISignin, IUser } from "../api/interfaces";
-import state from "../utils/state";
+import ApiService from '../api/api';
+import { ISignin, IUser } from '../api/interfaces';
+import state from '../utils/state';
 
 export default class AuthModel {
     api: ApiService;
@@ -12,7 +12,8 @@ export default class AuthModel {
         return NAME_REGEXP.test(value);
     }
     isValidMail(value: string) {
-        const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+        const EMAIL_REGEXP =
+            /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
         return EMAIL_REGEXP.test(value.toString().toLowerCase());
     }
 
@@ -20,7 +21,7 @@ export default class AuthModel {
         const PASS_REGEXP = /^(?=.*\d).{8}$/;
         return PASS_REGEXP.test(value);
     }
-    
+
     async sendUserDataToBase(data: IUser) {
         const response = await this.api.createUser(data);
         this.saveUserToken(response); //сохранение в локалсторадж токен
@@ -31,10 +32,10 @@ export default class AuthModel {
         state.userSignIn.token = response.token;
         state.userSignIn.refreshToken = response.refreshToken;
     }
-    
+
     saveUserToken(data: ISignin) {
         localStorage.setItem('tokenDataKata', JSON.stringify(data));
-    } 
+    }
 
     async sendSighInUserDataToBase(login: IUser) {
         const response = await this.api.signInUser(login);
@@ -42,7 +43,7 @@ export default class AuthModel {
         state.userSignIn.token = response.token;
         state.userSignIn.refreshToken = response.refreshToken;
     }
-    
+
     async checkToken() {
         if (state.userSignIn.isAuth) {
             const id = state.userSignIn.userId;
@@ -52,9 +53,8 @@ export default class AuthModel {
             state.userSignIn.refreshToken = res.refreshToken;
         }
     }
-    
+
     updateToken() {
+        console.log('add');
     }
 }
-
-
