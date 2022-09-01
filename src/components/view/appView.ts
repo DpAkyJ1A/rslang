@@ -1,6 +1,7 @@
 import { createHeader } from './header/header';
 import { createSideMenu } from './side-menu/side-menu';
 import { createFooter } from './footer/footer';
+import { createScrollUpBtn } from './pages/common/scrollUpBtn/scrollUpBtn';
 import TextbookPage from './pages/textbook-page/textbook-page';
 import DictionaryPage from './pages/dictionary-page/dictionary-page';
 import ErrorPage from './pages/error-page/error-page';
@@ -27,6 +28,7 @@ export default class AppView {
         createSideMenu(this.root);
         this.root.append(this.main.node);
         createFooter(this.root);
+        this.root.append(createScrollUpBtn(this.main.node));
     }
 
     drawCurrentView(state: IState, data?: IWord[]) {
