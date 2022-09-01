@@ -16,10 +16,12 @@ li {
 .textbook-page {
   // max-width: 80vw;
   margin: 0 auto;
+  height: auto;
 }
 
 .textbook-page__words {
   gap: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  height: auto;
 }

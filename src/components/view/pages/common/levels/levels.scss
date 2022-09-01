@@ -1,8 +1,12 @@
 .textbook__level-wrapper {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   gap: 10px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  // @include media-mobile{
+  //   grid-template-columns: repeat(3, 1fr);
+  //   grid-template-rows: 1fr 1fr;
+  // }
 }
 
 .textbook__level-link {
@@ -14,7 +18,7 @@
   border-radius: 25px;
   cursor: default;
   transition: background-color 0.2s ease;
-  @include media-desktop {
+  @include media-tablet {
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -51,7 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  @include media-desktop {
+  @include media-tablet {
     display: none;
   }
 }
@@ -111,7 +115,7 @@
 }
 
 .textbook__level-link_active {
-  @include media-desktop {
+  @include media-tablet {
     background-color: #fff;
     span {
       color: black;

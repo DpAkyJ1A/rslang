@@ -14,9 +14,10 @@ export default class Card {
 
     render() {
         const preview = new Control(this.node, 'div', 'card__preview');
-        preview.node.innerHTML = `
-            <img class="card__img" src="${this.baseUrl}${this.data.image}" alt="${this.data.word}">
-        `;
+        preview.node.style.backgroundImage = `url(${this.baseUrl}${this.data.image})`;
+        // preview.node.innerHTML = `
+        //     <img class="card__img" src="${this.baseUrl}${this.data.image}" alt="${this.data.word}">
+        // `;
 
         const content = new Control(this.node, 'div', 'card__content');
         const header = new Control(content.node, 'div', 'card__header');

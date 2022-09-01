@@ -11,11 +11,12 @@
   align-items: center;
   padding-left: 75px;
   padding-right: 52px;
-  @include media-tablet{
+  box-shadow: -2px -2px 2px 1px rgba(0, 0, 0, 0.2);
+  @include media-mobile{
     order: 2;
     height: 30px;
     padding-right: 42px;
-    padding-left: 65px;
+    padding-left: 50px;
   }
 }
 
@@ -23,7 +24,8 @@
   position: absolute;
   right: 20px;
   color: $color-light-xl;
-  @include media-tablet{
-    right: 10px;
+  @include media-mobile{
+    right: 5px;
+    font-size: 0.7em;
   }
 }
