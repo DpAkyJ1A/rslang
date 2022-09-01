@@ -19,13 +19,13 @@ export const createPgnEl = (pageInit: number, group: number) => {
               <svg class="pagination__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M14 7l-5 5 5 5V7z"></path></svg>
             `;
             if (page === 1) item.node.classList.add('pagination__item_disabled');
-            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page - 1}`;
+            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page - 2}`;
         } else if (i === TOTAL_ELEMENTS_TO_DISPLAY) {
             link.node.innerHTML = `
               <svg class="pagination__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5v10z"></path></svg>
             `;
             if (page === NUMBER_OF_PAGES) item.node.classList.add('pagination__item_disabled');
-            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page + 1}`;
+            (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${page}`;
         } else if (i === TOTAL_ELEMENTS_TO_DISPLAY - 1) {
             link.node.innerHTML = NUMBER_OF_PAGES + '';
         } else if (i === 2) {
@@ -96,5 +96,17 @@ export const createPgnEl = (pageInit: number, group: number) => {
             (link.node as HTMLAnchorElement).href = `/#textbook/?group=${group}&page=${+link.node.innerHTML - 1}`;
         }
     }
+
+    const item = new Control(list.node, 'li', 'pagination__item');
+    const link = new Control(item.node, 'a', 'pagination__link');
+    link.node.onclick = route;
+    if (page === 1 || page === 30) {
+        link.node.innerHTML = `...`;
+        link.node.classList.add('pagination__item_disabled');
+    } else {
+        link.node.innerHTML = `${page}`;
+        link.node.classList.add('pagination__link_active');
+    }
+
     return wrapper.node;
 };
