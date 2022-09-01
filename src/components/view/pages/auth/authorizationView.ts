@@ -2,10 +2,11 @@ import Control from "../../control";
 import AuthView from "./auth-view";
 import SignInView from "./sign-view";
 
+//доступ к мейну подключить, пока для визуализации прицепила вниз боди
 export default class AuthorizationView extends Control{
     signInView: SignInView;
     authView: AuthView;
-    constructor(parentNode: HTMLElement) {
+    constructor(parentNode: HTMLElement | null) {
         super(document.body, 'section', 'authorizationView');
         this.authView = new AuthView(this.node);
         this.signInView = new SignInView(null);

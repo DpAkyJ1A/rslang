@@ -103,6 +103,7 @@ export default class AuthController {
             this.view.authView.inputPass.node.style.border = '2px solid red';
             return;
         }
+        this.view.authView.successSign.node.textContent = '';
     }
 
     logOutUser() {
