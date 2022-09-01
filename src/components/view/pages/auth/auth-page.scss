@@ -13,9 +13,10 @@
     gap: 0.5em;
 }
 .auth__h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     padding: 1em;
-    color: #323232;
+    color: $color-dark-xl;
     letter-spacing: 1px;
 }
 .auth__form {
@@ -31,7 +32,7 @@
     padding: 0.4em;
     box-shadow: inset 1px 1px 0 0 #858585, inset -1px -1px 0 0 #858585;
     font-family: sans-serif;
-    color: #323232;
+    color: $color-dark-xl;
     font-size: 1.5em;
 }
 .auth__button {
@@ -39,22 +40,23 @@
     height: 48px;
     border: none;
     cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1em;
     letter-spacing: 1px;
-    color: #fff;
-    border: 1px solid #00bc9c;
+    color: $color-light-xl;
+    border: 1px solid $color-blue;
     border-radius: 15px;
-    background: #00bc9c;
+    background: $color-blue;
     text-transform: uppercase;
     overflow: hidden;
     transition: 1s all ease;
 }
 .auth__button:active {
     padding-bottom: 1px;
-    color: rgb(128,207,214);
+    color: $color-light-blue;
   }
 .colored {
-    color: #fff;
+    color: $color-light-xl;
     background-image: -webkit-linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
     background-image: linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
     background-position: 100%;
@@ -66,26 +68,28 @@
 }
 .auth__registration,
 .sign__registration {
-    color: #323232;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: $color-dark-xl;
     font-size: 1.1em;
     letter-spacing: 1px;
     cursor: pointer;
     padding-left: 0.5em;
     transition: all 0.5s ease; 
 }
-.auth__registration:hover {
-    color:#4d5bf9;
+.auth__registration:hover,
+.sign__registration:hover {
+    color: $color-primary;
 }
 .auth__err-pass,
 .auth__err-mail,
 .auth__err-name {
     font-size: 1em;
-    color: red;
+    color: $color-red;
     margin-bottom: 1em;
     padding-left: 0.5em;
 }
 .auth__access {
     text-align: center;
-    color: #4d5bf9;
+    color: $color-primary;
     font-size: 1em;
 }
