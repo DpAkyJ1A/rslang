@@ -56,7 +56,12 @@
 }
 
 .card__translation {
+  display: block;
   color: grey;
+}
+
+.card__translation_disabled {
+  display: none;
 }
 
 .card__content {

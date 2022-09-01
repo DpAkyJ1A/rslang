@@ -35,26 +35,37 @@ export default class Card {
             </audio>
         `;
         (header.node.querySelector('.card__icon_play') as HTMLElement).onclick = this.playAudio;
-        new Control(content.node, 'h4', 'card__translation', `${this.data.wordTranslate}`);
+        const wordTranslation = new Control(content.node, 'h4', 'card__translation', `${this.data.wordTranslate}`);
         const meaning = new Control(content.node, 'div', 'card__example');
-        meaning.node.innerHTML = `
-            <h3>${this.data.textMeaning}</h3>
-            <h4 class="card__translation">
-            ${this.data.textMeaningTranslate}
-            </h4>          
-        `;
+        new Control(meaning.node, 'h3', '', `${this.data.textMeaning}`);
+        const phraseTranslation = new Control(
+            meaning.node,
+            'h4',
+            'card__translation',
+            `${this.data.textMeaningTranslate}`
+        );
+
         const example = new Control(content.node, 'div', 'card__example');
-        example.node.innerHTML = `
-            <h3>${this.data.textExample}</h3>
-            <h4 class="card__translation">
-            ${this.data.textExampleTranslate}
-            </h4>          
-        `;
+        new Control(example.node, 'h3', '', `${this.data.textExample}`);
+        const exampleTranslation = new Control(
+            example.node,
+            'h4',
+            'card__translation',
+            `${this.data.textExampleTranslate}`
+        );
+
         const controls = new Control(content.node, 'div', 'card__controls');
         controls.node.innerHTML = `
             <button class="btn-reset">hard</button>
             <button class="btn-reset">learned</button>
         `;
+
+        const translationDisabled = localStorage.getItem('translationDisabled') || ('false' as string);
+        if (translationDisabled === 'true') {
+            wordTranslation.node.classList.add('card__translation_disabled');
+            phraseTranslation.node.classList.add('card__translation_disabled');
+            exampleTranslation.node.classList.add('card__translation_disabled');
+        }
 
         return this.node;
     }
