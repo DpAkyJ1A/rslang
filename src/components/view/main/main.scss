@@ -2,8 +2,22 @@
   padding: 30px;
   flex-grow: 1;
   width: 100px;
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px $color-dark-l;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 10px;
 }
