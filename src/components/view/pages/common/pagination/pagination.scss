@@ -7,15 +7,6 @@
   margin-bottom: 15px;
 }
 
-.second-pagination{
-  display: none;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  @include media-mobile{
-    display: flex;
-  }
-}
-
 .pagination__icon {
   height: 48px;
   width: 48px;
