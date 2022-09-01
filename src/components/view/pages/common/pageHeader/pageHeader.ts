@@ -19,6 +19,10 @@ export const createPageHeader = (title: string) => {
     return header.node;
 };
 
+const handleToggleClick = () => {
+  
+}
+
 // const handleToggleClick = (event: Event) => {
 //     const target = event.target as HTMLInputElement;
 //     const toggleTranslation = new CustomEvent('toggleTranslation', {

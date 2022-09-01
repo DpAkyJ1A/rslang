@@ -82,7 +82,7 @@ input[type=radio] {
   display: none;
 }
 .settings__switch label {
-  cursor: pointer;
+  cursor: default;
   color: rgba(0,0,0,0.2);
   width: 60px;
   line-height: 50px;
@@ -91,7 +91,6 @@ input[type=radio] {
 label[for=toggle-yes] {
   position: absolute;
   left: 0px;
-  
 }
 label[for=toggle-no] {
   position: absolute;
@@ -115,4 +114,10 @@ label[for=toggle-no] {
 }
 #toggle-no:checked ~ .settings__switch label[for=toggle-no] {
   color: #fff;
+}
+
+#toggle-yes:not(:checked) ~ .settings__switch label[for=toggle-yes]:hover, 
+#toggle-no:not(:checked) ~ .settings__switch label[for=toggle-no]:hover {
+  cursor: pointer;
+  color: $color-dark-l;
 }
