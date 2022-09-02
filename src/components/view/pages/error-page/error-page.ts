@@ -2,16 +2,12 @@ import Control from 'control';
 import Page from '../page';
 
 export default class ErrorPage extends Page {
-    constructor(className: string) {
-        super(className);
+    constructor() {
+        super('error-page');
     }
 
     public render(container: HTMLElement) {
-        // const header = createPageHeader('TextBook');
-        // const levels = createLevels();
-        // const cardList = this.drawCards(data || undefined);
-        // const pgn = createPgnEl(29);
-        // this.container.append(header, levels, pgn, cardList.node);
+        this.container.innerHTML = '';
         this.createErrorMessage();
         super.render(container);
     }

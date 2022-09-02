@@ -1,6 +1,4 @@
 import Control from 'control';
-import { IWord } from '../../api/interfaces';
-import { IState } from '../../controller/controller';
 
 abstract class Page {
     protected node: Control;
@@ -11,7 +9,7 @@ abstract class Page {
         this.container = this.node.node;
     }
 
-    render(container: HTMLElement, data?: IWord[]) {
+    render(container: HTMLElement) {
         container.append(this.container);
     }
 }

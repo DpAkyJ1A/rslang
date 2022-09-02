@@ -1,5 +1,4 @@
 import Control from 'control';
-import { handleLocation } from '../../../controller/handleLocation';
 
 export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, iconName: string) => {
     const listItem = new Control(sideMenuList, 'li', 'side-menu-item');
@@ -13,8 +12,6 @@ export const createSideMenuItem = (sideMenuList: HTMLElement, title: string, ico
     const icon = new Control(listItemIconBox.node, 'ion-icon');
     icon.node.setAttribute('name', iconName);
     new Control(listItemLink.node, 'span', 'side-menu-item__title', title);
-
-    //handleLocation();
 };
 
 export const route = (event: Event) => {
@@ -22,7 +19,7 @@ export const route = (event: Event) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLAnchorElement;
     window.history.pushState({}, '', target.href);
-    // handleLocation();
+
     document.dispatchEvent(test);
 };
 

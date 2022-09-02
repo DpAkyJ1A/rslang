@@ -1,0 +1,124 @@
+.textbook__level-wrapper {
+  margin-bottom: 20px;
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  // @include media-mobile{
+  //   grid-template-columns: repeat(3, 1fr);
+  //   grid-template-rows: 1fr 1fr;
+  // }
+}
+
+.textbook__level-link {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #eb4f37;
+  border-radius: 25px;
+  cursor: default;
+  transition: background-color 0.2s ease;
+  @include media-tablet {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+.textbook__level-link:not(.textbook__level-link_active):hover {
+  cursor: pointer;
+}
+
+.textbook__level-link_active:hover {
+  pointer-events: none;
+}
+
+.textbook__level-link_active div {
+  color: black;
+  background-color: #fff;
+}
+
+.textbook__level-link span {
+  color: #fff;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbook__level-link div {
+  text-align: center;
+  padding: 15px;
+  border-radius: inherit;
+  height: 100%;
+  min-width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media-tablet {
+    display: none;
+  }
+}
+
+.textbook__level-link_0 {
+  border-color: $colorLink0;
+  background-color: $colorLink0;
+}
+
+.textbook__level-link_0:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink0, 10%);
+}
+
+.textbook__level-link_1 {
+  border-color: $colorLink1;
+  background-color: $colorLink1;
+}
+
+.textbook__level-link_1:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink1, 10%);
+}
+
+.textbook__level-link_2 {
+  border-color: $colorLink2;
+  background-color: $colorLink2;
+}
+
+.textbook__level-link_2:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink2, 10%);
+}
+
+.textbook__level-link_3 {
+  border-color: $colorLink3;
+  background-color: $colorLink3;
+}
+
+.textbook__level-link_3:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink3, 10%);
+}
+
+.textbook__level-link_4 {
+  border-color: $colorLink4;
+  background-color: $colorLink4;
+}
+
+.textbook__level-link_4:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink4, 10%);
+}
+
+.textbook__level-link_5 {
+  border-color: $colorLink5;
+  background-color: $colorLink5;
+}
+
+.textbook__level-link_5:not(.textbook__level-link_active):hover {
+  background-color: lighten($colorLink5, 10%);
+}
+
+.textbook__level-link_active {
+  @include media-tablet {
+    background-color: #fff;
+    span {
+      color: black;
+    }
+  }
+}

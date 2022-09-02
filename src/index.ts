@@ -1,8 +1,6 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
-// import { createLayout } from './components/view/appView';
 import { App } from './components/app/app';
-import { IState } from './components/controller/controller';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -26,6 +24,10 @@ const state = localStorage['state']
           textbook: {
               page: 1,
               group: 1,
+          },
+          dictionary: {
+              page: 0,
+              group: 0,
           },
       };
 

@@ -1,7 +1,7 @@
 import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
-import { routes } from '../model/routes';
 import { parseHashString } from '../utils/parseHashString';
+import { updateSideMenu } from '../view/side-menu/side-menu';
 
 export default class Controller extends ApiService {
     state: IState;
@@ -50,8 +50,12 @@ export default class Controller extends ApiService {
     // }
 
     public async drawMain(view: string) {
+        updateSideMenu(view);
         if (view === 'textbook') {
             const data = await super.getWords(this.state.textbook.page, this.state.textbook.group);
+            this.drawView(this.state, data);
+        } else if (view === 'dictionary') {
+            const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
             this.drawView(this.state, data);
         } else {
             this.drawView(this.state);
@@ -62,6 +66,10 @@ export default class Controller extends ApiService {
 export interface IState {
     view: string;
     textbook: {
+        page: number;
+        group: number;
+    };
+    dictionary: {
         page: number;
         group: number;
     };
