@@ -112,7 +112,7 @@ export default class SprintView {
         new Control(resultsWrapper.node, 'span', 'content__result-label', 'Выучить: ');
         const wrongAnswers = new Control(resultsWrapper.node, 'ul', 'content__result-list content__result-list_false');
 
-        results.right.forEach((word) => {
+        results.right.forEach((word: IGameWord) => {
             const item = new Control(rightAnswers.node, 'li', 'content__result-item');
             const wordTranslate = word.wordTranslateActual ? word.wordTranslateActual : word.wordTranslate;
             const iconAudio = new Control(item.node, 'span', 'item-word');
@@ -130,7 +130,7 @@ export default class SprintView {
             `;
         });
 
-        results.wrong.forEach((word) => {
+        results.wrong.forEach((word: IGameWord) => {
             const item = new Control(wrongAnswers.node, 'li', 'content__result-item');
             const wordTranslate = word.wordTranslateActual ? word.wordTranslateActual : word.wordTranslate;
             const iconAudio = new Control(item.node, 'span', 'item-word');
@@ -154,7 +154,7 @@ export default class SprintView {
         backBtn.node.onclick = this.closeGame;
         againBtn.node.onclick = () => {
             this.closeGame();
-            const sprint = new SprintGame(SprintGameLaunchMode.textbook);
+            const sprint = new SprintGame(SprintGameLaunchMode.textbook, this.wrapper.node.parentNode as HTMLElement);
             sprint.start();
         };
     }
