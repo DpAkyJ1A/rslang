@@ -1,9 +1,7 @@
-import { IWord } from '../../../api/interfaces';
 import Control from '../../../view/control';
 import SprintGame from '../sprint';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';
-import { createSelect } from './__select/select';
 
 const baseUrl = 'https://rs-lang-team-156.herokuapp.com/';
 

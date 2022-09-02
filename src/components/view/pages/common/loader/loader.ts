@@ -1,12 +1,12 @@
-export default class Loader{
-  private loader: HTMLElement;
+export default class Loader {
+    private loader: HTMLElement;
 
-  constructor() {
-    this.loader = document.createElement("span");
-    this.loader.classList.add("loader");
-  }
+    constructor() {
+        this.loader = document.createElement('span');
+        this.loader.classList.add('loader');
+    }
 
-  get getLoader() {
-    return this.loader;
-  }
+    get getLoader() {
+        return this.loader;
+    }
 }

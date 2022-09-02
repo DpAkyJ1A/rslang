@@ -1,4 +1,3 @@
-import { IWord } from '../../../api/interfaces';
 import { SprintModel } from '../model/model';
 import {
     IGameProps,

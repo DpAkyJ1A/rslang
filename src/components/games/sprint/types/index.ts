@@ -1,5 +1,3 @@
-import { IWord } from '../../../api/interfaces';
-
 export enum SprintGameStages {
     welcome,
     game,

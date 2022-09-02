@@ -1,5 +1,5 @@
 import Control from '../../../../view/control';
-import { levelList } from '../../../../view/pages/textbook/__levels/levels';
+import { levelList } from '../../../../view/pages/common/levels/levels';
 
 export const createSelect = (group?: number) => {
     const groupToShow = group ? group : 1;
