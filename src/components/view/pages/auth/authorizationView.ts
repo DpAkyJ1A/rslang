@@ -7,7 +7,7 @@ export default class AuthorizationView extends Control {
     signInView: SignInView;
     authView: AuthView;
     constructor(parentNode: HTMLElement) {
-        super(document.body, 'section', 'authorizationView');
+        super(parentNode, 'section', 'authorizationView');
         this.authView = new AuthView(this.node);
         this.signInView = new SignInView(null);
     }
