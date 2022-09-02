@@ -5,8 +5,9 @@ import SprintView from './view/view';
 export default class SprintGame {
     private controller: SprintController;
     private view: SprintView;
+    private container: HTMLElement;
 
-    constructor(launchMode: SprintGameLaunchMode, userId?: string) {
+    constructor(launchMode: SprintGameLaunchMode, container: HTMLElement, userId?: string) {
         this.view = new SprintView();
         this.controller = new SprintController(
             launchMode,
@@ -14,10 +15,11 @@ export default class SprintGame {
                 this.view.drawContent(props, word, propsGame, result),
             userId
         );
+        this.container = container;
     }
 
     start() {
-        this.view.drawWrapper(document.body);
+        this.view.drawWrapper(this.container);
         this.controller.updateGameContentField();
     }
 }

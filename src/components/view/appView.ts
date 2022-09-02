@@ -10,6 +10,7 @@ import { IState } from '../controller/controller';
 import { IWord } from '../api/interfaces';
 import SprintGame from '../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../games/sprint/types/index';
+import AuthInit from './pages/auth/authinit';
 
 export default class AppView {
     private root: HTMLElement;
@@ -34,6 +35,7 @@ export default class AppView {
     }
 
     drawCurrentView(state: IState, data?: IWord[]) {
+        console.log(state);
         this.main.node.innerHTML = ``;
         const wordArr = data ? data : [];
         switch (state.view) {
@@ -46,6 +48,9 @@ export default class AppView {
             case 'games':
                 this.drawGamesPage();
                 break;
+            case 'auth':
+                this.drawAuthPage();
+                break;
             default:
                 this.errorPage.render(this.main.node);
         }
@@ -54,8 +59,14 @@ export default class AppView {
     drawGamesPage() {
         const btn = new Control(this.main.node, 'button', '', 'Sprint');
         btn.node.onclick = () => {
-            const sprint = new SprintGame(SprintGameLaunchMode.textbook);
+            const sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
             sprint.start();
         };
+    }
+
+    drawAuthPage() {
+        console.log('nen');
+        const auth = new AuthInit(this.main.node);
+        auth.start();
     }
 }

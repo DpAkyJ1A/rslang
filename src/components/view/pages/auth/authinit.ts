@@ -9,8 +9,8 @@ export default class AuthInit {
     view: AuthorizationView;
     model: AuthModel;
     controller: AuthController;
-    constructor() {
-        this.view = new AuthorizationView(document.body);
+    constructor(parentNode: HTMLElement) {
+        this.view = new AuthorizationView(parentNode);
         this.model = new AuthModel();
         this.controller = new AuthController(this.view, this.model);
     }
