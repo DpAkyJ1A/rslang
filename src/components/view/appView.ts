@@ -40,11 +40,11 @@ export default class AppView {
             case 'textbook':
                 this.textbook.render(this.main.node, wordArr);
                 break;
-            case 'dictionary':
-                this.dictionaryPage.render(this.main.node, wordArr);
-                break;
             case 'games':
                 this.drawGamesPage();
+                break;
+            case 'dictionary':
+                this.dictionaryPage.render(this.main.node, wordArr);
                 break;
             default:
                 this.errorPage.render(this.main.node);
