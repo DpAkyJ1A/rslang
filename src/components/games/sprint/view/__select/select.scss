@@ -1,0 +1,51 @@
+.select {
+  position: relative;
+  width: 200px;
+  margin-right: 30px;
+}
+
+.select_disabled {
+  pointer-events: none;
+}
+
+.select__list_hidden {
+    display: none;
+}
+
+.select__placeholder {
+  cursor: pointer;
+  position: relative;
+  padding: 10px 15px;
+  border: 2px solid #b56576;
+}
+
+.select__list {
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: #e56b6f;
+  border: 2px solid #e56b6f;
+  border-top: none;
+}
+
+.select__item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.select__item:hover {
+  background-color: #6d597a;
+}
+
+.select__placeholder::after {
+  content: '\2304';
+  right: 10px;
+  top: 0px;
+  position: absolute;
+  height: 15px;
+  width: 15px;
+}
+
+.select__placeholder:hover {
+  border-color: #e56b6f;
+}

@@ -9,4 +9,5 @@ export const createFooter = (root: HTMLElement) => {
     createFooterGit(footer.node, 'Katrinstom');
     createFooterGit(footer.node, 'rmnvch');
     new Control(footer.node, 'p', 'footer_year', '2022');
+    return footer.node;
 };

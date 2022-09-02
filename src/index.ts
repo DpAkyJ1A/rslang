@@ -1,7 +1,6 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
-import { createLayout } from './components/view/app';
-import AuthInit from './components/view/pages/auth/authinit';
+import { App } from './components/app/app';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -18,6 +17,19 @@ const ionIconNoModule = new Control(body, 'script');
 ionIconNoModule.node.setAttribute('nomodule', '');
 ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
-createLayout(root);
+const state = localStorage['state']
+    ? JSON.parse(localStorage.getItem('state') as string)
+    : {
+          view: 'main',
+          textbook: {
+              page: 1,
+              group: 1,
+          },
+          dictionary: {
+              page: 0,
+              group: 0,
+          },
+      };
 
-new AuthInit().start(); //передача функции на клик по кнопке логин
+const app = new App(root, state);
+app.start();

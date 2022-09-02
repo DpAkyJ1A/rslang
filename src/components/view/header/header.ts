@@ -6,4 +6,5 @@ export const createHeader = (root: HTMLElement) => {
     const headerWrapper = new Control(header.node, 'div', 'header__h1-wrapper');
     new Control(headerWrapper.node, 'h1', 'header__h1', 'RSLang');
     createHeaderAuth(header.node);
+    return header.node;
 };

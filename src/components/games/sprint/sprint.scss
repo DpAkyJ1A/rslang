@@ -1,0 +1,250 @@
+@import "../sprint/view/__select/select.scss";
+
+body {
+  position: relative;
+}
+
+.content__title {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.sprint-game {
+  background:	#eaac8b;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10
+  ;
+}
+
+.sprint-game__abort {
+  text-align: right;
+}
+
+.sprint-game__close svg {
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  fill: #8e8d8a;
+}
+
+// welcome
+
+.sprint-game__content {
+  width: 50vw;
+  height: 60vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: calc(100vh - 85vh);
+}
+
+.content {
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+  animation-name: test;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
+  background: 	#6d597a;
+  box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
+}
+
+.content__description {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.content__description span:nth-child(2) {
+  margin-top: 25px;
+  display: block;
+  text-align: left;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.content__controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.content__start-btn {
+  color: #fff;
+  cursor: pointer;
+  min-width: 150px;
+  background: none;
+  background-color: #b56576;
+  border-color: #b56576;
+  outline: none;
+}
+
+.content__start-btn:hover {
+  background-color: #e56b6f;
+}
+
+
+@keyframes test {
+  from{
+    transform: translateY(-200%);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+// game
+
+
+.content__success-list {
+  margin-bottom: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.content__success-item {
+  list-style: none;
+}
+
+.content__success-item svg {
+  fill: #8e8d8a;
+  width: 25px;
+  height: 25px;
+}
+
+.content__success-item_win svg {
+  fill: #e56b6f;
+}
+
+.content__word {
+  text-align: center;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.content__word_eng {
+  color:#e56b6f;
+  font-size: 3rem;
+}
+
+.content__word_rus {
+  color: #eaac8b;
+}
+
+.content__buttons {
+  margin-top: 100px;
+  width: 365px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__answer-button {
+  padding: 10px 15px;
+  color: #fff;
+  cursor: pointer;
+  min-width: 150px;
+  background: none;
+  background-color: #b56576;
+  border-color: #b56576;
+  outline: none;
+}
+
+.content__answer-button:hover {
+  background-color: #e56b6f;
+}
+
+.content__answer-button_true {
+  background-color: #1b6725;
+}
+
+.content__answer-button_true:hover {
+  background-color: #31873d;
+}
+
+// results
+
+.content__results {
+  margin-bottom: 15px;
+  color: #000000;
+  background-color: #fff;
+  min-width: 80%;
+  overflow-y: scroll;
+}
+
+.content__result-label {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.content__result-label:first-child {
+  background-color: #1b6725;
+}
+
+.content__result-label:nth-child(3) {
+  background-color: #8e1f1f;
+}
+
+.content__result-list {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.content__result-item {
+  font-size: 1.8rem;
+  display: flex;
+}
+
+.content__result-item span:nth-child(3) {
+  margin-left: 10px;
+  color: #e56b6f;
+}
+
+.item-icon {
+  margin-left: auto;
+}
+
+.item-word {
+  display: flex;
+  align-items: center;
+  min-width: 31px;
+  justify-content: center;
+}
+
+.play-mode {
+  background-color: black;
+  border-radius: 5px;
+  transform: scale(0.6);
+}
+
+.content__iconAudio {
+  height: 25px; 
+  width: 25px;
+  transform: scale(1.2);
+}
+
+.button__again,
+.button__back {
+  padding: 10px 15px;
+  color: #fff;
+  cursor: pointer;
+  min-width: 150px;
+  background: none;
+  background-color: #b56576;
+  border-color: #b56576;
+  outline: none;
+}
+
+.button__again:hover,
+.button__back:hover {
+  background-color: #e56b6f;
+}

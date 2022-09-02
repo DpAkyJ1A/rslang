@@ -4,7 +4,13 @@
 @import "./side-menu/side-menu.scss";
 @import "./main/main.scss";
 @import "./footer/footer.scss";
-@import "./pages/textbook/textbook.scss";
+
+@import "./pages/common/common.scss";
+@import "./pages/textbook-page/textbook-page.scss";
+@import "./pages/dictionary-page/dictionary-page.scss";
+@import "./pages/error-page/error-page.scss";
+@import "./pages/common/loader/loader.scss";
+@import "../games/sprint/sprint.scss";
 @import "./pages/auth/auth-page.scss";
 
 html {
@@ -12,6 +18,10 @@ html {
 }
 body {
   min-height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  @include media-mobile{
+    
+  }
 }
 
 #root{

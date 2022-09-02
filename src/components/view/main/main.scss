@@ -1,9 +1,35 @@
 .main{
+  padding: 30px;
   flex-grow: 1;
   width: 100px;
   height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  // @include media-tablet{
+  //   margin-left: 70px;
+  // }
+  @include media-mobile{
+    height: calc(100vh - 135px);
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  @include media-mobile{
+    width: 0;
+  }
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px $color-dark-l;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 10px;
 }
