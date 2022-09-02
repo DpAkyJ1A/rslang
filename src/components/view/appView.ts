@@ -8,6 +8,8 @@ import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
 import { IWord } from '../api/interfaces';
+import SprintGame from '../games/sprint/sprint';
+import { SprintGameLaunchMode } from '../games/sprint/types/index';
 
 export default class AppView {
     private root: HTMLElement;
@@ -41,9 +43,20 @@ export default class AppView {
             case 'dictionary':
                 this.dictionaryPage.render(this.main.node, wordArr);
                 break;
+            case 'games':
+                this.drawGamesPage();
+                break;
             default:
                 this.errorPage.render(this.main.node);
         }
+    }
+
+    drawGamesPage() {
+        const btn = new Control(this.main.node, 'button', '', 'Sprint');
+        btn.node.onclick = () => {
+            const sprint = new SprintGame(SprintGameLaunchMode.textbook);
+            sprint.start();
+        };
     }
 }
 
