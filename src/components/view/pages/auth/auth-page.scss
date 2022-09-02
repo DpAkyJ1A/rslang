@@ -1,0 +1,95 @@
+.authorizationView {
+    width: 35%;
+    margin: 0 auto;
+    display: flex;
+}
+.auth__wrapper,
+.sign__wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    padding: 2em;
+    gap: 0.5em;
+}
+.auth__h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    padding: 1em;
+    color: $color-dark-xl;
+    letter-spacing: 1px;
+}
+.auth__form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.auth__input {
+    width: 100%;
+    height: 48px;
+    border: none;
+    padding: 0.4em;
+    box-shadow: inset 1px 1px 0 0 #858585, inset -1px -1px 0 0 #858585;
+    font-family: sans-serif;
+    color: $color-dark-xl;
+    font-size: 1.5em;
+}
+.auth__button {
+    width: 100%;
+    height: 48px;
+    border: none;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: $color-light-xl;
+    border: 1px solid $color-blue;
+    border-radius: 15px;
+    background: $color-blue;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 1s all ease;
+}
+.auth__button:active {
+    padding-bottom: 1px;
+    color: $color-light-blue;
+  }
+.colored {
+    color: $color-light-xl;
+    background-image: -webkit-linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out;
+  }
+.colored:hover {
+    background-position: 0;
+}
+.auth__registration,
+.sign__registration {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: $color-dark-xl;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding-left: 0.5em;
+    transition: all 0.5s ease; 
+}
+.auth__registration:hover,
+.sign__registration:hover {
+    color: $color-primary;
+}
+.auth__err-pass,
+.auth__err-mail,
+.auth__err-name {
+    font-size: 1em;
+    color: $color-red;
+    margin-bottom: 1em;
+    padding-left: 0.5em;
+}
+.auth__access {
+    text-align: center;
+    color: $color-primary;
+    font-size: 1em;
+}

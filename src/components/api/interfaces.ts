@@ -40,7 +40,9 @@ export interface IUserWord {
 
 export interface ISettings {
     wordsPerDay: number;
-    optional: {};
+    optional: {
+        [key: string]: string | boolean | number;
+    };
 }
 
 export interface IStatistics {
