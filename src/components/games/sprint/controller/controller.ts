@@ -67,11 +67,11 @@ export default class SprintController extends SprintModel {
         window.addEventListener('startGame', this.handleStartGame as EventListener);
         document.addEventListener('sprintTimeout', this.handleTimeout);
         document.addEventListener('restartGame', this.handleRestartGame);
-        document.addEventListener('toggleSound', (e: Event) => {
-            e.stopImmediatePropagation();
-            e.stopPropagation();
-            this.state.sound = !this.state.sound;
-        });
+        // document.addEventListener('toggleSound', (e: Event) => {
+        //     e.stopImmediatePropagation();
+        //     e.stopPropagation();
+        //     this.state.sound = !this.state.sound;
+        // });
     }
 
     handleRestartGame() {
@@ -143,7 +143,6 @@ export default class SprintController extends SprintModel {
     }
 
     playSound(answer: boolean) {
-        console.log('nen0');
         try {
             playWin.load();
             playLoose.pause();
@@ -163,5 +162,15 @@ export default class SprintController extends SprintModel {
         this.state.stage = SprintGameStages.results;
         this.updateGameContentField();
         document.removeEventListener('sprintTimeout', this.handleTimeout);
+    }
+
+    listen() {
+        document.addEventListener('click', (e: Event) => {
+            const target = e.target as HTMLElement;
+            if (!target.closest('div')?.classList.contains('sprint-game__sound')) return;
+            console.log('nenSound');
+            this.state.sound = !this.state.sound;
+            target.classList.toggle('sprint-game__sound_active');
+        });
     }
 }
