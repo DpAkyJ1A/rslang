@@ -4,6 +4,7 @@ import { createFooter } from './footer/footer';
 import { createScrollUpBtn } from './pages/common/scrollUpBtn/scrollUpBtn';
 import TextbookPage from './pages/textbook-page/textbook-page';
 import DictionaryPage from './pages/dictionary-page/dictionary-page';
+import StatsPage from './pages/stats-page/stats-page';
 import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
@@ -16,12 +17,14 @@ export default class AppView {
     private root: HTMLElement;
     private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
+    private statsPage: StatsPage;
     private errorPage: ErrorPage;
     main: Control;
     constructor(root: HTMLElement) {
         this.root = root;
         this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
+        this.statsPage = new StatsPage();
         this.errorPage = new ErrorPage();
         this.main = new Control(null, 'div', 'main');
     }
@@ -47,6 +50,9 @@ export default class AppView {
                 break;
             case 'games':
                 this.drawGamesPage();
+                break;
+            case 'stats':
+                this.statsPage.render(this.main.node);
                 break;
             case 'auth':
                 this.drawAuthPage();
