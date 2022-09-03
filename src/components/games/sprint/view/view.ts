@@ -70,6 +70,7 @@ export default class SprintView {
                 break;
             case 2:
                 this.drawResults(gameProps as IGameProps, gameResult as IGameResult);
+                this.timer.reset();
                 break;
             default:
         }

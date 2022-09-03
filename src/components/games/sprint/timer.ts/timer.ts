@@ -50,11 +50,11 @@ export default class Timer extends Control {
     }
 
     reset() {
+        clearInterval(this.interval);
         this.interval = undefined;
         this.display.node.innerHTML = `00:${TIMER_IN_SPRINT}`;
         this.count = TIMER_IN_SPRINT;
         this.wrapper.node.classList.add('timer__wrapper_animated');
-        instance = null;
     }
 
     alarmTimeout() {
