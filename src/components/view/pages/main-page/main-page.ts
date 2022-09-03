@@ -17,9 +17,16 @@ export default class MainPage extends Page {
         new Control(this.container, 'p', 'main-page__description', 'Твоя цель не достигается, так как традиционные и "эффективные" подходы НЕ работают.'); 
         new Control(this.container, 'p', 'main-page__description', 'Работает: регулярность (5 минут в день!) + наше приложение RSLang.');
         const mainBgWrapper = new Control(this.container, 'div', 'main-page__bg-wrapper');
-        const mainNav = new Control(mainBgWrapper.node, 'nav', 'main-page-nav');
-        const ulMain = new Control(mainNav.node, 'ul', 'main-page-nav__list');
-        new Control(ulMain.node, 'a', 'main-page-nav__item', 'Games').node.setAttribute('href', '/#games');
-        new Control(ulMain.node, 'a', 'main-page-nav__item', 'Statistics').node.setAttribute('href', '/#stats');
+
+        const link1Dwn = new Control(mainBgWrapper.node, 'a', 'bnt__link content__white');
+        const div1Dwn = new Control(link1Dwn.node, 'div', 'btn__wrapper btn_yellow');
+        new Control(div1Dwn.node, 'p', 'btn__content', 'Зайди сюда - здесь не надо ничего учить. Просто играй!');
+        new Control(div1Dwn.node, 'div', 'btn__img', 'games'); //сюда картинку
+
+        const link2Dwn = new Control(mainBgWrapper.node, 'a', 'bnt__link content__grey');
+        const div2Dwn = new Control(link2Dwn.node, 'div', 'btn__wrapper btn_coral');
+        new Control(div2Dwn.node, 'p', 'btn__content', 'Сюда не нажимай, не смотри свои великие достижения');
+        new Control(div2Dwn.node, 'div', 'btn__img'); //сюда картинку
+
     }
 }

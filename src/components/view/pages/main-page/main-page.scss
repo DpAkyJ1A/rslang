@@ -1,0 +1,75 @@
+.main-page {
+    background-color: $color-gray-dark;
+    width: 100%;
+    height: max-content;
+}
+.h1-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+}
+.main-page__title {
+    width: 54%;
+    color: $colorLink5;
+    margin-top: 1.5em;
+    margin-left: 1.5em;
+    margin-bottom: 0.5em;
+    font-size: 4em;
+    line-height: 75px;
+}
+.main-page__description {
+    color: $color-gray-l;
+    margin-left: 4.6em;
+    margin-bottom: 0;
+    font-size: 1.3em;
+    width: 42%;
+}
+
+//
+.main-page__bg-wrapper {
+    display: flex;
+    gap: 2em;
+    justify-content: flex-end;
+    padding: 1.5em;
+}
+.bnt__link {
+    text-decoration: none;
+}
+.btn_yellow {
+    background-color: $colorLink0;
+    border: 1em solid $colorLink5;
+}
+.btn_coral {
+    background-color: $colorLink5;
+    border: 1em solid $colorLink4;
+}
+.btn__wrapper {
+    width: 270px;
+    height: max-content;
+    border-radius: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn__content {
+    font-size: 0.9em;
+    line-height: 22px;
+    text-align: center;
+}
+
+.content__grey {
+    color: $color-gray-dark;
+}
+.content__white {
+    color: $color-gray-l;
+}
+
+.btn__img {
+    width: 60px;
+    height: 80px;
+    background-color: inherit;
+    background-image: url('Assets/images/boy.jpg');
+    background-repeat: round;
+}
