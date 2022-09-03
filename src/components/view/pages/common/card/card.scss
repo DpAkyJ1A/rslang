@@ -9,6 +9,7 @@
 }
 
 .card {
+  background-color: $colorLink5;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
   @include media-tablet{
@@ -42,6 +43,7 @@
 
 .card__icon_play {
   cursor: pointer;
+  fill: $color-light-xl;
 }
 
 .card__icon_play.play-mode {
@@ -65,13 +67,14 @@
 }
 
 .card__content {
-  padding: 10px;
+  width: 100%;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  *{
-      margin-bottom: 5px;
-  }
+  // *{
+  //     margin-bottom: 5px;
+  // }
 }
 
 .card__word {
@@ -80,9 +83,12 @@
     font-size: 1.5rem;
   }
 }
-
+.card__controls {
+  margin-left: auto;
+}
 .card__controls button {
   border: 1px solid grey;
   padding: 5px 10px;
   border-radius: 5px;
+  border: none;
 }

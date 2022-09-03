@@ -13,6 +13,12 @@
 }
 
 .header__auth-wrapper:hover{
-  color: $color-dark-l;
+  color: $colorLink4;
   cursor: pointer;
+}
+.header__link {
+  color: $colorLink5;
+}
+.header__link:hover {
+  color: $colorLink4;
 }

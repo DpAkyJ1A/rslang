@@ -1,7 +1,6 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
 import { App } from './components/app/app';
-import MainPage from './components/view/pages/main-page/main-page';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -34,3 +33,11 @@ const state = localStorage['state']
 
 const app = new App(root, state);
 app.start();
+
+// const birds = new Control(body, 'script');
+// birds.node.setAttribute('type', 'module');
+// birds.node.setAttribute('src','three.r119.min.js'); 
+
+// const birdsBody = new Control(body, 'script');
+// birdsBody.node.setAttribute('type', 'module');
+// birdsBody.node.setAttribute('src','vanta.birds.min.js'); 
