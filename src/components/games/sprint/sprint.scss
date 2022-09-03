@@ -1,4 +1,5 @@
 @import "../sprint/view/__select/select.scss";
+@import './timer.ts/timer.scss';
 
 body {
   position: relative;
@@ -21,14 +22,46 @@ body {
 }
 
 .sprint-game__abort {
+  padding: 18px;
   text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sprint-game__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sprint-game__close svg {
   cursor: pointer;
   width: 42px;
   height: 42px;
+  fill: #6d597a;
+}
+
+.sprint-game__fullscreen svg {
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  fill: #6d597a;
+}
+
+.sprint-game__sound {
+  margin-right: 10px;
+}
+
+.sprint-game__sound svg {
+  width: 32px;
+  height: 32px;
   fill: #8e8d8a;
+  cursor: pointer;
+}
+
+.sprint-game__sound_active svg {
+  fill: #6d597a;
 }
 
 // welcome
@@ -38,11 +71,12 @@ body {
   height: 60vh;
   margin-left: auto;
   margin-right: auto;
-  margin-top: calc(100vh - 85vh);
+  margin-top: calc(100vh - 93Vh);
 }
 
 .content {
   padding: 15px 25px;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
