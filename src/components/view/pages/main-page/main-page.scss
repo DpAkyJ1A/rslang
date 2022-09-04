@@ -31,9 +31,10 @@
     }
     @include media-mobile {
         font-size: 2em;
-        width: 80%;
+        width: 90%;
         text-align: center;
         line-height: 50px;
+        margin-left: 0;
     }
 }
 .main-page__description {
@@ -48,10 +49,10 @@
         margin-left: 1.6em; 
     }
     @include media-mobile {
-        width: 80%;
+        width: 90%;
         text-align: center;
         margin-top: 0.5em;
-        margin-left: 1.4em;
+        margin-left: 0;
     }
 }
 
