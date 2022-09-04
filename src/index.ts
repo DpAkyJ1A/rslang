@@ -33,3 +33,11 @@ const state = localStorage['state']
 
 const app = new App(root, state);
 app.start();
+
+// const birds = new Control(body, 'script');
+// birds.node.setAttribute('type', 'module');
+// birds.node.setAttribute('src','three.r119.min.js'); 
+
+// const birdsBody = new Control(body, 'script');
+// birdsBody.node.setAttribute('type', 'module');
+// birdsBody.node.setAttribute('src','vanta.birds.min.js'); 

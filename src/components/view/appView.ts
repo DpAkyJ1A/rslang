@@ -11,15 +11,18 @@ import { IWord } from '../api/interfaces';
 import SprintGame from '../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
+import MainPage from './pages/main-page/main-page';
 
 export default class AppView {
     private root: HTMLElement;
+    private mainPage: MainPage;
     private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
     private errorPage: ErrorPage;
     main: Control;
     constructor(root: HTMLElement) {
         this.root = root;
+        this.mainPage = new MainPage();
         this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
         this.errorPage = new ErrorPage();
@@ -39,6 +42,9 @@ export default class AppView {
         this.main.node.innerHTML = ``;
         const wordArr = data ? data : [];
         switch (state.view) {
+            case 'main':
+                this.mainPage.render(this.main.node);
+                break;
             case 'textbook':
                 this.textbook.render(this.main.node, wordArr);
                 break;
@@ -58,8 +64,20 @@ export default class AppView {
 
     drawGamesPage() {
         const btn = new Control(this.main.node, 'button', '', 'Sprint');
+        let sprint: SprintGame | null;
         btn.node.onclick = () => {
-            const sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
+            // const className = 'SprintGame';
+            // const test = document.getElementsByClassName(className) as HTMLCollection;
+            // console.log(test);
+            // for (const item of test) {
+            //     item.classList.remove(className);
+            // }
+            // if (sprint) {
+            //     sprint = null;
+            //     console.log('exists!');
+            //     console.log(sprint);
+            // }
+            sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
             sprint.start();
         };
     }

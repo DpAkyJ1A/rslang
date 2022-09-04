@@ -1,5 +1,6 @@
 import Control from '../../../view/control';
 import SprintGame from '../sprint';
+import Timer from '../timer.ts/timer';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';
 
@@ -8,19 +9,50 @@ const baseUrl = 'https://rs-lang-team-156.herokuapp.com/';
 export default class SprintView {
     private content: Control;
     private wrapper: Control;
+    private timer: Timer;
     constructor() {
         this.wrapper = new Control(null, 'div', 'sprint-game');
         this.content = new Control(this.wrapper.node, 'div', 'sprint-game__content content');
         this.closeGame = this.closeGame.bind(this);
+        this.restartGame = this.restartGame.bind(this);
         this.playAudio = this.playAudio.bind(this);
+        this.enableFullscreen = this.enableFullscreen.bind(this);
+        this.toggleSound = this.toggleSound.bind(this);
+        this.timer = new Timer();
+    }
+
+    toggleSound() {
+        (document.querySelector('.sprint-game__sound') as HTMLElement).classList.toggle('sprint-game__sound_active');
+        const event = new Event('toggleSound');
+        document.dispatchEvent(event);
+    }
+
+    enableFullscreen() {
+        if (this.wrapper.node.requestFullscreen) {
+            this.wrapper.node.requestFullscreen();
+        }
     }
 
     drawWrapper(container: HTMLElement) {
+        // container.innerHTML = '';
         const closeWrapper = new Control(null, 'div', 'sprint-game__abort');
+        const actions = new Control(closeWrapper.node, 'div', 'sprint-game__actions');
         const closeBtn = new Control(closeWrapper.node, 'div', 'sprint-game__close');
+        const soundControl = new Control(actions.node, 'div', 'sprint-game__sound');
+        const fullScreen = new Control(actions.node, 'div', 'sprint-game__fullscreen');
+        soundControl.node.innerHTML = `
+        <svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1" viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="10,16 10,0 3,5 0,5 0,11 3,11 "/><path d="M11,13.91c2.837-0.477,5-2.938,5-5.91s-2.163-5.433-5-5.91v1.011C13.279,3.566,15,5.585,15,8s-1.721,4.434-4,4.899V13.91z"/><path d="M11,9.722v1.094c1.163-0.413,2-1.512,2-2.816s-0.837-2.403-2-2.816v1.094C11.595,6.625,12,7.263,12,8  C12,8.737,11.595,9.375,11,9.722z"/></svg>
+        `;
+        fullScreen.node.innerHTML = `
+        <svg viewBox="0 0 24 24">
+        <path d="M3 5C3 3.89543 3.89543 3 5 3H7C7.27614 3 7.5 3.22386 7.5 3.5C7.5 3.77614 7.27614 4 7 4H5C4.44772 4 4 4.44772 4 5V7C4 7.27614 3.77614 7.5 3.5 7.5C3.22386 7.5 3 7.27614 3 7V5ZM12.5 3.5C12.5 3.22386 12.7239 3 13 3H15C16.1046 3 17 3.89543 17 5V7C17 7.27614 16.7761 7.5 16.5 7.5C16.2239 7.5 16 7.27614 16 7V5C16 4.44772 15.5523 4 15 4H13C12.7239 4 12.5 3.77614 12.5 3.5ZM3.5 12.5C3.77614 12.5 4 12.7239 4 13V15C4 15.5523 4.44772 16 5 16H7C7.27614 16 7.5 16.2239 7.5 16.5C7.5 16.7761 7.27614 17 7 17H5C3.89543 17 3 16.1046 3 15V13C3 12.7239 3.22386 12.5 3.5 12.5ZM16.5 12.5C16.7761 12.5 17 12.7239 17 13V15C17 16.1046 16.1046 17 15 17H13C12.7239 17 12.5 16.7761 12.5 16.5C12.5 16.2239 12.7239 16 13 16H15C15.5523 16 16 15.5523 16 15V13C16 12.7239 16.2239 12.5 16.5 12.5Z"/>
+        </svg>
+        `;
         closeBtn.node.innerHTML = `
         <svg viewBox="0 0 24 24"><g id="info"/><g id="icons"><path d="M14.8,12l3.6-3.6c0.8-0.8,0.8-2,0-2.8c-0.8-0.8-2-0.8-2.8,0L12,9.2L8.4,5.6c-0.8-0.8-2-0.8-2.8,0   c-0.8,0.8-0.8,2,0,2.8L9.2,12l-3.6,3.6c-0.8,0.8-0.8,2,0,2.8C6,18.8,6.5,19,7,19s1-0.2,1.4-0.6l3.6-3.6l3.6,3.6   C16,18.8,16.5,19,17,19s1-0.2,1.4-0.6c0.8-0.8,0.8-2,0-2.8L14.8,12z" id="exit"/></g></svg>
         `;
+        fullScreen.node.onclick = this.enableFullscreen;
+        soundControl.node.onclick = this.toggleSound;
         closeBtn.node.onclick = this.closeGame;
         this.wrapper.node.prepend(closeWrapper.node);
         container.append(this.wrapper.node);
@@ -34,9 +66,11 @@ export default class SprintView {
                 break;
             case 1:
                 this.drawGame(data as IGameWord, gameProps as IGameProps);
+                this.timer.start(this.content.node);
                 break;
             case 2:
                 this.drawResults(gameProps as IGameProps, gameResult as IGameResult);
+                this.timer.reset();
                 break;
             default:
         }
@@ -53,7 +87,7 @@ export default class SprintView {
         controlDescr.node.innerHTML = `
                 <br>- Используйте мышь, чтобы выбрать.
                 <br> - Используйте клавиши:<br>
-                 - "Enter" для старта<br>
+                 - "s" для старта<br>
                  - "<" для выбора "true"<br>
                  - ">" для выбора "false"<br>
                  - "space" чтобы сыграть заново
@@ -107,9 +141,9 @@ export default class SprintView {
             Result: ${props.score}
         `;
         const resultsWrapper = new Control(this.content.node, 'div', 'content__results');
-        new Control(resultsWrapper.node, 'span', 'content__result-label', 'Знаю: ');
+        new Control(resultsWrapper.node, 'span', 'content__result-label', `Знаю (${results.right.length}):`);
         const rightAnswers = new Control(resultsWrapper.node, 'ul', 'content__result-list content__result-list_true');
-        new Control(resultsWrapper.node, 'span', 'content__result-label', 'Выучить: ');
+        new Control(resultsWrapper.node, 'span', 'content__result-label', `Выучить (${results.wrong.length}):`);
         const wrongAnswers = new Control(resultsWrapper.node, 'ul', 'content__result-list content__result-list_false');
 
         results.right.forEach((word: IGameWord) => {
@@ -152,15 +186,18 @@ export default class SprintView {
         const againBtn = new Control(buttonBlock.node, 'button', 'button__again', 'Again');
         const backBtn = new Control(buttonBlock.node, 'button', 'button__back', 'Back to Games');
         backBtn.node.onclick = this.closeGame;
-        againBtn.node.onclick = () => {
-            this.closeGame();
-            const sprint = new SprintGame(SprintGameLaunchMode.textbook, this.wrapper.node.parentNode as HTMLElement);
-            sprint.start();
-        };
+        againBtn.node.onclick = this.restartGame;
     }
 
     closeGame() {
+        this.timer?.reset();
         this.wrapper.destroy();
+    }
+
+    restartGame() {
+        // this.wrapper.destroy();
+        const event = new Event('restartGame');
+        document.dispatchEvent(event);
     }
 
     fireAnswerClick(e: Event) {
