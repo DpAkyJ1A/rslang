@@ -5,11 +5,13 @@ export default class Card {
     data: IWord;
     node: HTMLElement;
     baseUrl: string;
-    constructor(data: IWord, baseURL: string) {
+    isAuth: boolean;
+    constructor(data: IWord, baseURL: string, isAuth?: boolean) {
         this.data = data;
         this.node = document.createElement('div');
         this.node.className = 'textbook__card card';
         this.baseUrl = baseURL;
+        this.isAuth = isAuth as boolean;
         this.playAudio = this.playAudio.bind(this);
     }
 
@@ -69,10 +71,11 @@ export default class Card {
             exampleTranslation.node.classList.add('card__translation_disabled');
         }
 
-        const badge = createBadge();
-        this.node.setAttribute('data-id', `${this.data.id}`);
-
-        this.node.append(badge);
+        if (this.isAuth) {
+            const badge = createBadge();
+            this.node.setAttribute('data-id', `${this.data.id}`);
+            this.node.append(badge);
+        }
 
         return this.node;
     }

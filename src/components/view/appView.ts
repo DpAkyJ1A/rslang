@@ -46,7 +46,7 @@ export default class AppView {
                 this.mainPage.render(this.main.node);
                 break;
             case 'textbook':
-                this.textbook.render(this.main.node, wordArr);
+                this.textbook.render(this.main.node, state, wordArr);
                 break;
             case 'dictionary':
                 this.dictionaryPage.render(this.main.node, wordArr);
