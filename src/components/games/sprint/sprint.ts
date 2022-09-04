@@ -21,5 +21,6 @@ export default class SprintGame {
     start() {
         this.view.drawWrapper(this.container);
         this.controller.updateGameContentField();
+        this.controller.listen();
     }
 }

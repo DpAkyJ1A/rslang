@@ -13,6 +13,8 @@ export interface ISprintGameState {
     mode: SprintGameLaunchMode;
     stage: SprintGameStages;
     userId?: string;
+    group?: number;
+    sound: boolean;
 }
 
 export type TSprintViewCb = {
