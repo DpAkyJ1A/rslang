@@ -29,7 +29,9 @@ export default class StatsPage extends Page {
         );
         this.createGameStats(gameCardsContainer, 'Pip', sprintLearnedWords, sprintCorrectAnswerPercent, longestSeries);
 
+        new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
         const chartsContainer = new Control(this.container, 'div', 'charts-container').node;
+
         const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
         let header = 'New words per day';
         const datesLabels = ['21.08', '26.08', '27.08', '31.08', '02.09', '03.09'];
@@ -75,9 +77,21 @@ export default class StatsPage extends Page {
     ) {
         const statsCard = new Control(gameCardsContainer, 'div', `game-stats-card ${gameName.toLowerCase()}`).node;
         new Control(statsCard, 'h3', 'game-name', `${gameName}`);
-        new Control(statsCard, 'p', 'learned-words', `Learned ${sprintLearnedWords} words`);
-        new Control(statsCard, 'p', 'correct-answer-percent', `Correct answer ${sprintCorrectAnswerPercent}%`);
-        new Control(statsCard, 'p', 'longest-series', `Longest series of correct answers: ${longestSeries}`);
+        new Control(
+            statsCard,
+            'p',
+            'learned-words'
+        ).node.innerHTML = `Learned <span>${sprintLearnedWords}</span> words`;
+        new Control(
+            statsCard,
+            'p',
+            'correct-answer-percent'
+        ).node.innerHTML = `Correct answer <span>${sprintCorrectAnswerPercent}</span>%`;
+        new Control(
+            statsCard,
+            'p',
+            'longest-series'
+        ).node.innerHTML = `Longest series of correct answers: <span>${longestSeries}</span>`;
     }
 
     private createLongTermStats(
