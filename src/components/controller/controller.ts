@@ -2,6 +2,7 @@ import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
 import { parseHashString } from '../utils/parseHashString';
 import { updateSideMenu } from '../view/side-menu/side-menu';
+import userState from '../utils/state';
 
 export default class Controller extends ApiService {
     state: IState;
@@ -15,6 +16,7 @@ export default class Controller extends ApiService {
         });
         window.addEventListener('popstate', () => {
             this.handleLocation();
+            console.log('hehe');
         });
     }
 
@@ -25,9 +27,10 @@ export default class Controller extends ApiService {
     }
 
     updateState(params: { [N: string]: string }) {
+        console.log(userState);
         this.setViewState = params.view;
         if (params['view'] === 'textbook') {
-            this.setTextbookState = { group: params.group || '1', page: params.page || '1' };
+            this.setTextbookState = { group: params.group || '0', page: params.page || '0' };
         }
     }
 
@@ -74,6 +77,11 @@ export interface IState {
     dictionary: {
         page: number;
         group: number;
+    };
+    user: {
+        isAuth: false;
+        id: string;
+        name: string;
     };
 }
 
