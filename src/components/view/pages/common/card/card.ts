@@ -1,4 +1,5 @@
 import Control from 'control';
+import { BadgeType, createBadge } from '../badge/badge';
 
 export default class Card {
     data: IWord;
@@ -35,6 +36,13 @@ export default class Card {
             </audio>
         `;
         (header.node.querySelector('.card__icon_play') as HTMLElement).onclick = this.playAudio;
+
+        // const controls = new Control(content.node, 'div', 'card__controls');
+        // controls.node.innerHTML = `
+        //     <button class="card__btn card__btn_hard">Hard</button>
+        //     <button class="card__btn card__btn_learned">Learned</button>
+        // `;
+
         const wordTranslation = new Control(content.node, 'h4', 'card__translation', `${this.data.wordTranslate}`);
         const meaning = new Control(content.node, 'div', 'card__example');
         new Control(meaning.node, 'h3', '', `${this.data.textMeaning}`);
@@ -54,18 +62,17 @@ export default class Card {
             `${this.data.textExampleTranslate}`
         );
 
-        const controls = new Control(content.node, 'div', 'card__controls');
-        controls.node.innerHTML = `
-            <button class="btn-reset">hard</button>
-            <button class="btn-reset">learned</button>
-        `;
-
         const translationDisabled = localStorage.getItem('translationDisabled') || ('false' as string);
         if (translationDisabled === 'true') {
             wordTranslation.node.classList.add('card__translation_disabled');
             phraseTranslation.node.classList.add('card__translation_disabled');
             exampleTranslation.node.classList.add('card__translation_disabled');
         }
+
+        const badge = createBadge();
+        this.node.setAttribute('data-id', `${this.data.id}`);
+
+        this.node.append(badge);
 
         return this.node;
     }
