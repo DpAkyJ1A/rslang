@@ -9,7 +9,7 @@
   a {
     display: flex;
     text-decoration: none;
-    color: $color-light-xl;
+    color: $color-gray-dark;
     width: 100%;
   }
   @include media-mobile{
@@ -57,9 +57,9 @@
 }
 
 .side-menu-item.active{
-  background: $color-light-xl;
+  background: $color-gray-dark;
   *{
-    color: $color-dark-l;
+    color: $colorLink5;
   }
 }
 
@@ -68,7 +68,7 @@
   position: absolute;
   height: 20px;
   width: 100%;
-  background: $color-light-xl;
+  background: $color-gray-dark;
   display: none;
   @include media-mobile{
     height: 100%;
@@ -100,7 +100,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: $color-primary;
+  background: $colorLink5;
 }
 
 .side-menu-item b:nth-child(1)::before{

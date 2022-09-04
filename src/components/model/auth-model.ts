@@ -24,7 +24,7 @@ export default class AuthModel {
 
     async sendUserDataToBase(data: IUser) {
         const response = await this.api.createUser(data);
-        this.saveUserToken(response); //сохранение в локалсторадж токен
+        this.saveUserToken(Object.assign(response, { isAuth: false })); //сохранение в локалсторадж токен
         state.userSignIn.isAuth = true;
         state.userSignIn.userId = response.id;
         state.userSignIn.name = response.name;
@@ -39,9 +39,14 @@ export default class AuthModel {
 
     async sendSighInUserDataToBase(login: IUser) {
         const response = await this.api.signInUser(login);
-        this.saveUserToken(response);
+        this.saveUserToken(Object.assign(response, { isAuth: true }));
         state.userSignIn.token = response.token;
         state.userSignIn.refreshToken = response.refreshToken;
+        // я добавил
+        state.userSignIn.isAuth = true;
+        state.userSignIn.userId = response.id;
+        state.userSignIn.name = response.name;
+        state.userSignIn.email = response.email;
     }
 
     async checkToken() {

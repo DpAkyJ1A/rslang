@@ -9,8 +9,9 @@
 }
 
 .card {
-  background-color: #eaac8b;
+
   position: relative;
+  background-color: $colorLink5;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
   @include media-tablet{
@@ -44,6 +45,7 @@
 
 .card__icon_play {
   cursor: pointer;
+  fill: $color-light-xl;
 }
 
 .card__icon_play.play-mode {
@@ -59,21 +61,26 @@
 
 .card__translation {
   display: block;
+  text-transform: uppercase;
   color: grey;
+  padding-top: 3px;
 }
 
 .card__translation_disabled {
   display: none;
 }
-
+.card__example > h3 > i {
+  color: $colorLink0;
+}
 .card__content {
-  padding: 10px;
+  width: 100%;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  *{
-      margin-bottom: 5px;
-  }
+  // *{
+  //     margin-bottom: 5px;
+  // }
 }
 
 .card__word {
@@ -82,22 +89,31 @@
     font-size: 1.5rem;
   }
 }
-
-.card__btn {
-  cursor: pointer;
-  background-color: inherit;
-  min-width: 150px;
-  border: 3px solid #fff;
+.card__controls {
+  margin-left: auto;
+}
+.card__controls button {
+  border: 1px solid grey;
   padding: 5px 10px;
-  border-radius: 35px;
+  border-radius: 5px;
+  border: none;
 }
 
-.card__btn_hard {
-  // border-color: $colorLink4;
-  color: #fff;
-}
+// .card__btn {
+//   cursor: pointer;
+//   background-color: inherit;
+//   min-width: 150px;
+//   border: 3px solid #fff;
+//   padding: 5px 10px;
+//   border-radius: 35px;
+// }
 
-.card__btn_learned {
-  // border-color: #00bc9c;
-  color: #fff;
-}
+// .card__btn_hard {
+//   // border-color: $colorLink4;
+//   color: #fff;
+// }
+
+// .card__btn_learned {
+//   // border-color: #00bc9c;
+//   color: #fff;
+// }

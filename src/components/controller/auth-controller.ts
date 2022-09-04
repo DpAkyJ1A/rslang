@@ -76,7 +76,9 @@ export default class AuthController {
         this.model.sendSighInUserDataToBase({ email, password }).then((res) => {
             this.view.authView.inputMail.node.value = '';
             this.view.authView.inputPass.node.value = '';
-            console.log(res);
+            // на мейн
+            window.history.pushState({}, '', '/#main');
+            location.reload();
             //переход на страницу учебника (спинер)
         });
         if (this.model.isValidMail(email)) {
@@ -98,8 +100,9 @@ export default class AuthController {
         this.view.authView.successSign.node.textContent = '';
     };
 
-    logOutUser() {
-        document.querySelector('.header__auth-wrapper');
+    static logOutUser() {
+        // document.querySelector('.header__auth-wrapper');
         localStorage.clear();
+        location.reload();
     }
 }

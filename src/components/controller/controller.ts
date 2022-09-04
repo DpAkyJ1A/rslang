@@ -2,6 +2,7 @@ import { IWord } from '../api/interfaces';
 import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
 import { updateSideMenu } from '../view/side-menu/side-menu';
+import userState from '../utils/state';
 
 export default class Controller extends TextbookModel {
     state: IState;
@@ -16,6 +17,7 @@ export default class Controller extends TextbookModel {
         });
         window.addEventListener('popstate', () => {
             this.handleLocation();
+            console.log('hehe');
         });
         document.addEventListener('cardWordToggle', this.handleWordsToogle as EventListener);
     }
@@ -31,9 +33,10 @@ export default class Controller extends TextbookModel {
     }
 
     updateState(params: { [N: string]: string }) {
+        console.log(userState);
         this.setViewState = params.view;
         if (params['view'] === 'textbook') {
-            this.setTextbookState = { group: params.group || '1', page: params.page || '1' };
+            this.setTextbookState = { group: params.group || '0', page: params.page || '0' };
         }
     }
 
@@ -78,6 +81,11 @@ export interface IState {
     dictionary: {
         page: number;
         group: number;
+    };
+    user: {
+        isAuth: false;
+        id: string;
+        name: string;
     };
 }
 
