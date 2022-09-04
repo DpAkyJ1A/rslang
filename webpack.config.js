@@ -16,7 +16,7 @@ const baseConfig = {
             },
             // изображения
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                test: /\.(?:ico|gif|png|jpg|jpeg|wav)$/i,
                 type: 'asset/resource',
             },
             // шрифты и SVG

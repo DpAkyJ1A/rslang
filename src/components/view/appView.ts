@@ -58,8 +58,20 @@ export default class AppView {
 
     drawGamesPage() {
         const btn = new Control(this.main.node, 'button', '', 'Sprint');
+        let sprint: SprintGame | null;
         btn.node.onclick = () => {
-            const sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
+            // const className = 'SprintGame';
+            // const test = document.getElementsByClassName(className) as HTMLCollection;
+            // console.log(test);
+            // for (const item of test) {
+            //     item.classList.remove(className);
+            // }
+            // if (sprint) {
+            //     sprint = null;
+            //     console.log('exists!');
+            //     console.log(sprint);
+            // }
+            sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
             sprint.start();
         };
     }
