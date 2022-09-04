@@ -11,8 +11,8 @@ export class App {
         this.controller = new Controller(state, (state, data?) => this.view.drawCurrentView(state, data));
     }
 
-    start() {
-        this.view.drawStaticInterface();
+    start(data: { isAuth: boolean; name: string }) {
+        this.view.drawStaticInterface(data);
         this.controller.handleLocation();
     }
 }

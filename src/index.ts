@@ -1,6 +1,7 @@
 import 'Components/view/index.scss';
 import Control from './components/view/control';
 import { App } from './components/app/app';
+import { IState } from './components/controller/controller';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -17,22 +18,34 @@ const ionIconNoModule = new Control(body, 'script');
 ionIconNoModule.node.setAttribute('nomodule', '');
 ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
-const state = localStorage['state']
-    ? JSON.parse(localStorage.getItem('state') as string)
-    : {
-          view: 'main',
-          textbook: {
-              page: 1,
-              group: 1,
-          },
-          dictionary: {
-              page: 0,
-              group: 0,
-          },
-      };
+const state: IState = {
+    view: 'main',
+    textbook: {
+        page: 0,
+        group: 0,
+    },
+    dictionary: {
+        page: 0,
+        group: 0,
+    },
+    user: {
+        isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : false,
+        id: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : '',
+        name: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).name : '',
+    },
+};
 
 const app = new App(root, state);
-app.start();
+
+app.start({ isAuth: state.user.isAuth, name: state.user.name} );
+
+interface ILocalStorageData {
+    message: string;
+    name: string;
+    refreshToken: string;
+    token: string;
+    userId: string;
+}
 
 // const birds = new Control(body, 'script');
 // birds.node.setAttribute('type', 'module');
@@ -41,3 +54,4 @@ app.start();
 // const birdsBody = new Control(body, 'script');
 // birdsBody.node.setAttribute('type', 'module');
 // birdsBody.node.setAttribute('src','vanta.birds.min.js'); 
+
