@@ -1,6 +1,5 @@
 .stats-page{
   width: 100%;
-  padding-right: 70px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -19,8 +18,6 @@
 
 .today-stats-container{
   display: flex;
-  
-  
 }
 
 .learned-words-container{
@@ -43,11 +40,34 @@
 
 }
 
+.game-cards-container{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  margin: 30px 0;
+  @include media-mobile{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .game-stats-card{
+  width: fit-content;
   height: fit-content;
   padding: 20px;
   border-radius: 30px;
   margin: 0 20px;
+  transition: all 0.3s ease;
+}
+
+.game-stats-card + .game-stats-card{
+  @include media-mobile{
+    margin-top: 30px;
+  }
+}
+
+.game-stats-card:hover{
+  cursor: pointer;
   box-shadow: 10px 5px 20px black;
 }
 
@@ -73,4 +93,25 @@
 
 .pip{
   background:cadetblue;
+}
+
+.charts-container{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  @include media-tablet{
+    flex-direction: column;
+  }
+}
+
+.chart1-container{
+  min-width: 48%;
+  @include media-tablet{
+    margin-bottom: 30px;
+  }
+}
+
+.chart2-container{
+  min-width: 48%;
 }
