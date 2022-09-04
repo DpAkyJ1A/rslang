@@ -59,13 +59,17 @@
 
 .card__translation {
   display: block;
+  text-transform: uppercase;
   color: grey;
+  padding-top: 3px;
 }
 
 .card__translation_disabled {
   display: none;
 }
-
+.card__example > h3 > i {
+  color: $colorLink0;
+}
 .card__content {
   width: 100%;
   padding: 15px;

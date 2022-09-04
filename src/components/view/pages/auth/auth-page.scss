@@ -1,7 +1,13 @@
 .authorizationView {
-    width: 35%;
+    width: 40%;
     margin: 0 auto;
     display: flex;
+    @include media-tablet {
+        width: 60%; 
+    }
+    @include media-mobile {
+        width: 80%; 
+    }
 }
 .auth__wrapper,
 .sign__wrapper {
@@ -11,13 +17,23 @@
     flex-direction: column;
     padding: 2em;
     gap: 0.5em;
+    @include media-tablet {
+        margin-top: 5em;
+    }
+    @include media-mobile {
+        margin-top: 2em;
+        padding: 1em;
+    }
 }
 .auth__h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     padding: 1em;
-    color: $color-dark-xl;
+    color: $colorLink5;
     letter-spacing: 1px;
+    @include media-mobile {
+        font-size: 1.3em;
+    }    
 }
 .auth__form {
     display: flex;
@@ -44,12 +60,13 @@
     font-size: 1em;
     letter-spacing: 1px;
     color: $color-light-xl;
-    border: 1px solid $color-blue;
+    border: 1px solid $colorLink4;
     border-radius: 15px;
-    background: $color-blue;
+    background: $colorLink4;
     text-transform: uppercase;
     overflow: hidden;
     transition: 1s all ease;
+    padding: .5em;
 }
 .auth__button:active {
     padding-bottom: 1px;
@@ -57,8 +74,8 @@
   }
 .colored {
     color: $color-light-xl;
-    background-image: -webkit-linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
-    background-image: linear-gradient(45deg, #4d5bf9 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(45deg, $colorLink5 50%, transparent 50%);
+    background-image: linear-gradient(45deg, $colorLink5 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     transition: background 300ms ease-in-out;
@@ -69,7 +86,7 @@
 .auth__registration,
 .sign__registration {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: $color-dark-xl;
+    color: $color-light-xl;
     font-size: 1.1em;
     letter-spacing: 1px;
     cursor: pointer;
@@ -78,7 +95,7 @@
 }
 .auth__registration:hover,
 .sign__registration:hover {
-    color: $color-primary;
+    color: $colorLink4;
 }
 .auth__err-pass,
 .auth__err-mail,
@@ -90,6 +107,6 @@
 }
 .auth__access {
     text-align: center;
-    color: $color-primary;
+    color: $colorLink4;
     font-size: 1em;
 }
