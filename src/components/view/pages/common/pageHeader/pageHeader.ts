@@ -18,7 +18,6 @@ export const createPageHeader = (title: string) => {
     `;
 
     const translationDisabled = localStorage.getItem('translationDisabled') || ('false' as string);
-    console.log(translationDisabled);
     if (translationDisabled === 'false') {
         const inputYes = settingsToggle.node.querySelector('#toggle-yes') as HTMLInputElement;
         inputYes.checked = true;
