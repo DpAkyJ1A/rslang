@@ -1,21 +1,27 @@
-import ApiService from '../api/api';
 import { IWord } from '../api/interfaces';
+import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
 import { updateSideMenu } from '../view/side-menu/side-menu';
 
-export default class Controller extends ApiService {
+export default class Controller extends TextbookModel {
     state: IState;
     drawView;
     constructor(state: IState, cbView: TCallback) {
         super();
         this.state = state;
         this.drawView = cbView;
+        this.handleWordsToogle = this.handleWordsToogle.bind(this);
         document.addEventListener('event', () => {
             this.handleLocation();
         });
         window.addEventListener('popstate', () => {
             this.handleLocation();
         });
+        document.addEventListener('cardWordToggle', this.handleWordsToogle as EventListener);
+    }
+
+    handleWordsToogle(e: CustomEvent) {
+        // super.updateTextbookUserWord();
     }
 
     handleLocation() {
@@ -52,7 +58,7 @@ export default class Controller extends ApiService {
     public async drawMain(view: string) {
         updateSideMenu(view);
         if (view === 'textbook') {
-            const data = await super.getWords(this.state.textbook.page, this.state.textbook.group);
+            const data = await super.gerWordsForTextbook(this.state.textbook.page, this.state.textbook.group);
             this.drawView(this.state, data);
         } else if (view === 'dictionary') {
             const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
