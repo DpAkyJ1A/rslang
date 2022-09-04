@@ -8,6 +8,9 @@
     @include media-mobile {
         width: 80%; 
     }
+    @include media-mobile2 {
+        width: 90%;
+    }
 }
 .auth__wrapper,
 .sign__wrapper {
@@ -24,6 +27,9 @@
         margin-top: 2em;
         padding: 1em;
     }
+    @include media-mobile2 {
+        padding: 0;
+    }
 }
 .auth__h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -33,7 +39,7 @@
     letter-spacing: 1px;
     @include media-mobile {
         font-size: 1.3em;
-    }    
+    }
 }
 .auth__form {
     display: flex;
@@ -92,6 +98,7 @@
     cursor: pointer;
     padding-left: 0.5em;
     transition: all 0.5s ease; 
+    padding-bottom: 1em;
 }
 .auth__registration:hover,
 .sign__registration:hover {
