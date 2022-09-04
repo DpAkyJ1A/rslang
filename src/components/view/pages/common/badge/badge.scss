@@ -13,6 +13,35 @@
   width: 40px;
 }
 
+.card__badge-tooltip {
+    min-width: 170px;
+    padding: 5px 10px;
+    text-align: center;
+    top: calc(100% - 80px);
+    left: calc(50% - 90px);
+    border: 1px solid #fff;
+    background-color: #fff;
+    border-radius: 25px;
+    position: absolute;
+    display: none;
+    transition: all 0.4s ease-in;
+}
+
+.card__badge-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent #fff;
+}
+
+.card__badge-icon:hover .card__badge-tooltip {
+  display: inline-block;
+}
+
 // .card__badge_hard svg {
 //   fill: $colorLink4;
 // }
