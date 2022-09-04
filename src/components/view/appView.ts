@@ -26,8 +26,8 @@ export default class AppView {
         this.main = new Control(null, 'div', 'main');
     }
 
-    drawStaticInterface() {
-        createHeader(this.root);
+    drawStaticInterface(data: { isAuth: boolean; name: string }) {
+        createHeader(this.root, data);
         createSideMenu(this.root);
         this.root.append(this.main.node);
         createFooter(this.root);
@@ -77,7 +77,6 @@ export default class AppView {
     }
 
     drawAuthPage() {
-        console.log('nen');
         const auth = new AuthInit(this.main.node);
         auth.start();
     }
