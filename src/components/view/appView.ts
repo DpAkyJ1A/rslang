@@ -13,13 +13,17 @@ import SprintGame from '../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
 import MainPage from './pages/main-page/main-page';
+import GamesPage from './pages/games-page/games-page';
+import TeamPage from './pages/team-page/team-page';
+
 
 export default class AppView {
     private root: HTMLElement;
     private mainPage: MainPage;
     private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
-    private statsPage: StatsPage;
+    private games: GamesPage;
+    private teamPage: TeamPage;
     private errorPage: ErrorPage;
     main: Control;
     constructor(root: HTMLElement) {
@@ -27,7 +31,8 @@ export default class AppView {
         this.mainPage = new MainPage();
         this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
-        this.statsPage = new StatsPage();
+        this.games = new GamesPage();
+        this.teamPage = new TeamPage();
         this.errorPage = new ErrorPage();
         this.main = new Control(null, 'div', 'main');
     }
@@ -41,7 +46,6 @@ export default class AppView {
     }
 
     drawCurrentView(state: IState, data?: IWord[]) {
-        console.log(state);
         this.main.node.innerHTML = ``;
         const wordArr = data ? data : [];
         switch (state.view) {
@@ -49,17 +53,17 @@ export default class AppView {
                 this.mainPage.render(this.main.node);
                 break;
             case 'textbook':
-                this.textbook.render(this.main.node, wordArr);
+                this.textbook.render(this.main.node, state, wordArr);
                 break;
             case 'dictionary':
                 this.dictionaryPage.render(this.main.node, wordArr);
                 break;
             case 'games':
-                this.drawGamesPage();
+                this.games.render(this.main.node);
                 break;
-            case 'stats':
-                this.statsPage.render(this.main.node);
-                break;
+            case 'team':
+                this.teamPage.render(this.main.node);
+                break;    
             case 'auth':
                 this.drawAuthPage();
                 break;
@@ -67,27 +71,6 @@ export default class AppView {
                 this.errorPage.render(this.main.node);
         }
     }
-
-    drawGamesPage() {
-        const btn = new Control(this.main.node, 'button', '', 'Sprint');
-        let sprint: SprintGame | null;
-        btn.node.onclick = () => {
-            // const className = 'SprintGame';
-            // const test = document.getElementsByClassName(className) as HTMLCollection;
-            // console.log(test);
-            // for (const item of test) {
-            //     item.classList.remove(className);
-            // }
-            // if (sprint) {
-            //     sprint = null;
-            //     console.log('exists!');
-            //     console.log(sprint);
-            // }
-            sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
-            sprint.start();
-        };
-    }
-
     drawAuthPage() {
         const auth = new AuthInit(this.main.node);
         auth.start();

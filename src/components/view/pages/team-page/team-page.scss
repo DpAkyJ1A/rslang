@@ -1,0 +1,115 @@
+.team__cards {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2em;
+    @include media-tablet {
+        max-width: 700px;
+        flex-wrap: wrap;
+        gap: .5em;
+    }
+    @include media-mobile {
+        flex-wrap: wrap;
+    }
+}
+.team-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin: 50px auto;
+    text-align: center;
+    background-color: $colorLink4;
+    gap: 1em;
+    border-radius: 20px;
+    padding: 1em;
+    @include media-tablet {
+        width: 50%;
+        max-width: 700px;
+        gap: .5em;
+    }
+    @include media-mobile {
+        width: 70%;
+        flex-wrap: wrap;
+        gap: 1em;
+        margin: 25px auto;
+    }
+}
+.team__title {
+    width: fit-content;
+    padding-right: 15px;
+    color: $color-light-xl;
+}
+.team__title:first-child {
+    margin-right: 15px;
+    border-right: 4px solid $colorLink5;
+  }
+.team-card__avatar1 {
+    background-image: url('Assets/images/alex.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__avatar2 {
+    background-image: url('Assets/images/kate.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__avatar3 {
+    background-image: url('Assets/images/toha.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__role,
+.team-card__in-project {
+    color: $colorLink5;
+    text-transform: uppercase;
+    padding-left: 2em;
+    padding-right: 2em;
+    @include media-mobile {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+}
+.team-icon:hover {
+    fill: $colorLink0;
+}
+.team-card__name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.team-card__description {
+    padding: 2em;
+    line-height: 1.5em;
+    height: 250px;
+    @include media-mobile {
+        padding: 0;
+    }
+}

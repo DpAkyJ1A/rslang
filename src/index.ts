@@ -32,11 +32,13 @@ const state: IState = {
         group: 0,
     },
     user: {
-        isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : false,
+        isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).isAuth : false,
         id: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : '',
         name: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).name : '',
+        token: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).token : '',
     },
 };
+console.log(localStorage['tokenDataKata']);
 
 const app = new App(root, state);
 

@@ -1,3 +1,5 @@
+import { BadgeType } from '../view/pages/common/badge/badge';
+
 export interface IWord {
     id: string;
     group: 0;
@@ -13,6 +15,8 @@ export interface IWord {
     wordTranslate: string;
     textMeaningTranslate: string;
     textExampleTranslate: string;
+    // для учебника
+    status?: BadgeType;
 }
 
 export interface IUser {
@@ -31,11 +35,17 @@ export interface ISignin {
 
 export interface IUserWord {
     difficulty: string;
-    optional: {
+    optional?: {
         word: string;
         textMeaning: string;
         textExample: string;
     };
+}
+
+export interface IUserWordResp {
+    difficulty: string;
+    id: string;
+    wordId: string;
 }
 
 export interface ISettings {

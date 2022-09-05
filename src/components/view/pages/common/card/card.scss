@@ -9,6 +9,8 @@
 }
 
 .card {
+
+  position: relative;
   background-color: $colorLink5;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
@@ -96,3 +98,22 @@
   border-radius: 5px;
   border: none;
 }
+
+// .card__btn {
+//   cursor: pointer;
+//   background-color: inherit;
+//   min-width: 150px;
+//   border: 3px solid #fff;
+//   padding: 5px 10px;
+//   border-radius: 35px;
+// }
+
+// .card__btn_hard {
+//   // border-color: $colorLink4;
+//   color: #fff;
+// }
+
+// .card__btn_learned {
+//   // border-color: #00bc9c;
+//   color: #fff;
+// }
