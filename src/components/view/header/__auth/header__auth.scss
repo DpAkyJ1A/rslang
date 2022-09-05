@@ -2,10 +2,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
+  min-width: 35px;
   height: 35px;
   position: absolute;
   right: 35px;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}
+
+.header__user-name{
+  margin-right: 5px;
+  color: #fff;
+}
+
+.header__auth-wrapper:hover {
+  .header__link{
+    color: $colorLink4;
+  }
+  .header__user-name {
+    color: $colorLink4;
+  }
 }
 
 .header__auth{
@@ -18,7 +38,4 @@
 }
 .header__link {
   color: $colorLink5;
-}
-.header__link:hover {
-  color: $colorLink4;
 }
