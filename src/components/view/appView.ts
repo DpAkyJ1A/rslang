@@ -38,7 +38,6 @@ export default class AppView {
     }
 
     drawCurrentView(state: IState, data?: IWord[]) {
-        console.log(state);
         this.main.node.innerHTML = ``;
         const wordArr = data ? data : [];
         switch (state.view) {
