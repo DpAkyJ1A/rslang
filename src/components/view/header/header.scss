@@ -28,7 +28,12 @@
   }
 }
 
-.header__h1-wrapper:hover{
+.header__h1-link{
+  color: #fff;
+  text-decoration: none;
+}
+
+.header__h1-link:hover{
   color: $colorLink4;
   cursor: pointer;
 }
