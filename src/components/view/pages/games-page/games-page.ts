@@ -2,11 +2,11 @@ import Control from 'control';
 import SprintGame from '../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../games/sprint/types/index';
 import Page from '../page';
+import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 export default class GamesPage extends Page {
     constructor() {
         super('games-page');
-        
     }
     public render(container: HTMLElement) {
         this.container.innerHTML = '';
@@ -15,7 +15,8 @@ export default class GamesPage extends Page {
     }
 
     createGamesPage() {
-        new Control(this.container, 'h2', 'games__title', 'Игры');
+        const header = createPageHeader('Games', false);
+        this.container.append(header);
         const gamesDiv = new Control(this.container, 'div', 'games__container');
         const divGame1 = new Control(gamesDiv.node, 'div', 'games__game1');
         new Control(divGame1.node, 'button', 'games__audio-game');
@@ -27,6 +28,6 @@ export default class GamesPage extends Page {
         btn.node.onclick = () => {
             sprint = new SprintGame(SprintGameLaunchMode.textbook, this.container);
             sprint.start();
-        }
+        };
     }
 }

@@ -74,6 +74,8 @@ export default class Controller extends TextbookModel {
         } else if (view === 'dictionary') {
             const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
             this.drawView(this.state, data);
+        } else if (view === 'stats') {
+            this.drawView(this.state);
         } else {
             this.drawView(this.state);
         }

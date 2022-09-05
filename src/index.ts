@@ -18,6 +18,9 @@ const ionIconNoModule = new Control(body, 'script');
 ionIconNoModule.node.setAttribute('nomodule', '');
 ionIconNoModule.node.setAttribute('src', 'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js');
 
+// const chartJS = new Control(body, 'script');
+// chartJS.node.setAttribute('src', 'https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js');
+
 const state: IState = {
     view: 'main',
     textbook: {
