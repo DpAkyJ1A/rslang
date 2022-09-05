@@ -38,11 +38,9 @@ export default class TextbookModel extends ApiService {
                     .updateUserWord(data.userId, { difficulty: data.type }, data.id, data.userToken)
                     .then((res) => console.log(res));
             }
-            console.log(word);
         } catch (error) {
             if ((error as Error).message === '404') {
-                const res = await super.createUserWord(data.userId, data.id, { difficulty: data.type }, data.userToken);
-                console.log(res);
+                await super.createUserWord(data.userId, data.id, { difficulty: data.type }, data.userToken);
             }
         }
     }
