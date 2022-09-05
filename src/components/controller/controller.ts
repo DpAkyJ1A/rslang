@@ -72,8 +72,11 @@ export default class Controller extends TextbookModel {
                 this.drawView(this.state, data);
             });
         } else if (view === 'dictionary') {
-            const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
-            this.drawView(this.state, data);
+            const loader = new Loader(document.querySelector('.main') as HTMLElement);
+            super.getUserWords(this.state.user.id, this.state.user.token).then((data) => {
+                loader.destroy();
+                this.drawView(this.state, data);
+            });
         } else if (view === 'stats') {
             this.drawView(this.state);
         } else {
@@ -85,10 +88,6 @@ export default class Controller extends TextbookModel {
 export interface IState {
     view: string;
     textbook: {
-        page: number;
-        group: number;
-    };
-    dictionary: {
         page: number;
         group: number;
     };

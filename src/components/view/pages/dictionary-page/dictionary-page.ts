@@ -2,8 +2,7 @@ import Control from 'control';
 import Page from '../page';
 import Card from '../common/card/card';
 import { createPageHeader } from '../common/pageHeader/pageHeader';
-import { createLevels } from '../common/levels/levels';
-import { createPgnEl } from '../common/pagination/pagination';
+
 import { IWord } from '../../../api/interfaces';
 
 // пока без апи
@@ -17,30 +16,21 @@ export default class DictionaryPage extends Page {
     public render(container: HTMLElement, data?: IWord[]) {
         this.container.innerHTML = '';
         const header = createPageHeader('Dictionary');
-        let group, page;
-        if (!data) {
-            group = 0;
-            page = 0;
-        } else {
-            group = (data as IWord[])[0].group;
-            page = (data as IWord[])[0].page;
-            const levels = createLevels(group);
-            const pgn = createPgnEl(page, group);
-            const cardList = this.drawCards(data || []);
-            this.container.append(header, levels, pgn, cardList.node);
-            container.append(this.container);
-        }
+        const cardList = this.drawCards(data || []);
+        this.container.append(header, cardList.node);
+        container.append(this.container);
     }
 
     drawCards(data: IWord[] | []) {
         const cardList = new Control(this.container, 'div', 'textbook-page__words');
         if (!data?.length) {
-            new Control(
-                cardList.node,
-                'div',
-                'textbook-page__error',
-                'Ooops..something went wrong. Check you connection'
-            );
+            new Control(cardList.node, 'div', 'dictionary-page__error').node.innerHTML = `
+            Looks like the dictionary is empty<br>
+            To add words here, visit the textbook and mark words you don't know yet
+            <p class="card__translation">
+            Кажется словарь пуст<br>
+            Чтобы добавить слова отметь те, которые пока не знаешь в учебнике
+            </p>`;
         } else {
             data.forEach((i) => {
                 const obj = i as IWord;
