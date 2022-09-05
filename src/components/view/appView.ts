@@ -12,13 +12,16 @@ import SprintGame from '../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
 import MainPage from './pages/main-page/main-page';
+import GamesPage from './pages/games-page/games-page';
 import TeamPage from './pages/team-page/team-page';
+
 
 export default class AppView {
     private root: HTMLElement;
     private mainPage: MainPage;
     private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
+    private games: GamesPage;
     private teamPage: TeamPage;
     private errorPage: ErrorPage;
     main: Control;
@@ -27,6 +30,7 @@ export default class AppView {
         this.mainPage = new MainPage();
         this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
+        this.games = new GamesPage();
         this.teamPage = new TeamPage();
         this.errorPage = new ErrorPage();
         this.main = new Control(null, 'div', 'main');
@@ -55,7 +59,7 @@ export default class AppView {
                 this.dictionaryPage.render(this.main.node, wordArr);
                 break;
             case 'games':
-                this.drawGamesPage();
+                this.games.render(this.main.node);
                 break;
             case 'team':
                 this.teamPage.render(this.main.node);
@@ -67,27 +71,6 @@ export default class AppView {
                 this.errorPage.render(this.main.node);
         }
     }
-
-    drawGamesPage() {
-        const btn = new Control(this.main.node, 'button', '', 'Sprint');
-        let sprint: SprintGame | null;
-        btn.node.onclick = () => {
-            // const className = 'SprintGame';
-            // const test = document.getElementsByClassName(className) as HTMLCollection;
-            // console.log(test);
-            // for (const item of test) {
-            //     item.classList.remove(className);
-            // }
-            // if (sprint) {
-            //     sprint = null;
-            //     console.log('exists!');
-            //     console.log(sprint);
-            // }
-            sprint = new SprintGame(SprintGameLaunchMode.textbook, this.main.node);
-            sprint.start();
-        };
-    }
-
     drawAuthPage() {
         const auth = new AuthInit(this.main.node);
         auth.start();
