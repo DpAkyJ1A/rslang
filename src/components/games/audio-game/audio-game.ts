@@ -20,6 +20,7 @@ export default class AudioGame {
     start() {
         this.view.drawWrapper(document.body);
         this.controller.updateGameContentField();
+        
         // this.controller.listen();
     }
 }

@@ -32,42 +32,11 @@ export default class AudioGameController {
             right: [],
             wrong: [],
         };
-        // this.handleTimeout = this.handleTimeout.bind(this);
-        // this.handleStartGame = this.handleStartGame.bind(this);
-        // this.handleRestartGame = this.handleRestartGame.bind(this);
-        // window.addEventListener('keyup', (e: KeyboardEvent) => {
-        //     e.stopPropagation();
-        //     e.stopImmediatePropagation();
-        //     const content = document.querySelector('.content');
-        //     if (!content) return;
-        //     switch (e.code) {
-        //         case 'ArrowLeft':
-        //             (content.querySelector('.content__answer-button_true') as HTMLButtonElement)?.click();
-        //             break;
-        //         case 'ArrowRight':
-        //             (content.querySelector('.content__answer-button_false') as HTMLButtonElement)?.click();
-        //             break;
-        //         case 'KeyS':
-        //             (content.querySelector('.content__start-btn') as HTMLButtonElement)?.click();
-        //             break;
-        //         case 'Space':
-        //             (content.querySelector('.button__again') as HTMLButtonElement)?.click();
-        //             break;
-        //         default:
-        //             return;
-        //     }
-        // });
-        // window.addEventListener('startGame', this.handleStartGame as EventListener);
-        // document.addEventListener('sprintTimeout', this.handleTimeout);
-        // document.addEventListener('restartGame', this.handleRestartGame);
 
-        // document.addEventListener('toggleSound', (e: Event) => {
-        //     e.stopImmediatePropagation();
-        //     e.stopPropagation();
-        //     this.state.sound = !this.state.sound;
-        // });
     }
+
     updateGameContentField(word?: IGameWord) {
         this.drawContent(this.state, word || undefined, this.gameState || undefined, this.gameResult);
     }
+
 }

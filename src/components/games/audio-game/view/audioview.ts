@@ -58,7 +58,7 @@ export default class AudioView {
         container.append(this.wrapper.node);
     }
 
-    //вызывается в контроллере
+    //оставляем
     drawContent(props: IAudioGameState, data?: IGameWord, gameProps?: IGameProps, gameResult?: IGameResult) {
         this.content.node.innerHTML = '';
         switch (props.stage) {
@@ -77,7 +77,7 @@ export default class AudioView {
         }
     }
 
-    // +
+    //оставляем (1view)
     drawWelcomePage(mode: AudioGameLaunchMode) {
         new Control(this.content.node, 'h1', 'content__title', 'AudioCall');
         const descr = new Control(this.content.node, 'p', 'content__description');
@@ -98,47 +98,32 @@ export default class AudioView {
         this.content.node.append(controls);
     }
 
-    //сама игра - перерисовать
+    //сама игра - перерисована ((2view))
     drawGame(data: IGameWord, props: IGameProps) {
-        const result = new Control(this.content.node, 'h1', 'content__title');
-        result.node.innerHTML = `
-            Result: ${props.score}
-        `;
-        const list = new Control(this.content.node, 'ul', 'content__success-list');
-        for (let i = 0; i < 3; i++) {
-            const item = new Control(list.node, 'li', 'content__success-item');
-            item.node.innerHTML = `
-                <svg><path d="M7.667 12H2v8H0V0h12l.333 2H20l-3 6 3 6H8l-.333-2z"/></svg>
-            `;
-            if ((i === 0 && props.row === 1) || (i === 0 && props.row > 1)) {
-                item.node.classList.add('content__success-item_win');
-            } else if ((i === 1 && props.row === 2) || (i === 1 && props.row > 2)) {
-                item.node.classList.add('content__success-item_win');
-            } else if (i === 2 && props.row > 2) {
-                item.node.classList.add('content__success-item_win');
-            }
-        }
-        const wordsBlock = new Control(this.content.node, 'div', 'content__word');
-        new Control(wordsBlock.node, 'span', 'content__word_eng', `${data.word}`);
-        new Control(wordsBlock.node, 'span', 'content__word_rus', `${data.wordTranslate}`);
-        const btnBlock = new Control(this.content.node, 'div', 'content__buttons');
-        const trueBtn = new Control(
-            btnBlock.node,
-            'button',
-            'content__answer-button content__answer-button_true',
-            'True'
-        );
-        const falseBtn = new Control(
-            btnBlock.node,
-            'button',
-            'content__answer-button content__answer-button_false',
-            'False'
-        );
-        trueBtn.node.onclick = this.fireAnswerClick;
-        falseBtn.node.onclick = this.fireAnswerClick;
+       
+        //стилей этому нет, новые классы
+        
+        new Control(this.content.node, 'button', 'audio-game__sound').node.innerHTML = `<svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1" viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="10,16 10,0 3,5 0,5 0,11 3,11 "/><path d="M11,13.91c2.837-0.477,5-2.938,5-5.91s-2.163-5.433-5-5.91v1.011C13.279,3.566,15,5.585,15,8s-1.721,4.434-4,4.899V13.91z"/><path d="M11,9.722v1.094c1.163-0.413,2-1.512,2-2.816s-0.837-2.403-2-2.816v1.094C11.595,6.625,12,7.263,12,8  C12,8.737,11.595,9.375,11,9.722z"/></svg>`;
+        const audioWords = new Control(this.content.node, 'div', 'audiocall__words');
+        const audioBtn1 = new Control(audioWords.node, 'div', 'audiocall__btn');
+        new Control(audioBtn1.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
+        
+        const audioBtn2 = new Control(audioWords.node, 'div', 'audiocall__btn');
+        new Control(audioBtn2.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
+
+        const audioBtn3 = new Control(audioWords.node, 'div', 'audiocall__btn');
+        new Control(audioBtn3.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
+
+        const audioBtn4 = new Control(audioWords.node, 'div', 'audiocall__btn');
+        new Control(audioBtn4.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
+
+        const audioBtn5 = new Control(audioWords.node, 'div', 'audiocall__btn');
+        new Control(audioBtn5.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
+
+        const dontKnowBtn = new Control(this.content.node, 'button', 'dont-know', 'не знаю');
     }
 
-    //не меняла код
+    //пока оставила такое же (3view)
     drawResults(props: IGameProps, results: IGameResult) {
         const result = new Control(this.content.node, 'h1', 'content__title');
         result.node.innerHTML = `
@@ -204,17 +189,7 @@ export default class AudioView {
         document.dispatchEvent(event);
     }
 
-    //что это пока не поняла
-    fireAnswerClick(e: Event) {
-        const target = e.target as HTMLElement;
-        const event = new CustomEvent('answerBtn', {
-            detail: { answer: target.textContent },
-            bubbles: true,
-            cancelable: true,
-        });
-        target.dispatchEvent(event);
-    }
-
+    //пока оставила
     playAudio(event: Event) {
         const target = event.target as HTMLElement;
         const spanWrapper = target.closest('span') as HTMLElement;
