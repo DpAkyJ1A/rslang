@@ -60,15 +60,13 @@ export default class AppView {
                 this.textbook.render(this.main.node, state, wordArr);
                 break;
             case 'dictionary':
-                if (state.user.isAuth) this.dictionaryPage.render(this.main.node, wordArr);
-                else this.noAccessPage.render(this.main.node, 'dictionary');
+                this.dictionaryPage.render(this.main.node, wordArr);
                 break;
             case 'games':
                 this.games.render(this.main.node);
                 break;
             case 'stats':
-                if (state.user.isAuth) this.statsPage.render(this.main.node);
-                else this.noAccessPage.render(this.main.node, 'stats');
+                this.statsPage.render(this.main.node);
                 break;
             case 'team':
                 this.teamPage.render(this.main.node);
@@ -79,6 +77,10 @@ export default class AppView {
             default:
                 this.errorPage.render(this.main.node);
         }
+    }
+    drawNoAccessPage(name: string) {
+        this.main.node.innerHTML = ``;
+        this.noAccessPage.render(this.main.node, name);
     }
     drawAuthPage() {
         const auth = new AuthInit(this.main.node);

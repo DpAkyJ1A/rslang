@@ -7,10 +7,12 @@ import { updateSideMenu } from '../view/side-menu/side-menu';
 export default class Controller extends TextbookModel {
     state: IState;
     drawView;
-    constructor(state: IState, cbView: TCallback) {
+    drawNoAccessView;
+    constructor(state: IState, cbView: TCallback, noAccessView: T2Callback) {
         super();
         this.state = state;
         this.drawView = cbView;
+        this.drawNoAccessView = noAccessView;
         this.handleWordsToogle = this.handleWordsToogle.bind(this);
         document.addEventListener('event', () => {
             this.handleLocation();
@@ -72,13 +74,23 @@ export default class Controller extends TextbookModel {
                 this.drawView(this.state, data);
             });
         } else if (view === 'dictionary') {
-            const loader = new Loader(document.querySelector('.main') as HTMLElement);
-            super.getUserWords(this.state.user.id, this.state.user.token).then((data) => {
-                loader.destroy();
-                this.drawView(this.state, data);
-            });
+            if (this.state.user.isAuth) {
+                console.log('here');
+                const loader = new Loader(document.querySelector('.main') as HTMLElement);
+                super.getUserWords(this.state.user.id, this.state.user.token).then((data) => {
+                    loader.destroy();
+                    this.drawView(this.state, data);
+                });
+            } else {
+                console.log('here2');
+                this.drawNoAccessView('dictionary');
+            }
         } else if (view === 'stats') {
-            this.drawView(this.state);
+            if (this.state.user.isAuth) {
+                this.drawView(this.state);
+            } else {
+                this.drawNoAccessView('stats');
+            }
         } else {
             this.drawView(this.state);
         }
@@ -101,4 +113,8 @@ export interface IState {
 
 type TCallback = {
     (props: IState, data?: IWord[]): void;
+};
+
+type T2Callback = {
+    (name: string): void;
 };

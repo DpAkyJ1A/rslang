@@ -8,7 +8,11 @@ export class App {
     constructor(root: HTMLElement, state: IState) {
         this.root = root;
         this.view = new AppView(root);
-        this.controller = new Controller(state, (state, data?) => this.view.drawCurrentView(state, data));
+        this.controller = new Controller(
+            state,
+            (state, data?) => this.view.drawCurrentView(state, data),
+            (name) => this.view.drawNoAccessPage(name)
+        );
     }
 
     start(data: { isAuth: boolean; name: string }) {
