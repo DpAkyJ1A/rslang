@@ -21,15 +21,20 @@ export default class SprintController extends SprintModel {
     private gameState: IGameProps;
     private gameResult: IGameResult;
 
-    constructor(launchMode: SprintGameLaunchMode, cb: TSprintViewCb, userId?: string) {
+    constructor(
+        launchMode: SprintGameLaunchMode,
+        cb: TSprintViewCb,
+        user?: { id: string; token: string },
+        props?: { group: number; page: number }
+    ) {
         super();
         this.drawContent = cb;
         this.state = {
             mode: launchMode,
             stage: SprintGameStages.welcome,
-            userId: userId,
-            group: undefined,
+            user: user,
             sound: false,
+            source: props,
         };
         this.gameState = {
             score: 0,
@@ -38,6 +43,8 @@ export default class SprintController extends SprintModel {
         this.gameResult = {
             right: [],
             wrong: [],
+            longestRow: 0,
+            currentRow: 0,
         };
         this.handleTimeout = this.handleTimeout.bind(this);
         this.handleStartGame = this.handleStartGame.bind(this);
@@ -78,6 +85,8 @@ export default class SprintController extends SprintModel {
         this.state.stage = SprintGameStages.welcome;
         this.gameState.score = 0;
         this.gameState.row = 0;
+        this.gameResult.currentRow = 0;
+        this.gameResult.longestRow = 0;
         this.updateGameContentField();
         window.addEventListener('startGame', this.handleStartGame as EventListener);
         document.addEventListener('sprintTimeout', this.handleTimeout);
@@ -85,10 +94,28 @@ export default class SprintController extends SprintModel {
 
     updateGameContentField(word?: IGameWord) {
         this.drawContent(this.state, word || undefined, this.gameState || undefined, this.gameResult);
+        if (this.state.stage === 2 && this.state.user?.id)
+            super.updateDataForStats(this.state.user, this.gameState.score, this.gameResult);
     }
 
-    async startGame(group: number) {
-        const words = (await super.getWordsForGame(group)) as IGameWord[];
+    async startGame(group?: number) {
+        let words: IGameWord[];
+        if (group) {
+            words = (await super.getWordsForGame(group)) as IGameWord[];
+        } else {
+            if (!this.state.user?.id) {
+                words = await super.getWordsForGame(
+                    this.state.source?.group as number,
+                    this.state.source?.page as number
+                );
+            } else {
+                words = await super.getWordsForGameAuth(
+                    this.state.source?.group as number,
+                    this.state.source?.page as number,
+                    this.state.user
+                );
+            }
+        }
         let i = 0;
         this.gameResult.right = [];
         this.gameResult.wrong = [];
@@ -109,6 +136,7 @@ export default class SprintController extends SprintModel {
             } else {
                 this.state.stage = SprintGameStages.results;
                 this.updateGameContentField(undefined);
+                console.log(this.gameResult);
             }
         };
         if (i === 0) loop();
@@ -116,6 +144,7 @@ export default class SprintController extends SprintModel {
 
     handleAnswer(data: { word: IGameWord; answer: boolean }) {
         if (data.answer === data.word.answer) {
+            this.gameResult.currentRow += 1;
             switch (this.gameState.row) {
                 case 0:
                     this.gameState.row += 1;
@@ -137,6 +166,10 @@ export default class SprintController extends SprintModel {
             }
             this.gameResult.right.push(data.word);
         } else {
+            if (this.gameResult.currentRow > this.gameResult.longestRow) {
+                this.gameResult.longestRow = this.gameResult.currentRow;
+            }
+            this.gameResult.currentRow = 0;
             this.gameResult.wrong.push(data.word);
             this.gameState.row = 0;
         }
@@ -153,8 +186,8 @@ export default class SprintController extends SprintModel {
 
     handleStartGame(event: CustomEvent) {
         this.state.stage = SprintGameStages.game;
-        this.startGame(event.detail.group);
-        this.state.group = event.detail.group;
+        this.startGame(event.detail?.group || undefined);
+        // this.state.group = event.detail.group;
         window.removeEventListener('startGame', this.handleStartGame as EventListener);
     }
 
@@ -162,6 +195,9 @@ export default class SprintController extends SprintModel {
         this.state.stage = SprintGameStages.results;
         this.updateGameContentField();
         document.removeEventListener('sprintTimeout', this.handleTimeout);
+        if (this.gameResult.currentRow > this.gameResult.longestRow) {
+            this.gameResult.longestRow = this.gameResult.currentRow;
+        }
     }
 
     listen() {

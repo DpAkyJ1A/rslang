@@ -3,6 +3,7 @@ import Control from '../../../control';
 export enum BadgeType {
     learned = 'learned',
     hard = 'hard',
+    process = 'process',
 }
 
 export const createBadge = (type?: BadgeType) => {
@@ -27,10 +28,9 @@ export const createBadge = (type?: BadgeType) => {
     `;
     iconHard.node.setAttribute('data-process', 'hard');
     iconLearned.node.setAttribute('data-process', 'learned');
-    const tooltipHard = new Control(iconHard.node, 'span', 'card__badge-tooltip', 'Add to Dictionary');
-    const tooltipLearned = new Control(iconLearned.node, 'span', 'card__badge-tooltip', 'Tag as learned');
-    if (type) {
-        console.log(type);
+    new Control(iconHard.node, 'span', 'card__badge-tooltip', 'Add to Dictionary');
+    new Control(iconLearned.node, 'span', 'card__badge-tooltip', 'Tag as learned');
+    if (type && type !== 'process') {
         (wrapper.node.querySelector(`[data-process="${type}"]`) as HTMLElement).classList.remove(
             'card__badge-icon_disabled'
         );

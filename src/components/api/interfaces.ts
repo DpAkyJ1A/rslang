@@ -36,9 +36,11 @@ export interface ISignin {
 export interface IUserWord {
     difficulty: string;
     optional?: {
-        word: string;
-        textMeaning: string;
-        textExample: string;
+        // word: string;
+        // textMeaning: string;
+        // textExample: string;
+        wasInGame: boolean;
+        rightAnswers: number;
     };
 }
 
@@ -58,6 +60,7 @@ export interface ISettings {
 export interface IStatistics {
     learnedWords: number;
     optional: {
+        newLearnedWordSprint?: number;
         newWordsPerDaySprint?: number;
         percentCorrectOfAnswersSprint?: number;
         longerSeriaOfAnswersSprint?: number;

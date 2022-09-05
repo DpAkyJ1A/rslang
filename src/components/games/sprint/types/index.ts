@@ -12,8 +12,8 @@ export enum SprintGameLaunchMode {
 export interface ISprintGameState {
     mode: SprintGameLaunchMode;
     stage: SprintGameStages;
-    userId?: string;
-    group?: number;
+    user?: { id: string; token: string };
+    source?: { group: number; page: number };
     sound: boolean;
 }
 
@@ -38,4 +38,6 @@ export interface IGameProps {
 export interface IGameResult {
     right: IGameWord[];
     wrong: IGameWord[];
+    longestRow: number;
+    currentRow: number;
 }

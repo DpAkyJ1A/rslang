@@ -8,15 +8,14 @@ export default class GamesPage extends Page {
     constructor() {
         super('games-page');
     }
-    public render(container: HTMLElement) {
+    public render(container: HTMLElement, user?: { id: string; token: string }) {
         this.container.innerHTML = '';
-        this.createGamesPage();
+        this.createGamesPage(user as { id: string; token: string });
         container.append(this.container);
     }
 
-    createGamesPage() {
-        const header = createPageHeader('Games', false);
-        this.container.append(header);
+    createGamesPage(user: { id: string; token: string }) {
+        new Control(this.container, 'h2', 'games__title', 'Игры');
         const gamesDiv = new Control(this.container, 'div', 'games__container');
         const divGame1 = new Control(gamesDiv.node, 'div', 'games__game1');
         new Control(divGame1.node, 'button', 'games__audio-game');
@@ -26,7 +25,7 @@ export default class GamesPage extends Page {
         new Control(divGame2.node, 'h3', 'games__title', 'audio game');
         let sprint: SprintGame | null;
         btn.node.onclick = () => {
-            sprint = new SprintGame(SprintGameLaunchMode.textbook, this.container);
+            sprint = new SprintGame(SprintGameLaunchMode.sideBar, this.container, user, undefined);
             sprint.start();
         };
     }

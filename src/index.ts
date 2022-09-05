@@ -34,7 +34,7 @@ const state: IState = {
         token: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).token : '',
     },
 };
-console.log(localStorage['tokenDataKata']);
+// console.log(localStorage['tokenDataKata']);
 
 const app = new App(root, state);
 
