@@ -1,0 +1,14 @@
+.dictionary-page{
+  width: 100%;
+  .textbook-page__words{
+    padding-bottom: 10px;
+  }
+}
+
+.dictionary-page__error{
+  color: #fff;
+  line-height: 1.5em;
+  *{
+    text-transform: none;
+  }
+}

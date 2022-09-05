@@ -37,14 +37,14 @@ export const createSideMenu = (root: HTMLElement) => {
 
 export function updateSideMenu(view: string) {
     const list = sideMenuList.childNodes as NodeListOf<HTMLElement>;
+    let j = 0;
+    while (j < list.length) {
+        list[j++].className = 'side-menu-item';
+    }
     for (let i = 0; i < list.length; i++) {
         const listLink = list[i].querySelector('.side-menu-item__title') as HTMLSpanElement;
         const title = listLink.innerText.toLowerCase() as string;
         if (view === title) {
-            let j = 0;
-            while (j < list.length) {
-                list[j++].className = 'side-menu-item';
-            }
             list[i].className = 'side-menu-item active';
         }
     }

@@ -2,6 +2,7 @@ import Control from 'control';
 import SprintGame from '../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../games/sprint/types/index';
 import Page from '../page';
+import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 export default class GamesPage extends Page {
     constructor() {

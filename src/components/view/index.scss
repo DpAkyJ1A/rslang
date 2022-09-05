@@ -8,6 +8,7 @@
 @import "./pages/common/common.scss";
 @import "./pages/textbook-page/textbook-page.scss";
 @import "./pages/dictionary-page/dictionary-page.scss";
+@import "./pages/stats-page/stats-page.scss";
 @import "./pages/error-page/error-page.scss";
 @import "./pages/common/loader/loader.scss";
 @import "../games/sprint/sprint.scss";
@@ -16,6 +17,7 @@
 @import "./pages/common/gameLinks/gameLinks.scss";
 @import "./pages/games-page/games-page.scss";
 @import "./pages/team-page/team-page.scss";
+@import "./pages/no-access-page/no-access-page.scss";
 
 html {
   height: 100%;
