@@ -1,6 +1,7 @@
 import Control from 'control';
 import Page from '../page';
 import { Chart, registerables } from 'chart.js';
+import { IState } from 'components/controller/controller';
 Chart.register(...registerables);
 
 export default class StatsPage extends Page {
@@ -12,8 +13,8 @@ export default class StatsPage extends Page {
         this.container.innerHTML = '';
 
         const learnedWords = 10;
-        const correctAnswerPersent = 21;
-        this.createStatsForToday(learnedWords, correctAnswerPersent);
+        const correctAnswerPercent = 21;
+        this.createStatsForToday(learnedWords, correctAnswerPercent);
 
         const sprintLearnedWords = 5;
         const sprintCorrectAnswerPercent = 12;

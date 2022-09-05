@@ -6,7 +6,6 @@ import Page from '../page';
 export default class GamesPage extends Page {
     constructor() {
         super('games-page');
-        
     }
     public render(container: HTMLElement) {
         this.container.innerHTML = '';
@@ -27,6 +26,6 @@ export default class GamesPage extends Page {
         btn.node.onclick = () => {
             sprint = new SprintGame(SprintGameLaunchMode.textbook, this.container);
             sprint.start();
-        }
+        };
     }
 }

@@ -1,0 +1,16 @@
+.no-access-page{
+  display: flex;
+}
+
+.log-in-message {
+  color: $color-light-xl;
+  margin: auto;
+
+  a {
+    color: $color-light-xl;
+  }
+}
+
+.log-in-message a:hover {
+  color: $colorLink4;
+}

@@ -15,7 +15,7 @@ import AuthInit from './pages/auth/authinit';
 import MainPage from './pages/main-page/main-page';
 import GamesPage from './pages/games-page/games-page';
 import TeamPage from './pages/team-page/team-page';
-
+import NoAccessPage from './pages/no-access-page/no-access-page';
 
 export default class AppView {
     private root: HTMLElement;
@@ -23,8 +23,10 @@ export default class AppView {
     private textbook: TextbookPage;
     private dictionaryPage: DictionaryPage;
     private games: GamesPage;
+    private statsPage: StatsPage;
     private teamPage: TeamPage;
     private errorPage: ErrorPage;
+    private noAccessPage: NoAccessPage;
     main: Control;
     constructor(root: HTMLElement) {
         this.root = root;
@@ -32,8 +34,10 @@ export default class AppView {
         this.textbook = new TextbookPage();
         this.dictionaryPage = new DictionaryPage();
         this.games = new GamesPage();
+        this.statsPage = new StatsPage();
         this.teamPage = new TeamPage();
         this.errorPage = new ErrorPage();
+        this.noAccessPage = new NoAccessPage();
         this.main = new Control(null, 'div', 'main');
     }
 
@@ -56,14 +60,19 @@ export default class AppView {
                 this.textbook.render(this.main.node, state, wordArr);
                 break;
             case 'dictionary':
-                this.dictionaryPage.render(this.main.node, wordArr);
+                if (state.user.isAuth) this.dictionaryPage.render(this.main.node, wordArr);
+                else this.noAccessPage.render(this.main.node, 'dictionary');
                 break;
             case 'games':
                 this.games.render(this.main.node);
                 break;
+            case 'stats':
+                if (state.user.isAuth) this.statsPage.render(this.main.node);
+                else this.noAccessPage.render(this.main.node, 'stats');
+                break;
             case 'team':
                 this.teamPage.render(this.main.node);
-                break;    
+                break;
             case 'auth':
                 this.drawAuthPage();
                 break;
