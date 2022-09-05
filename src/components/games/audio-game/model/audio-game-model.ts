@@ -18,6 +18,7 @@ export class AudioGameModel extends ApiService {
         const image = wordsInit.map((obj: IWord) => obj.image);
         const audio = wordsInit.map((obj: IWord) => obj.audio);
         const truthyWordsQty = Math.floor(10 + Math.random() * 5);
+        
         const output = [];
         for (let i = 0; i < truthyWordsQty; i++) {
             const trueWord = {

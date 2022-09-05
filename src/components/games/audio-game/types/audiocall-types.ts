@@ -21,12 +21,12 @@ export type TAudioViewCb = {
     (props: IAudioGameState, word?: IGameWord, propsGame?: IGameProps, results?: IGameResult): void;
 };
 
-//хз будут ли такие данные
 export interface IGameWord {
     word: string;
     wordTranslate: string;
     answer: boolean;
     id: string;
+    image: string;
     audio: 'string';
     wordTranslateActual?: string;
 }

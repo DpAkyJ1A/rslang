@@ -1,3 +1,4 @@
+import { shuffleArray } from "../../../utils/shuffleArray";
 import Control from "../../../view/control";
 import { SprintGameLaunchMode, IGameWord, IGameProps, IGameResult } from "../../sprint/types/index";
 import { createStartGameControls } from "../../sprint/view/__controls/controls";
@@ -77,7 +78,6 @@ export default class AudioView {
         }
     }
 
-    //оставляем (1view)
     drawWelcomePage(mode: AudioGameLaunchMode) {
         new Control(this.content.node, 'h1', 'content__title', 'AudioCall');
         const descr = new Control(this.content.node, 'p', 'content__description');
@@ -101,27 +101,32 @@ export default class AudioView {
     //сама игра - перерисована ((2view))
     drawGame(data: IGameWord, props: IGameProps) {
        
-        // новые классы
-        
         new Control(this.content.node, 'button', 'audio-game__sound-btn').node.innerHTML = `<svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1" viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="10,16 10,0 3,5 0,5 0,11 3,11 "/><path d="M11,13.91c2.837-0.477,5-2.938,5-5.91s-2.163-5.433-5-5.91v1.011C13.279,3.566,15,5.585,15,8s-1.721,4.434-4,4.899V13.91z"/><path d="M11,9.722v1.094c1.163-0.413,2-1.512,2-2.816s-0.837-2.403-2-2.816v1.094C11.595,6.625,12,7.263,12,8  C12,8.737,11.595,9.375,11,9.722z"/></svg>`;
         
         const audioWords = new Control(this.content.node, 'div', 'audiocall__words');
         const audioBtn1 = new Control(audioWords.node, 'div', 'audiocall__btn');
-        new Control(audioBtn1.node, 'button', 'audiocall__word', `ffffffffff`);
+        new Control(audioBtn1.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
         
         const audioBtn2 = new Control(audioWords.node, 'div', 'audiocall__btn');
-        new Control(audioBtn2.node, 'button', 'audiocall__word', `gggggggggg`);
+        new Control(audioBtn2.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
 
         const audioBtn3 = new Control(audioWords.node, 'div', 'audiocall__btn');
-        new Control(audioBtn3.node, 'button', 'audiocall__word', `aaaaaaaaaaa`);
+        new Control(audioBtn3.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
 
         const audioBtn4 = new Control(audioWords.node, 'div', 'audiocall__btn');
-        new Control(audioBtn4.node, 'button', 'audiocall__word', `eeeeeeee`);
+        new Control(audioBtn4.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
 
         const audioBtn5 = new Control(audioWords.node, 'div', 'audiocall__btn');
-        new Control(audioBtn5.node, 'button', 'audiocall__word', `pppp`);
+        new Control(audioBtn5.node, 'button', 'audiocall__word', `${data.wordTranslate}`);
 
         const dontKnowBtn = new Control(this.content.node, 'button', 'dont-know', 'не знаю');
+        document.querySelectorAll('.audiocall__btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                console.log(btn.textContent);
+                
+            })
+            
+        })
     }
 
     //пока оставила такое же (3view)
