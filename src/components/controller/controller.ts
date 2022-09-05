@@ -1,4 +1,4 @@
-import { IWord } from '../api/interfaces';
+import { IWord, IUserWordResp } from '../api/interfaces';
 import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
 import Loader from '../view/pages/common/loader/loader';
@@ -75,14 +75,12 @@ export default class Controller extends TextbookModel {
             });
         } else if (view === 'dictionary') {
             if (this.state.user.isAuth) {
-                console.log('here');
                 const loader = new Loader(document.querySelector('.main') as HTMLElement);
-                super.getUserWords(this.state.user.id, this.state.user.token).then((data) => {
+                super.gerWordsForDictionary(this.state).then((data) => {
                     loader.destroy();
                     this.drawView(this.state, data);
                 });
             } else {
-                console.log('here2');
                 this.drawNoAccessView('dictionary');
             }
         } else if (view === 'stats') {
