@@ -30,7 +30,9 @@ export default class Card {
                 folderColors[this.data.group]
             }"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>
             <h3 class="card__word">${this.data.word} - ${this.data.transcription}</h3>
+            <span class="card__icon-container">
             <svg class="card__icon card__icon_play" onClick="() => this.playAudio()"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+            </span>
             <audio src="${this.baseUrl}${this.data.audio}">
             </audio>
             <audio src="${this.baseUrl}${this.data.audioMeaning}">
