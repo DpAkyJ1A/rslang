@@ -68,7 +68,6 @@ export default class Controller extends TextbookModel {
             const loader = new Loader(document.querySelector('.main') as HTMLElement);
             super.gerWordsForTextbook(this.state).then((data) => {
                 loader.destroy();
-                console.log(data);
                 this.drawView(this.state, data);
             });
         } else if (view === 'dictionary') {

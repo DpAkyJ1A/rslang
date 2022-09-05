@@ -92,7 +92,7 @@ export default class SprintView {
                  - ">" для выбора "false"<br>
                  - "space" чтобы сыграть заново
                  `;
-        const controls = createStartGameControls();
+        const controls = createStartGameControls(mode);
         this.content.node.append(controls);
     }
 
