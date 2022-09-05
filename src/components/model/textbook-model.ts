@@ -49,13 +49,10 @@ export default class TextbookModel extends ApiService {
 
     async gerWordsForDictionary(state: IState) {
         const userWords = (await super.getUserWords(state.user.id, state.user.token)) as IUserWordResp[];
-        console.log('userWords = ');
-        console.log(userWords);
         const words: IWord[] = [];
         for (const item of userWords) {
             const word = (await super.getWordsById(item.wordId)) as IWord;
-            console.log('newWord = ');
-            console.log(word);
+            Object.assign(word, { status: item.difficulty });
             words.push(word);
         }
         return words;

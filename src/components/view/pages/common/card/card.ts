@@ -75,6 +75,7 @@ export default class Card {
         }
 
         if (this.isAuth) {
+            console.log('im here2');
             const badge = createBadge(this.data.status || undefined);
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);

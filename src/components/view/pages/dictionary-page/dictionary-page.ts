@@ -34,7 +34,7 @@ export default class DictionaryPage extends Page {
         } else {
             data.forEach((i) => {
                 const obj = i as IWord;
-                const card = new Card(obj, URL);
+                const card = new Card(obj, URL, true);
                 cardList.node.append(card.render());
             });
         }
