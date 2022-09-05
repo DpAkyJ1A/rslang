@@ -27,10 +27,6 @@ const state: IState = {
         page: 0,
         group: 0,
     },
-    dictionary: {
-        page: 0,
-        group: 0,
-    },
     user: {
         isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).isAuth : false,
         id: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : '',
