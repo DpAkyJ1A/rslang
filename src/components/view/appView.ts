@@ -8,13 +8,12 @@ import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
 import { IWord } from '../api/interfaces';
-import SprintGame from '../games/sprint/sprint';
-import { SprintGameLaunchMode } from '../games/sprint/types/index';
+// import SprintGame from '../games/sprint/sprint';
+// import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
 import MainPage from './pages/main-page/main-page';
 import GamesPage from './pages/games-page/games-page';
 import TeamPage from './pages/team-page/team-page';
-
 
 export default class AppView {
     private root: HTMLElement;
@@ -58,11 +57,11 @@ export default class AppView {
                 this.dictionaryPage.render(this.main.node, wordArr);
                 break;
             case 'games':
-                this.games.render(this.main.node);
+                this.games.render(this.main.node, { id: state.user.id, token: state.user.token });
                 break;
             case 'team':
                 this.teamPage.render(this.main.node);
-                break;    
+                break;
             case 'auth':
                 this.drawAuthPage();
                 break;

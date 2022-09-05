@@ -29,7 +29,10 @@ export default class TextbookPage extends Page {
             const levels = createLevels(group);
             const pgn = createPgnEl(page, group);
             const cardList = this.drawCards(data || [], state?.user.isAuth as boolean);
-            const gameLinks = createGameLinks(group);
+            const gameLinks = createGameLinks(group, page, {
+                id: state?.user.id,
+                token: state?.user.token,
+            } as { id: string; token: string });
             this.container.append(header, levels, pgn, cardList.node, gameLinks);
             container.append(this.container);
         }

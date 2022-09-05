@@ -6,14 +6,22 @@ export default class SprintGame {
     private controller: SprintController;
     private view: SprintView;
     private container: HTMLElement;
+    // private userId: string;
+    // private props: { group: number; page: number };
 
-    constructor(launchMode: SprintGameLaunchMode, container: HTMLElement, userId?: string) {
+    constructor(
+        launchMode: SprintGameLaunchMode,
+        container: HTMLElement,
+        user: { id: string; token: string },
+        props?: { group: number; page: number } | undefined
+    ) {
         this.view = new SprintView();
         this.controller = new SprintController(
             launchMode,
-            (props: ISprintGameState, word?: IGameWord, propsGame?: IGameProps, result?: IGameResult) =>
-                this.view.drawContent(props, word, propsGame, result),
-            userId
+            (state: ISprintGameState, word?: IGameWord, propsGame?: IGameProps, result?: IGameResult) =>
+                this.view.drawContent(state, word, propsGame, result),
+            user,
+            props
         );
         this.container = container;
     }

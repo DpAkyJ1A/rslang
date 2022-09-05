@@ -3,7 +3,7 @@ import { SprintGameLaunchMode } from '../../../../games/sprint/types/index';
 import Control from '../../../control';
 import { route } from '../../../side-menu/side-menu-item/side-menu-item';
 
-export const createGameLinks = (group: number) => {
+export const createGameLinks = (group: number, page: number, user: { id: string; token: string }) => {
     const wrapper = new Control(null, 'div', 'game-link');
     const dropdown = new Control(wrapper.node, 'ul', 'game-link__dropdown');
     const placeholder = new Control(wrapper.node, 'div', 'game-link__placeholder');
@@ -24,19 +24,21 @@ export const createGameLinks = (group: number) => {
     `;
     sprintGame.node.onclick = (e: Event) => {
         route(e);
-        startGame(e);
+        startGame(e, { group, page, user });
     };
-    audioGame.node.onclick = startGame;
+    // audioGame.node.onclick = startGame;
     return wrapper.node;
 };
 
-const startGame = (e: Event) => {
+const startGame = (e: Event, props: { group: number; page: number; user: { id: string; token: string } }) => {
     const target = e.target as HTMLButtonElement;
     const btn = target.closest('a') as HTMLAnchorElement;
     const container = document.querySelector('.main') as HTMLElement;
-    console.log(container);
     if (btn.classList.contains('game-link__item_sprint')) {
-        const sprint = new SprintGame(SprintGameLaunchMode.textbook, container);
+        const sprint = new SprintGame(SprintGameLaunchMode.textbook, container, props.user, {
+            group: props.group,
+            page: props.page,
+        });
         sprint.start();
     } else {
         // audiocall
