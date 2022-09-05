@@ -14,4 +14,10 @@ export const createSideMenuToggle = (sideMenu: HTMLElement) => {
         toggle.node.classList.toggle('active');
         nav.classList.toggle('active');
     };
+    window.onresize = (event) => {
+        if (window.innerWidth < 768) {
+            toggle.node.classList.remove('active');
+            nav.classList.remove('active');
+        }
+    };
 };
