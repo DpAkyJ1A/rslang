@@ -52,4 +52,3 @@ interface ILocalStorageData {
     userId: string;
 }
 
-new AudioGameModel().getWordsForGame(5, 5);
