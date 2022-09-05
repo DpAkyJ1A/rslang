@@ -4,6 +4,7 @@
   margin-bottom: 30px;
   display: flex;
   align-items: center;
+  height: 50px;
   @include media-mobile{
     flex-direction: column;
     margin-bottom: 20px;

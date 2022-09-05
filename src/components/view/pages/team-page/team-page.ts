@@ -1,5 +1,6 @@
 import Control from 'control';
 import Page from './../page';
+import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 export default class TeamPage extends Page {
     constructor() {
@@ -12,7 +13,8 @@ export default class TeamPage extends Page {
     }
 
     createTeamPage() {
-        new Control(this.container, 'h2', 'team__title', 'Команда разработчиков');
+        const header = createPageHeader('Команда разработчиков', false);
+        this.container.append(header);
         const containerCards = new Control(this.container, 'div', 'team__cards');
         const teamCards1 = new Control(containerCards.node, 'div', 'team-card');
         const teamCards2 = new Control(containerCards.node, 'div', 'team-card');
@@ -35,7 +37,7 @@ export default class TeamPage extends Page {
             teamCards1.node,
             'p',
             'team-card__description',
-            'Студент KHNU, 4 курс. В свободное время fontend и workout, этим летом мне подчинился силовой выход в стойку на брусьях💪. Играю на пианино и укулеле. Люблю фронтенд за мгновенный результат своей работы - пару строк и менюшка выезжает. Бэк лишен этого.'
+            'Студент KHNU, 4 курс. В свободное время fontend и workout, этим летом мне подчинился силовой выход в стойку на брусьях💪. Играю на пианино и укулеле. Люблю фронтенд за мгновенный результат своей работы - пару строк и менюшка выезжает.'
         );
         new Control(teamCards1.node, 'p', 'team-card__in-project', 'в проекте');
         new Control(

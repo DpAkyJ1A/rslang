@@ -1,3 +1,9 @@
+.team-page{
+    .textbook__header {
+            margin-bottom: 0;
+        }
+}
+
 .team__cards {
     max-width: 1200px;
     display: flex;
@@ -37,15 +43,6 @@
         margin: 25px auto;
     }
 }
-.team__title {
-    width: fit-content;
-    padding-right: 15px;
-    color: $color-light-xl;
-}
-.team__title:first-child {
-    margin-right: 15px;
-    border-right: 4px solid $colorLink5;
-  }
 .team-card__avatar1 {
     background-image: url('Assets/images/alex.png');
     width: 250px;
