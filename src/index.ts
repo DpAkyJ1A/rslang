@@ -51,5 +51,3 @@ interface ILocalStorageData {
     userId: string;
 }
 
-//временно расположила тут
-new AudioGame(AudioGameLaunchMode.textbook, document.body).start();

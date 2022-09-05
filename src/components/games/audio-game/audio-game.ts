@@ -1,6 +1,6 @@
 import AudioGameController from "./controller/audiogamecontroller";
 import { AudioGameLaunchMode, IAudioGameState, IGameProps, IGameResult, IGameWord } from "./types/audiocall-types";
-import AudioView from "./view/audioview";
+import AudioView from "./view/audio-game-view";
 
 export default class AudioGame {
     private controller: AudioGameController;

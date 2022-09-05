@@ -1,5 +1,6 @@
 import Control from 'control';
 import AudioGame from '../../../games/audio-game/audio-game';
+import { AudioGameLaunchMode } from '../../../games/audio-game/types/audiocall-types';
 import SprintGame from '../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../games/sprint/types/index';
 import Page from '../page';
@@ -29,10 +30,10 @@ export default class GamesPage extends Page {
             sprint = new SprintGame(SprintGameLaunchMode.textbook, this.container);
             sprint.start();
         }
-        // let audioGame: AudioGame | null;
-        // btnAudio.node.onclick = () => {
-        //     audioGame = new AudioGame(this.container);
-        //     audioGame.start();
-        // }
+        let audioGame: AudioGame | null;
+        btnAudio.node.onclick = () => {
+            audioGame = new AudioGame(AudioGameLaunchMode.textbook, this.container);
+            audioGame.start();
+        }
     }
 }
