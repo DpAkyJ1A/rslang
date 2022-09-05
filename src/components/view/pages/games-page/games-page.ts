@@ -15,7 +15,8 @@ export default class GamesPage extends Page {
     }
 
     createGamesPage(user: { id: string; token: string }) {
-        new Control(this.container, 'h2', 'games__title', 'Игры');
+        const header = createPageHeader('Games', false);
+        this.container.append(header);
         const gamesDiv = new Control(this.container, 'div', 'games__container');
         const divGame1 = new Control(gamesDiv.node, 'div', 'games__game1');
         new Control(divGame1.node, 'button', 'games__audio-game');
