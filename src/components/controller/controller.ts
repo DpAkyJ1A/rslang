@@ -1,8 +1,8 @@
 import { IWord } from '../api/interfaces';
 import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
+import Loader from '../view/pages/common/loader/loader';
 import { updateSideMenu } from '../view/side-menu/side-menu';
-import userState from '../utils/state';
 
 export default class Controller extends TextbookModel {
     state: IState;
@@ -17,13 +17,18 @@ export default class Controller extends TextbookModel {
         });
         window.addEventListener('popstate', () => {
             this.handleLocation();
-            console.log('hehe');
         });
         document.addEventListener('cardWordToggle', this.handleWordsToogle as EventListener);
     }
 
     handleWordsToogle(e: CustomEvent) {
-        // super.updateTextbookUserWord();
+        const loader = new Loader(document.body);
+
+        super
+            .updateTextbookUserWord(
+                Object.assign(e.detail, { userId: this.state.user.id, userToken: this.state.user.token })
+            )
+            .then(() => loader.destroy());
     }
 
     handleLocation() {
@@ -33,7 +38,6 @@ export default class Controller extends TextbookModel {
     }
 
     updateState(params: { [N: string]: string }) {
-        console.log(userState);
         this.setViewState = params.view;
         if (params['view'] === 'textbook') {
             this.setTextbookState = { group: params.group || '0', page: params.page || '0' };
@@ -61,8 +65,12 @@ export default class Controller extends TextbookModel {
     public async drawMain(view: string) {
         updateSideMenu(view);
         if (view === 'textbook') {
-            const data = await super.gerWordsForTextbook(this.state.textbook.page, this.state.textbook.group);
-            this.drawView(this.state, data);
+            const loader = new Loader(document.querySelector('.main') as HTMLElement);
+            super.gerWordsForTextbook(this.state).then((data) => {
+                loader.destroy();
+                console.log(data);
+                this.drawView(this.state, data);
+            });
         } else if (view === 'dictionary') {
             const data = await super.getWords(this.state.dictionary.page, this.state.dictionary.group);
             this.drawView(this.state, data);
@@ -86,6 +94,7 @@ export interface IState {
         isAuth: false;
         id: string;
         name: string;
+        token: string;
     };
 }
 
