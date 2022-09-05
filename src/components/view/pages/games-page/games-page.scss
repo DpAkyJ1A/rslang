@@ -3,29 +3,31 @@
 }
 .games__title {
     width: fit-content;
-    padding-right: 15px;
     color: $color-light-xl;
 }
 .games__title:first-child {
     margin-right: 15px;
     border-right: 4px solid $colorLink5;
-  }
+}
+.games__title {
+    text-transform: uppercase;
+    color: $colorLink5;
+}
 .games__container {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 5em;
     margin-top: 4em;
     gap: 1em;
+    padding: 0 5em;
     @include media-tablet {
-        padding-top: 0;
         margin-top: 2em;
         flex-wrap: wrap;
         gap: 2em;
     }
     @include media-mobile {
-        padding: 0;
+        padding-bottom: 30px;
     }
 }
 .games__game1,
@@ -33,7 +35,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     gap: 2em;
+    @include media-mobile {
+        gap: 1em;
+    }
 }
 .games__sprint {
     background-image: url('Assets/images/sprint.jpeg');
