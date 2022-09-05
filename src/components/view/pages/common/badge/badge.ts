@@ -30,6 +30,7 @@ export const createBadge = (type?: BadgeType) => {
     const tooltipHard = new Control(iconHard.node, 'span', 'card__badge-tooltip', 'Add to Dictionary');
     const tooltipLearned = new Control(iconLearned.node, 'span', 'card__badge-tooltip', 'Tag as learned');
     if (type) {
+        console.log(type);
         (wrapper.node.querySelector(`[data-process="${type}"]`) as HTMLElement).classList.remove(
             'card__badge-icon_disabled'
         );

@@ -1,4 +1,5 @@
 import Control from 'control';
+import { IWord } from '../../../../api/interfaces';
 import { BadgeType, createBadge } from '../badge/badge';
 
 export default class Card {
@@ -72,7 +73,7 @@ export default class Card {
         }
 
         if (this.isAuth) {
-            const badge = createBadge();
+            const badge = createBadge(this.data.status || undefined);
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);
         }
@@ -118,23 +119,6 @@ export default class Card {
             loop();
         }
     }
-}
-
-interface IWord {
-    id: string;
-    group: 0;
-    page: 0;
-    word: string;
-    image: string;
-    audio: string;
-    audioMeaning: string;
-    audioExample: string;
-    textMeaning: string;
-    textExample: string;
-    transcription: string;
-    wordTranslate: string;
-    textMeaningTranslate: string;
-    textExampleTranslate: string;
 }
 
 const folderColors = {
