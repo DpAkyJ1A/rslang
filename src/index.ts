@@ -4,6 +4,7 @@ import { App } from './components/app/app';
 import { IState } from './components/controller/controller';
 import AudioGame from './components/games/audio-game/audio-game';
 import { AudioGameLaunchMode } from './components/games/audio-game/types/audiocall-types';
+import { AudioGameModel } from './components/games/audio-game/model/audio-game-model';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -51,3 +52,4 @@ interface ILocalStorageData {
     userId: string;
 }
 
+new AudioGameModel().getWordsForGame(5, 5);
