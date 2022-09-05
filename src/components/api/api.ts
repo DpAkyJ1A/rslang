@@ -91,7 +91,7 @@ export default class ApiService {
     async getUserWords(id: string, token: string) {
         return await fetch(`${this.baseUrl}/users/${id}/words`, {
             method: 'GET',
-            credentials: 'include',
+            // credentials: 'include',
             headers: {
                 Authorization: `Bearer ${token}`,
                 Accept: 'application/json',
@@ -106,7 +106,7 @@ export default class ApiService {
     async createUserWord(id: string, wordId: string, userWord: IUserWord, token: string) {
         return await fetch(`${this.baseUrl}/users/${id}/words/${wordId}`, {
             method: 'POST',
-            credentials: 'include',
+            // credentials: 'include',
             headers: {
                 Authorization: `Bearer ${token}`,
                 Accept: 'application/json',
@@ -159,17 +159,14 @@ export default class ApiService {
 
     // в методе нет фильтрации
     async getAggregatedWords(id: string, group: number, token: string, page?: number, wordsPerPage?: number) {
-        return await fetch(
-            `${this.baseUrl}/users/${id}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            }
-        ).then((res) => {
+        return await fetch(`${this.baseUrl}/users/${id}/aggregatedWords?group=${group}&page=${page}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
             if (res.status !== 200) throw Error(`${res.status}`);
             return res.json();
         });

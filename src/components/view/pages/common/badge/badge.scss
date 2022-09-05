@@ -1,0 +1,75 @@
+.card__badge {
+  position: absolute;
+  display: flex;
+  bottom: 10px;
+  right: 10px;
+  gap: 10px;
+}
+
+.card__badge-icon {
+  position: relative;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.card__badge-tooltip {
+    min-width: 170px;
+    padding: 5px 10px;
+    text-align: center;
+    top: calc(100% - 80px);
+    left: calc(50% - 90px);
+    border: 1px solid #fff;
+    background-color: #fff;
+    border-radius: 25px;
+    position: absolute;
+    display: none;
+    transition: all 0.4s ease-in;
+}
+
+.card__badge-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent #fff;
+}
+
+.card__badge-icon:hover .card__badge-tooltip {
+  display: inline-block;
+}
+
+// .card__badge_hard svg {
+//   fill: $colorLink4;
+// }
+
+.card__badge-icon_hard svg {
+  fill: $colorLink4;
+}
+
+.card__badge-icon_learned svg {
+  fill: #00bc9c;
+}
+
+.card__badge-icon_disabled svg {
+  fill: $color-dark-xl;
+}
+
+.card__badge-icon_disabled::after {
+  font-size: 1.3rem;
+  height: 15px;
+  width: 15px;
+  right: 0px;
+  top: -2px;
+  position: absolute;
+  content: "+";
+  background-color: inherit;
+  background-color: #eaac8b;
+  color: $color-dark-xl;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+}

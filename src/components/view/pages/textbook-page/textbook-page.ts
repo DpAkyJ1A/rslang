@@ -6,6 +6,7 @@ import { createLevels } from '../common/levels/levels';
 import { createPgnEl } from '../common/pagination/pagination';
 import { IWord } from '../../../api/interfaces';
 import { createGameLinks } from '../common/gameLinks/gameLinks';
+import { IState } from '../../../controller/controller';
 
 // пока без апи
 const URL = 'https://rs-lang-team-156.herokuapp.com/';
@@ -15,7 +16,7 @@ export default class TextbookPage extends Page {
         super('textbook-page');
     }
 
-    public render(container: HTMLElement, data?: IWord[]) {
+    public render(container: HTMLElement, state?: IState, data?: IWord[]) {
         this.container.innerHTML = '';
         const header = createPageHeader('TextBook');
         let group, page;
@@ -27,14 +28,14 @@ export default class TextbookPage extends Page {
             page = (data as IWord[])[0].page;
             const levels = createLevels(group);
             const pgn = createPgnEl(page, group);
-            const cardList = this.drawCards(data || []);
+            const cardList = this.drawCards(data || [], state?.user.isAuth as boolean);
             const gameLinks = createGameLinks(group);
             this.container.append(header, levels, pgn, cardList.node, gameLinks);
             container.append(this.container);
         }
     }
 
-    drawCards(data: IWord[] | []) {
+    drawCards(data: IWord[] | [], isAuth: boolean) {
         const cardList = new Control(this.container, 'div', 'textbook-page__words');
         if (!data?.length) {
             new Control(
@@ -46,7 +47,7 @@ export default class TextbookPage extends Page {
         } else {
             data.forEach((i) => {
                 const obj = i as IWord;
-                const card = new Card(obj, URL);
+                const card = new Card(obj, URL, isAuth);
                 cardList.node.append(card.render());
             });
         }

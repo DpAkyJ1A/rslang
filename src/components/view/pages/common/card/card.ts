@@ -1,14 +1,18 @@
 import Control from 'control';
+import { IWord } from '../../../../api/interfaces';
+import { BadgeType, createBadge } from '../badge/badge';
 
 export default class Card {
     data: IWord;
     node: HTMLElement;
     baseUrl: string;
-    constructor(data: IWord, baseURL: string) {
+    isAuth: boolean;
+    constructor(data: IWord, baseURL: string, isAuth?: boolean) {
         this.data = data;
         this.node = document.createElement('div');
         this.node.className = 'textbook__card card';
         this.baseUrl = baseURL;
+        this.isAuth = isAuth as boolean;
         this.playAudio = this.playAudio.bind(this);
     }
 
@@ -35,6 +39,13 @@ export default class Card {
             </audio>
         `;
         (header.node.querySelector('.card__icon_play') as HTMLElement).onclick = this.playAudio;
+
+        // const controls = new Control(content.node, 'div', 'card__controls');
+        // controls.node.innerHTML = `
+        //     <button class="card__btn card__btn_hard">Hard</button>
+        //     <button class="card__btn card__btn_learned">Learned</button>
+        // `;
+
         const wordTranslation = new Control(content.node, 'h4', 'card__translation', `${this.data.wordTranslate}`);
         const meaning = new Control(content.node, 'div', 'card__example');
         new Control(meaning.node, 'h3', '', `${this.data.textMeaning}`);
@@ -54,17 +65,17 @@ export default class Card {
             `${this.data.textExampleTranslate}`
         );
 
-        const controls = new Control(content.node, 'div', 'card__controls');
-        controls.node.innerHTML = `
-            <button class="btn-reset">hard</button>
-            <button class="btn-reset">learned</button>
-        `;
-
         const translationDisabled = localStorage.getItem('translationDisabled') || ('false' as string);
         if (translationDisabled === 'true') {
             wordTranslation.node.classList.add('card__translation_disabled');
             phraseTranslation.node.classList.add('card__translation_disabled');
             exampleTranslation.node.classList.add('card__translation_disabled');
+        }
+
+        if (this.isAuth) {
+            const badge = createBadge(this.data.status || undefined);
+            this.node.setAttribute('data-id', `${this.data.id}`);
+            this.node.append(badge);
         }
 
         return this.node;
@@ -108,23 +119,6 @@ export default class Card {
             loop();
         }
     }
-}
-
-interface IWord {
-    id: string;
-    group: 0;
-    page: 0;
-    word: string;
-    image: string;
-    audio: string;
-    audioMeaning: string;
-    audioExample: string;
-    textMeaning: string;
-    textExample: string;
-    transcription: string;
-    wordTranslate: string;
-    textMeaningTranslate: string;
-    textExampleTranslate: string;
 }
 
 const folderColors = {

@@ -29,15 +29,17 @@ const state: IState = {
         group: 0,
     },
     user: {
-        isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : false,
+        isAuth: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).isAuth : false,
         id: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).userId : '',
         name: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).name : '',
+        token: localStorage['tokenDataKata'] ? JSON.parse(localStorage['tokenDataKata']).token : '',
     },
 };
+console.log(localStorage['tokenDataKata']);
 
 const app = new App(root, state);
 
-app.start({ isAuth: state.user.isAuth, name: state.user.name} );
+app.start({ isAuth: state.user.isAuth, name: state.user.name });
 
 interface ILocalStorageData {
     message: string;
@@ -49,9 +51,8 @@ interface ILocalStorageData {
 
 // const birds = new Control(body, 'script');
 // birds.node.setAttribute('type', 'module');
-// birds.node.setAttribute('src','three.r119.min.js'); 
+// birds.node.setAttribute('src','three.r119.min.js');
 
 // const birdsBody = new Control(body, 'script');
 // birdsBody.node.setAttribute('type', 'module');
-// birdsBody.node.setAttribute('src','vanta.birds.min.js'); 
-
+// birdsBody.node.setAttribute('src','vanta.birds.min.js');
