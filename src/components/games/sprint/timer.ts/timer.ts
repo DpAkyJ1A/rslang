@@ -1,6 +1,6 @@
 import Control from '../../../view/control';
 
-const TIMER_IN_SPRINT = 10;
+const TIMER_IN_SPRINT = 20;
 
 // make sure we have only 1 timer instance - Singleton
 let instance: Timer | null;
