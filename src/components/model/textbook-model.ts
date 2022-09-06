@@ -1,5 +1,5 @@
 import ApiService from '../api/api';
-import { IUserWordResp, IWord } from '../api/interfaces';
+import { IUserWordResp, IWord, IStatistics } from '../api/interfaces';
 import { IState } from '../controller/controller';
 
 export default class TextbookModel extends ApiService {
@@ -57,7 +57,6 @@ export default class TextbookModel extends ApiService {
     async gerWordsForDictionary(state: IState) {
         const userWords = (await super.getUserWords(state.user.id, state.user.token)) as IUserWordResp[];
         const words: IWord[] = [];
-        console.log(userWords);
         for (const item of userWords) {
             if (item.difficulty === 'hard') {
                 const word = (await super.getWordsById(item.wordId)) as IWord;
@@ -66,5 +65,10 @@ export default class TextbookModel extends ApiService {
             }
         }
         return words;
+    }
+
+    async getUserStats(state: IState) {
+        const userStats = (await super.getUserStatistics(state.user.id, state.user.token)) as IStatistics;
+        console.log(userStats);
     }
 }

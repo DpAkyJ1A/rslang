@@ -84,6 +84,7 @@ export default class Controller extends TextbookModel {
             }
         } else if (view === 'stats') {
             if (this.state.user.isAuth) {
+                super.getUserStats(this.state);
                 this.drawView(this.state);
             } else {
                 this.drawNoAccessView('stats');
