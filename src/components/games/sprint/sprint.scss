@@ -73,10 +73,9 @@ body {
   border: 1em solid $colorLink4;
   border-radius: 60px;
   width: 50vw;
-  height: 50vh;
+  min-height: 500px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: calc(100vh - 93vh);
 }
 
 .content {
@@ -291,10 +290,10 @@ body {
   background-color: #e56b6f;
 }
 
-@media screen and (max-width: 1024px) {  
+@media screen and (max-width: 1200px) {  
 
   .sprint-game__content {
-    width: 60vw;
+    width: 70vw;
     height: 50vh;
   }
 
@@ -305,8 +304,11 @@ body {
 
 @media screen and (max-width: 768px) {
   .sprint-game__content {
-    width: 70vw;
+    width: 90vw;
+    max-height: 90vh;
     height: 50vh;
+    padding: 10px;
+    padding-top: 20vh;
 }
 .content__controls {
   margin-top: 30px;
@@ -319,7 +321,7 @@ body {
 }
 
 .content__description span:nth-child(2) {
-  font-size: 1.1rem;
+  display: none;
 }
 
 .content__description span:nth-child(2) {
@@ -327,7 +329,7 @@ body {
 }
 
 .content__buttons {
-  margin-top: 100px;
+  margin-top: 20px;
   max-width: 315px;
   display: flex;
   justify-content: space-between;
@@ -362,17 +364,16 @@ body {
   }
 
   .sprint-game__content {
-    width: 70vw;
-    height: 60vh;
+    min-height: 550px;
 }
 .content__controls {
-  margin-top: 80px;
+  margin-top: 40px;
   flex-direction: column;
   gap: 10px;
 }
 .content__buttons {
   flex-direction: column;
-  gap: 30px
+  gap: 10px
 }
 
 .content__answer-button {
