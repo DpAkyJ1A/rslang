@@ -1,0 +1,30 @@
+.footer__logo-link{
+  position: absolute;
+  left: 10px;
+  display: block;
+  width: 75px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include media-mobile{
+    left: 0;
+    height: 30px;
+    width: 60px;
+  }
+}
+
+.footer__logo{
+  display: block;
+  width: 60px;
+  height: 25px;
+  background-color: inherit;
+  background-image: url('Assets/icons/rss-logo.svg');
+  background-repeat: no-repeat;
+  @include media-mobile{
+    width: 50px;
+    height: 19px;
+    background-size: cover;
+  }
+}

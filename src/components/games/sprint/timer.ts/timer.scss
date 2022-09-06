@@ -1,0 +1,53 @@
+.timer {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  z-index: 10;
+}
+
+.timer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #e56b6f;
+}
+
+.timer__wrapper_animated {
+  animation-name: boxShadow;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+.timer__display {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+@keyframes boxShadow {
+    0% {
+      box-shadow: rgba(232, 90, 70, 0.4) 0px 0px 0px 3px;
+    }
+
+    25% {
+      box-shadow: rgba(232, 90, 70, 0.3) 0px 0px 0px 6px;
+    }
+    
+    50% {
+      box-shadow: rgba(232, 90, 70, 0.3) 0px 0px 0px 9px;
+    }
+
+    75% {
+      box-shadow: rgba(232, 90, 70, 0.2) 0px 0px 0px 12px;
+    }
+
+    100% {
+      box-shadow: rgba(232, 90, 70, 0.1) 0px 0px 0px 15px;
+    }
+}
+

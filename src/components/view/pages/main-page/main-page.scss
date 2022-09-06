@@ -1,0 +1,137 @@
+.main-page {
+    background-color: $color-gray-dark;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    @include media-mobile {
+        align-items: center;
+    }
+}
+.h1-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+}
+.main-page__title {
+    width: 54%;
+    color: $colorLink5;
+    margin-top: 1.3em;
+    margin-left: 1.2em;
+    margin-bottom: 0.5em;
+    font-size: 4em;
+    line-height: 70px;
+    @include media-tablet {
+        font-size: 3em;
+        line-height: 50px;
+        margin-top: 0.7em;
+        margin-left: 0.7em; 
+    }
+    @include media-mobile {
+        font-size: 2em;
+        width: 90%;
+        text-align: center;
+        line-height: 50px;
+        margin-left: 0;
+    }
+}
+.main-page__description {
+    color: $color-gray-l;
+    margin-left: 4.6em;
+    margin-bottom: 0;
+    font-size: 1.3em;
+    width: 60%;
+    line-height: 1.5em;
+    @include media-tablet {
+        margin-top: 0.7em;
+        margin-left: 1.6em; 
+    }
+    @include media-mobile {
+        width: 90%;
+        text-align: center;
+        margin-top: 0.5em;
+        margin-left: 0;
+    }
+}
+
+//
+.main-page__bg-wrapper {
+    display: flex;
+    gap: 2em;
+    justify-content: flex-end;
+    padding-top: 2.5em;
+    @include media-mobile {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+.bnt__link {
+    text-decoration: none;
+}
+.btn_yellow {
+    background-color: $colorLink0;
+    border: 1em solid $colorLink5;
+}
+.btn_coral {
+    background-color: $colorLink5;
+    border: 1em solid $colorLink4;
+}
+.btn__wrapper {
+    width: 270px;
+    height: max-content;
+    border-radius: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.btn__wrapper.switched-pink {
+    color: $color-light-xl;
+    background-image: -webkit-linear-gradient(45deg, $colorLink4 50%, transparent 50%);
+    background-image: linear-gradient(45deg, $colorLink4 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out;
+  }
+  .btn__wrapper.switched-blue {
+    color: $color-light-xl;
+    background-image: -webkit-linear-gradient(45deg, $colorLink0 50%, transparent 50%);
+    background-image: linear-gradient(45deg, $colorLink0 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out;
+  }
+.switched-blue:hover,
+.switched-pink:hover {
+    background-position: 0;
+}
+.btn__content {
+    width: 80%;
+    font-size: 0.9em;
+    line-height: 22px;
+    text-align: center;
+    padding-top: .7em;
+}
+
+.content__grey {
+    color: $color-gray-dark;
+}
+.content__white {
+    color: $color-gray-l;
+}
+.btn__img-games {
+    width: 100%;
+    height: 185px;
+    border-radius: 47px;
+    background-image: url('Assets/images/big-image-2.png');
+    background-repeat: round;
+}
+.btn__img-stats {
+    width: 100%;
+    height: 185px;
+    border-radius: 47px;
+    background-image: url('Assets/images/line-1.png');
+    background-repeat: round;
+}

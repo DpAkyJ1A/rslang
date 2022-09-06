@@ -1,0 +1,126 @@
+/* header  */
+
+.textbook__header {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  @include media-mobile{
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+}
+
+.textbook__title {
+  padding-right: 15px;
+  color: $color-light-xl;
+}
+
+.textbook__title_disable {
+  color: grey;
+}
+
+.textbook__title:first-child {
+  margin-right: 15px;
+  border-right: 4px solid $colorLink5;
+}
+
+.textbook__settings {
+  display: flex;
+  align-items: center;
+}
+
+.settings {
+  margin-left: auto;
+  @include media-mobile{
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}
+
+.settings__label {
+  color: $color-light-xl;
+  margin-right: 15px;
+}
+
+.settings__switch {
+  position: relative;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  background: #00bc9c;
+  transition: all 0.2s ease;
+  border-radius: 25px;
+  @include media-mobile{
+    width: 130px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+  }
+}
+.settings__switch span {
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  margin: -2px 0px 0px -4px;
+  background: #fff;
+  display: block;
+  transform: rotate(-45deg);
+  transition: all 0.2s ease;
+}
+.settings__switch span:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  margin-top: -8px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+input[type=radio] {
+  display: none;
+}
+.settings__switch label {
+  cursor: default;
+  color: rgba(0,0,0,0.2);
+  width: 60px;
+  line-height: 50px;
+  transition: all 0.2s ease;
+}
+label[for=toggle-yes] {
+  position: absolute;
+  left: 0px;
+}
+label[for=toggle-no] {
+  position: absolute;
+  right: 0px;
+}
+#toggle-no:checked ~ .settings__switch {
+  background: #eb4f37;
+}
+#toggle-no:checked ~ .settings__switch span {
+  background: #fff;
+  margin-left: -8px;
+}
+#toggle-no:checked ~ .settings__switch span:after {
+  background: #fff;
+  height: 20px;
+  margin-top: -8px;
+  margin-left: 8px;
+}
+#toggle-yes:checked ~ .settings__switch label[for=toggle-yes] {
+  color: #fff;
+}
+#toggle-no:checked ~ .settings__switch label[for=toggle-no] {
+  color: #fff;
+}
+
+#toggle-yes:not(:checked) ~ .settings__switch label[for=toggle-yes]:hover, 
+#toggle-no:not(:checked) ~ .settings__switch label[for=toggle-no]:hover {
+  cursor: pointer;
+  color: $color-dark-l;
+}

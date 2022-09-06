@@ -1,0 +1,125 @@
+.side-menu-item{
+  position: relative;
+  display: flex;
+  list-style: none;
+  width: 100%;
+  cursor: pointer;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  a {
+    display: flex;
+    text-decoration: none;
+    color: $color-gray-dark;
+    width: 100%;
+  }
+  @include media-mobile{
+    width: 50px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+.side-menu-item__icon{
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 70px;
+  text-align: center;
+  z-index: 1;
+  @include media-mobile{
+    min-width: 50px;
+    line-height: 65px;
+    height: 50px;
+  }
+}
+
+.side-menu-item__icon * {
+  font-size: 1.5em;
+}
+
+.side-menu-item__title{
+  position: relative;
+  display: block;
+  padding-left: 10px;
+  height: 60px;
+  line-height: 60px;
+  white-space: normal;
+  @include media-mobile{
+    display: none;
+  }
+}
+
+.side-menu-item:hover{
+  *{
+    color: $colorLink4;
+  }
+}
+
+.side-menu-item.active{
+  background: $color-gray-dark;
+  *{
+    color: $colorLink5;
+  }
+}
+
+.side-menu-item b:nth-child(1), 
+.side-menu-item b:nth-child(2){
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  background: $color-gray-dark;
+  display: none;
+  @include media-mobile{
+    height: 100%;
+    width: 20px;
+  }
+}
+
+.side-menu-item b:nth-child(1){
+  top: -20px;
+  @include media-mobile{
+    top: 0;
+    left: -20px;
+  }
+}
+
+.side-menu-item b:nth-child(2){
+  bottom: -20px;
+  @include media-mobile{
+    bottom: 0;
+    right: -20px;
+  }
+}
+
+.side-menu-item b:nth-child(1)::before,
+.side-menu-item b:nth-child(2)::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $colorLink5;
+}
+
+.side-menu-item b:nth-child(1)::before{
+  border-bottom-right-radius: 20px;
+  @include media-mobile{
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 20px;
+  }
+}
+
+.side-menu-item b:nth-child(2)::before{
+  border-top-right-radius: 20px;
+  @include media-mobile{
+    border-top-right-radius: 0;
+    border-top-left-radius: 20px;
+  }
+}
+
+.side-menu-item.active b:nth-child(1),
+.side-menu-item.active b:nth-child(2){
+  display: block;
+}

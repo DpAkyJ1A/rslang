@@ -1,0 +1,196 @@
+.team-page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .textbook__header {
+            margin-bottom: 0;
+            margin-right: auto;
+    }
+}
+
+.team__cards {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+    flex-wrap: wrap;
+    @include media-tablet {
+        max-width: 700px;
+        gap: .5em;
+    }
+    @include media-mobile {
+        max-width: 300px;
+    }
+    padding-bottom: 20px;
+}
+.team-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    width: 30%;
+    height: 820px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 20px;
+    @include media-tablet {
+        width: 50%;
+        max-width: 700px;
+        height: 650px;
+        .team-card__description{
+            padding-bottom: 0;
+        }
+    }
+    @include media-mobile {
+        width: 90%;
+        height: 750px;
+        margin: 25px auto;
+        .team-card__description {
+            padding: 2em;
+            padding-top: 0;
+        }
+    }
+}
+
+.team-card:nth-child(1){
+    .team-card__front-side,
+    .team-card__back-side{
+        .team-card__description {
+            padding-top: 0;
+            margin-top: 50px;
+        }
+    }
+}
+
+.team-card__front-side,
+.team-card__back-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    transition: 1s;
+    backface-visibility: hidden;
+    background-color: $colorLink4;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    .team-card__description {
+        padding-top: 4.5em;
+    }
+    @include media-tablet {
+        gap: .5em;
+    }
+    
+    @include media-mobile {
+        flex-wrap: wrap;
+        gap: 1em;
+        margin: 25px auto;
+    }
+}
+
+.team-card__description{
+    ul{
+        width: 100%;
+        font-weight: bold;
+        li+li{
+            margin-top: 20px;
+        }
+    }
+}
+
+.team-card__back-side {
+    transform: rotateY(180deg);
+}
+
+.team-card__front-side{
+    .team-card__description{
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.team-card:hover .team-card__front-side {
+    transform: rotateY(180deg);
+}
+
+.team-card:hover .team-card__back-side {
+    transform: rotateY(360deg);
+}
+
+.team-card__avatar1 {
+    background-image: url('Assets/images/alex.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__avatar2 {
+    background-image: url('Assets/images/kate.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__avatar3 {
+    background-image: url('Assets/images/toha.png');
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1em solid $colorLink0;
+    border-radius: 50%;
+    @include media-tablet {
+        width: 160px;
+        height: 160px;
+    }
+}
+.team-card__role,
+.team-card__in-project {
+    color: $colorLink5;
+    text-transform: uppercase;
+    padding-left: 2em;
+    padding-right: 2em;
+    @include media-mobile {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+}
+.team-icon:hover {
+    fill: $colorLink0;
+}
+.team-card__name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.team-card__description {
+    padding: 2em;
+    line-height: 1.5em;
+    height: 250px;
+    @include media-mobile {
+        padding: 0;
+    }
+}

@@ -1,0 +1,117 @@
+.game-link {
+  min-width: 100px;
+  min-height: 100px;
+  position: fixed;
+  bottom: 30px;
+  right: 4vw;
+  border-radius: 50px;
+  // background-color: #e56b6f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include media-mobile{
+    min-width: 70px;
+    min-height: 70px;
+    top: unset;
+    bottom: 100px;
+  }
+}
+
+.game-link__dropdown {
+  position: absolute;
+  top: -180px;
+  display: none;
+  flex-direction: column;
+  transition: all 0.3s ease-in;
+  min-height: 200px;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+  @include media-mobile {
+      top: -150px;
+  }
+}
+
+.game-link__placeholder {
+  border: 2px solid #e56b6f;
+  border-radius: 50%;
+  margin-top: 10px;
+  height: 85px;
+  width: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e56b6f;
+  @include media-mobile {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.game-link__placeholder svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  fill: #fff;
+  @include media-mobile{
+    width: 35px;
+  }
+}
+
+.game-link:hover > .game-link__dropdown {
+  display: flex;
+}
+
+.game-link:hover > .game-link__placeholder {
+  background-color: #e56b6f;
+  fill: #fff;
+}
+
+.game-link__icon {
+  width: 45px;
+  height: 45px;
+}
+
+.game-link__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85px;
+  width: 85px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: inherit;
+  transition: all 0.4s ease-in-out;
+  border: 2px solid #fff;
+  margin-bottom: 10px;
+  @include media-mobile {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.game-link__item:first-child svg {
+  width: 48px;
+  @include media-mobile {
+    width: 35px;
+  }
+}
+
+.game-link__item svg{
+  fill: #fff;
+  @include media-mobile {
+    width: 35px;
+  }
+}
+
+.game-link__item:last-child:hover {
+  background-color: #eaac8b;
+  box-shadow: 0 0 5em rgba(227, 208, 196, 0.8);
+}
+
+.game-link__item:first-child:hover {
+  background-color: #6d597a;
+  box-shadow: 0 0 5em rgba(227, 208, 196, 0.8);
+}
