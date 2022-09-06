@@ -17,6 +17,9 @@
   padding: 10px 15px;
   border: 2px solid $colorLink4;
   border-radius: 25px;
+  @include media-mobile{
+    width: 220px;
+  }
 }
 
 .select__list {
