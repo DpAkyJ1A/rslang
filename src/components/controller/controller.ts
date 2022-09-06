@@ -67,14 +67,14 @@ export default class Controller extends TextbookModel {
     public async drawMain(view: string) {
         updateSideMenu(view);
         if (view === 'textbook') {
-            const loader = new Loader(document.querySelector('.main') as HTMLElement);
+            const loader = new Loader(document.body);
             super.gerWordsForTextbook(this.state).then((data) => {
                 loader.destroy();
                 this.drawView(this.state, data);
             });
         } else if (view === 'dictionary') {
             if (this.state.user.isAuth) {
-                const loader = new Loader(document.querySelector('.main') as HTMLElement);
+                const loader = new Loader(document.body);
                 super.gerWordsForDictionary(this.state).then((data) => {
                     loader.destroy();
                     this.drawView(this.state, data);
