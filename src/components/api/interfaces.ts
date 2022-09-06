@@ -17,6 +17,8 @@ export interface IWord {
     textExampleTranslate: string;
     // для учебника
     status?: BadgeType;
+    sprintAppearance: number;
+    audioAppearance?: number;
 }
 
 export interface IUser {
@@ -39,13 +41,13 @@ export interface IUserWord {
         // word: string;
         // textMeaning: string;
         // textExample: string;
-        wasInGame: boolean;
+        sprintAppearances: number;
+        audioAppearances?: number;
         rightAnswers: number;
     };
 }
 
-export interface IUserWordResp {
-    difficulty: string;
+export interface IUserWordResp extends IUserWord {
     id: string;
     wordId: string;
 }

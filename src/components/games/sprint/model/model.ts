@@ -86,71 +86,146 @@ export class SprintModel extends ApiService {
         let learnedWords = 0;
         const rightProcent = (data.right.length / (data.right.length + data.wrong.length)) * 100;
 
-        data.right.forEach(async (word: IGameWord) => {
-            try {
-                const wordU = (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
+        const testPromises = data.right.map((word) =>
+            this.getUserWordById(user.id, word.id, user.token).then((wordU) => {
                 if (wordU.optional) {
-                    if (wordU.optional.rightAnswers < 3) {
+                    if (wordU.optional.rightAnswers === 3) {
                         const answerCount = wordU.optional.rightAnswers + 1;
+                        const gameCount = wordU.optional.sprintAppearances + 1;
                         this.updateUserWord(
                             user.id,
-                            { difficulty: 'hard', optional: { rightAnswers: answerCount, wasInGame: true } },
+                            {
+                                difficulty: 'hard',
+                                optional: { rightAnswers: answerCount, sprintAppearances: gameCount },
+                            },
                             word.id,
                             user.token
-                        ).then((res) => console.log(res));
+                        ).then(() => console.log('updated'));
                     } else {
+                        const gameCount = wordU.optional.sprintAppearances + 1;
                         this.updateUserWord(
                             user.id,
-                            { difficulty: 'learned', optional: { rightAnswers: 0, wasInGame: true } },
+                            { difficulty: 'learned', optional: { rightAnswers: 3, sprintAppearances: gameCount } },
                             word.id,
                             user.token
-                        ).then((res) => console.log(res));
+                        ).then(() => console.log('add to learned'));
                         learnedWords++;
                     }
                 } else {
                     this.updateUserWord(
                         user.id,
-                        { difficulty: 'process', optional: { rightAnswers: 1, wasInGame: true } },
+                        { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
                         word.id,
                         user.token
-                    );
+                    ).catch((error) => {
+                        if ((error as Error).message === '404') {
+                            this.createUserWord(
+                                user.id,
+                                word.id,
+                                { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
+                                user.token
+                            ).then(() => console.log('new word!!'));
+                            newWords++;
+                        }
+                    });
                 }
-            } catch (error) {
-                if ((error as Error).message === '404') {
-                    await this.createUserWord(
-                        user.id,
-                        word.id,
-                        { difficulty: 'process', optional: { rightAnswers: 0, wasInGame: true } },
-                        user.token
-                    );
-                    newWords++;
-                }
-            }
-        });
+            })
+        );
+        Promise.allSettled(testPromises).then(() =>
+            this.handleStatsUpdate(
+                { id: user.id, token: user.token },
+                { newWords: newWords, learnedWords: learnedWords, rightProc: rightProcent, longestRow: data.longestRow }
+            )
+        );
+
+        // data.right.forEach(async (word: IGameWord) => {
+        //     try {
+        //         const wordU = (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
+        //         if (wordU.optional) {
+        //             if (wordU.optional.rightAnswers === 3) {
+        //                 const answerCount = wordU.optional.rightAnswers + 1;
+        //                 const gameCount = wordU.optional.sprintAppearances + 1;
+        //                 this.updateUserWord(
+        //                     user.id,
+        //                     {
+        //                         difficulty: 'hard',
+        //                         optional: { rightAnswers: answerCount, sprintAppearances: gameCount },
+        //                     },
+        //                     word.id,
+        //                     user.token
+        //                 ).then(() => console.log('updated'));
+        //             } else {
+        //                 const gameCount = wordU.optional.sprintAppearances + 1;
+        //                 this.updateUserWord(
+        //                     user.id,
+        //                     { difficulty: 'learned', optional: { rightAnswers: 3, sprintAppearances: gameCount } },
+        //                     word.id,
+        //                     user.token
+        //                 ).then(() => console.log('add to learned'));
+        //                 learnedWords++;
+        //             }
+        //         } else {
+        //             this.updateUserWord(
+        //                 user.id,
+        //                 { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
+        //                 word.id,
+        //                 user.token
+        //             );
+        //         }
+        //     } catch (error) {
+        //         if ((error as Error).message === '404') {
+        //             await this.createUserWord(
+        //                 user.id,
+        //                 word.id,
+        //                 { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
+        //                 user.token
+        //             ).then(() => console.log('new word!!'));
+        //             newWords++;
+        //         }
+        //     }
+        // });
+
         data.wrong.forEach(async (word: IGameWord) => {
             try {
-                (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
-                this.updateUserWord(
-                    user.id,
-                    { difficulty: 'hard', optional: { rightAnswers: 0, wasInGame: true } },
-                    word.id,
-                    user.token
-                ).then((res) => console.log(res));
+                const wordU = (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
+                if (wordU.optional) {
+                    const gameCount = wordU.optional.sprintAppearances + 1;
+                    this.updateUserWord(
+                        user.id,
+                        {
+                            difficulty: 'hard',
+                            optional: { rightAnswers: 0, sprintAppearances: gameCount },
+                        },
+                        word.id,
+                        user.token
+                    ).then(() => console.log('hard again'));
+                } else {
+                    this.updateUserWord(
+                        user.id,
+                        { difficulty: 'hard', optional: { rightAnswers: 0, sprintAppearances: 1 } },
+                        word.id,
+                        user.token
+                    ).then(() => console.log('add to hard'));
+                }
             } catch (error) {
                 if ((error as Error).message === '404') {
                     await this.createUserWord(
                         user.id,
                         word.id,
-                        { difficulty: 'hard', optional: { rightAnswers: 0, wasInGame: true } },
+                        { difficulty: 'hard', optional: { rightAnswers: 0, sprintAppearances: 1 } },
                         user.token
-                    );
+                    ).then(() => console.log('new word!! but hard'));
                     newWords++;
                 }
             }
         });
+        // this.handleStatsUpdate(
+        //     { id: user.id, token: user.token },
+        //     { newWords: newWords, learnedWords: learnedWords, rightProc: rightProcent, longestRow: data.longestRow }
+        // );
     }
 
-    async handeStatsUpdate(
+    async handleStatsUpdate(
         user: { id: string; token: string },
         results: { newWords: number; learnedWords: number; rightProc: number; longestRow: number }
     ) {
@@ -166,23 +241,27 @@ export class SprintModel extends ApiService {
                 userStat.longerSeriaOfAnswersSprint > results.longestRow
                     ? userStat.longerSeriaOfAnswersSprint
                     : results.longestRow;
-            super.putUserStatistics(user.id, user.token, {
-                learnedWords: learnedWordsUpd,
-                optional: {
-                    newLearnedWordSprint: newWords,
-                    percentCorrectOfAnswersSprint: percentCorrectOfAnswersSprintUpd,
-                    longerSeriaOfAnswersSprint: longerSeriaOfAnswersSprintUpd,
-                },
-            });
+            super
+                .putUserStatistics(user.id, user.token, {
+                    learnedWords: learnedWordsUpd,
+                    optional: {
+                        newLearnedWordSprint: newWords,
+                        percentCorrectOfAnswersSprint: percentCorrectOfAnswersSprintUpd,
+                        longerSeriaOfAnswersSprint: longerSeriaOfAnswersSprintUpd,
+                    },
+                })
+                .then((data) => console.log('user stat updated', data));
         } catch {
-            super.putUserStatistics(user.id, user.token, {
-                learnedWords: results.learnedWords,
-                optional: {
-                    newLearnedWordSprint: results.newWords,
-                    percentCorrectOfAnswersSprint: results.rightProc,
-                    longerSeriaOfAnswersSprint: results.longestRow,
-                },
-            });
+            super
+                .putUserStatistics(user.id, user.token, {
+                    learnedWords: results.learnedWords,
+                    optional: {
+                        newLearnedWordSprint: results.newWords,
+                        percentCorrectOfAnswersSprint: results.rightProc,
+                        longerSeriaOfAnswersSprint: results.longestRow,
+                    },
+                })
+                .then((data) => console.log('user stat created', data));
         }
     }
 }
