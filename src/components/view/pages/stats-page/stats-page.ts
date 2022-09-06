@@ -13,13 +13,15 @@ export default class StatsPage extends Page {
     public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
         if (data) {
-            const learnedWords = 10;
-            const correctAnswerPercent = 21;
+            console.log(data.optional.newWordsPerDay);
+
+            const learnedWords = data.learnedWords;
+            const correctAnswerPercent = data.optional.percentCorrectOfAnswersSprint || 0;
             this.createStatsForToday(learnedWords, correctAnswerPercent);
 
-            const sprintLearnedWords = 5;
-            const sprintCorrectAnswerPercent = 12;
-            const longestSeries = 6;
+            const sprintLearnedWords = data.optional.newLearnedWordSprint || 0;
+            const sprintCorrectAnswerPercent = data.optional.percentCorrectOfAnswersSprint || 0;
+            const sprintLongestSeries = data.optional.longerSeriaOfAnswersSprint || 0;
 
             const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
             this.createGameStats(
@@ -27,14 +29,19 @@ export default class StatsPage extends Page {
                 'Sprint',
                 sprintLearnedWords,
                 sprintCorrectAnswerPercent,
-                longestSeries
+                sprintLongestSeries
             );
+
+            const audioLearnedWords = 0;
+            const audioCorrectAnswerPercent = data.optional.percentCorrectOfAnswersAudio || 0;
+            const audioLongestSeries = data.optional.longerSeriaOfAnswersAudio || 0;
+
             this.createGameStats(
                 gameCardsContainer,
-                'Pip',
-                sprintLearnedWords,
-                sprintCorrectAnswerPercent,
-                longestSeries
+                'Audio',
+                audioLearnedWords,
+                audioCorrectAnswerPercent,
+                audioLongestSeries
             );
 
             new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
