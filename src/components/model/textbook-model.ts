@@ -19,7 +19,16 @@ export default class TextbookModel extends ApiService {
             // if (!crossWords.length) return data;
             return data.reduce((acc: IWord[], curr: IWord) => {
                 userWords.forEach((word: IUserWordResp) => {
-                    if (curr.id === word.wordId) Object.assign(curr, { status: word.difficulty });
+                    if (curr.id === word.wordId) {
+                        console.log(word, !!word.optional);
+                        word.optional
+                            ? Object.assign(curr, {
+                                  status: word.difficulty,
+                                  sprintAppearance: word.optional.sprintAppearances,
+                              })
+                            : Object.assign(curr, { status: word.difficulty });
+                        console.log(curr);
+                    }
                 });
                 acc.push(curr);
                 return acc;
@@ -50,7 +59,7 @@ export default class TextbookModel extends ApiService {
         const words: IWord[] = [];
         console.log(userWords);
         for (const item of userWords) {
-            if ((item.difficulty === 'hard')) {
+            if (item.difficulty === 'hard') {
                 const word = (await super.getWordsById(item.wordId)) as IWord;
                 Object.assign(word, { status: item.difficulty });
                 words.push(word);
