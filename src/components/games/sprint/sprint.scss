@@ -11,7 +11,7 @@ body {
 }
 
 .sprint-game {
-  background:	#eaac8b;
+  background:	#404756;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -39,14 +39,18 @@ body {
   cursor: pointer;
   width: 32px;
   height: 32px;
-  fill: #6d597a;
+  fill: $colorLink4;
+}
+
+.sprint-game__fullscreen {
+  display: flex;
 }
 
 .sprint-game__fullscreen svg {
   cursor: pointer;
   width: 36px;
   height: 36px;
-  fill: #6d597a;
+  fill: $colorLink4;
 }
 
 .sprint-game__sound {
@@ -61,14 +65,16 @@ body {
 }
 
 .sprint-game__sound_active svg {
-  fill: #6d597a;
+  fill: $colorLink4;
 }
 
 // welcome
 
 .sprint-game__content {
+  border: 1em solid $colorLink4;
+  border-radius: 60px;
   width: 50vw;
-  height: 60vh;
+  height: 50vh;
   margin-left: auto;
   margin-right: auto;
   margin-top: calc(100vh - 93Vh);
@@ -81,11 +87,11 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  color: #fff;
+  color: #000000;
   animation-name: test;
   animation-duration: 1.5s;
   animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
-  background: 	#6d597a;
+  background: #fff;
   box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
 }
 
@@ -99,23 +105,25 @@ body {
   display: block;
   text-align: left;
   font-size: 1.2rem;
-  color: #fff;
+  color: #000000;
 }
 
 .content__controls {
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 40px;
+  gap: 20px;
 }
 
 .content__start-btn {
   color: #fff;
   cursor: pointer;
-  min-width: 150px;
+  min-width: 180px;
   background: none;
-  background-color: #b56576;
-  border-color: #b56576;
+  background-color: $colorLink4;
+  border-color: $colorLink4;
   outline: none;
+  border-radius: 25px;
 }
 
 .content__start-btn:hover {
@@ -165,12 +173,12 @@ body {
 }
 
 .content__word_eng {
-  color:#e56b6f;
+  color:#FA9490;
   font-size: 3rem;
 }
 
 .content__word_rus {
-  color: #eaac8b;
+  color: $color-gray-dark;
 }
 
 .content__buttons {
@@ -186,9 +194,10 @@ body {
   cursor: pointer;
   min-width: 150px;
   background: none;
-  background-color: #b56576;
+  background-color: $color-gray-dark;
   border-color: #b56576;
   outline: none;
+  border-radius: 25px;
 }
 
 .content__answer-button:hover {
@@ -196,11 +205,11 @@ body {
 }
 
 .content__answer-button_true {
-  background-color: #1b6725;
+  background-color: #FA9490;
 }
 
 .content__answer-button_true:hover {
-  background-color: #31873d;
+  background-color: $color-gray-dark;
 }
 
 // results
@@ -273,12 +282,115 @@ body {
   cursor: pointer;
   min-width: 150px;
   background: none;
-  background-color: #b56576;
-  border-color: #b56576;
+  background-color: $colorLink4;
+  border-color: $colorLink4;
   outline: none;
 }
 
 .button__again:hover,
 .button__back:hover {
   background-color: #e56b6f;
+}
+
+@media screen and (max-width: 1024px) {  
+
+  .sprint-game__content {
+    width: 60vw;
+    height: 50vh;
+  }
+
+  .content__start-btn {
+    min-height: 45px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sprint-game__content {
+    width: 70vw;
+    height: 50vh;
+}
+.content__controls {
+  margin-top: 30px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content__description {
+  font-size: 1.3rem;
+}
+
+.content__description span:nth-child(2) {
+  font-size: 1.1rem;
+}
+
+.content__description span:nth-child(2) {
+  margin-top: 10px;
+}
+
+.content__buttons {
+  margin-top: 100px;
+  max-width: 315px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__result-item {
+  font-size: 1.3rem;
+}
+.content__title {
+  font-size: 2rem;
+}
+
+.content__results {
+  max-height: 60%;
+}
+
+.button__again, 
+.button__back {
+  min-width: 120px;
+}
+
+
+}
+
+@media screen and (max-width: 480px) {
+  .content__description {
+    font-size: 1.2rem;
+  }
+  
+  .content__description span:nth-child(2) {
+    font-size: 1rem;
+  }
+
+  .sprint-game__content {
+    width: 70vw;
+    height: 60vh;
+}
+.content__controls {
+  margin-top: 80px;
+  flex-direction: column;
+  gap: 10px;
+}
+.content__buttons {
+  flex-direction: column;
+  gap: 30px
+}
+
+.content__answer-button {
+  min-width: none;
+}
+
+.content__buttons {
+  width: 210px;
+}
+
+.button__block {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.content__result-item {
+  font-size: 0.9rem;
+}
 }

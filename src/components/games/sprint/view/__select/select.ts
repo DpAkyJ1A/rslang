@@ -4,9 +4,9 @@ import { levelList } from '../../../../view/pages/common/levels/levels';
 export const createSelect = (group?: number) => {
     const groupToShow = group ? group : 1;
     const wrapper = new Control(null, 'div', 'content__select select');
+    const list = new Control(wrapper.node, 'div', 'select__list select__list_hidden');
     const placeholder = new Control(wrapper.node, 'div', 'select__placeholder', `${levelList[groupToShow]}`);
     placeholder.node.setAttribute('data-group', `${groupToShow}`);
-    const list = new Control(wrapper.node, 'div', 'select__list select__list_hidden');
     for (const level of Object.keys(levelList)) {
         const item = new Control(list.node, 'div', 'select__item', `${levelList[level]}`);
         item.node.setAttribute('data-group', `${level}`);

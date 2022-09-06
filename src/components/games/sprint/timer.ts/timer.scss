@@ -25,7 +25,7 @@
 }
 
 .timer__display {
-  color: #fff;
+  color: $color-gray-dark;
   font-size: 1.5rem;
 }
 
@@ -51,3 +51,16 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+  .timer {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .timer {
+    top: -130px;
+    left: calc(50% - 60px);
+  }
+}
