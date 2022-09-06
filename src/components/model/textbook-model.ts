@@ -68,7 +68,13 @@ export default class TextbookModel extends ApiService {
     }
 
     async getUserStats(state: IState) {
-        const userStats = (await super.getUserStatistics(state.user.id, state.user.token)) as IStatistics;
-        console.log(userStats);
+        let stats: IStatistics | null;
+        try {
+            const userStats = (await super.getUserStatistics(state.user.id, state.user.token)) as IStatistics;
+            stats = userStats;
+        } catch (e) {
+            stats = null;
+        }
+        return stats;
     }
 }

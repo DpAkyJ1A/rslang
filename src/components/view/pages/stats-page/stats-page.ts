@@ -2,6 +2,7 @@ import Control from 'control';
 import Page from '../page';
 import { Chart, registerables } from 'chart.js';
 import { IState } from 'components/controller/controller';
+import { IStatistics } from '../../../api/interfaces';
 Chart.register(...registerables);
 
 export default class StatsPage extends Page {
@@ -9,48 +10,63 @@ export default class StatsPage extends Page {
         super('stats-page');
     }
 
-    public render(container: HTMLElement) {
+    public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
+        if (data) {
+            const learnedWords = 10;
+            const correctAnswerPercent = 21;
+            this.createStatsForToday(learnedWords, correctAnswerPercent);
 
-        const learnedWords = 10;
-        const correctAnswerPercent = 21;
-        this.createStatsForToday(learnedWords, correctAnswerPercent);
+            const sprintLearnedWords = 5;
+            const sprintCorrectAnswerPercent = 12;
+            const longestSeries = 6;
 
-        const sprintLearnedWords = 5;
-        const sprintCorrectAnswerPercent = 12;
-        const longestSeries = 6;
+            const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
+            this.createGameStats(
+                gameCardsContainer,
+                'Sprint',
+                sprintLearnedWords,
+                sprintCorrectAnswerPercent,
+                longestSeries
+            );
+            this.createGameStats(
+                gameCardsContainer,
+                'Pip',
+                sprintLearnedWords,
+                sprintCorrectAnswerPercent,
+                longestSeries
+            );
 
-        const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
-        this.createGameStats(
-            gameCardsContainer,
-            'Sprint',
-            sprintLearnedWords,
-            sprintCorrectAnswerPercent,
-            longestSeries
-        );
-        this.createGameStats(gameCardsContainer, 'Pip', sprintLearnedWords, sprintCorrectAnswerPercent, longestSeries);
+            new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
+            const chartsContainer = new Control(this.container, 'div', 'charts-container').node;
 
-        new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
-        const chartsContainer = new Control(this.container, 'div', 'charts-container').node;
+            const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
+            let header = 'New words per day';
+            const datesLabels = ['21.08', '26.08', '27.08', '31.08', '02.09', '03.09'];
+            const wordsNumber = [12, 5, 13, 21, 3, 8];
+            const fontColor = '#fff';
+            let borderColor = 'rgb(75, 192, 192)';
 
-        const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
-        let header = 'New words per day';
-        const datesLabels = ['21.08', '26.08', '27.08', '31.08', '02.09', '03.09'];
-        const wordsNumber = [12, 5, 13, 21, 3, 8];
-        const fontColor = '#fff';
-        let borderColor = 'rgb(75, 192, 192)';
+            this.createLongTermStats(chart1Container, header, datesLabels, wordsNumber, fontColor, borderColor);
 
-        this.createLongTermStats(chart1Container, header, datesLabels, wordsNumber, fontColor, borderColor);
+            const chart2Container = new Control(chartsContainer, 'div', 'chart2-container').node;
+            header = 'Number of new words';
+            const wordsNumber2 = [wordsNumber[0]];
+            for (let i = 1; i < wordsNumber.length; i++) {
+                wordsNumber2[i] = wordsNumber2[i - 1] + wordsNumber[i];
+            }
+            borderColor = '#ff4d89';
 
-        const chart2Container = new Control(chartsContainer, 'div', 'chart2-container').node;
-        header = 'Number of new words';
-        const wordsNumber2 = [wordsNumber[0]];
-        for (let i = 1; i < wordsNumber.length; i++) {
-            wordsNumber2[i] = wordsNumber2[i - 1] + wordsNumber[i];
+            this.createLongTermStats(chart2Container, header, datesLabels, wordsNumber2, fontColor, borderColor);
+        } else {
+            new Control(this.container, 'div', 'dictionary-page__error').node.innerHTML = `
+            Unfortunately there are no stats yet<br>
+            To start tracking your progress, try to play any game
+            <p class="card__translation">
+            К сожалению статистики пока нет<br>
+            Чтобы начать отслеживать свой прогресс, попробуй сыграть в игру 
+            </p>`;
         }
-        borderColor = '#ff4d89';
-
-        this.createLongTermStats(chart2Container, header, datesLabels, wordsNumber2, fontColor, borderColor);
 
         super.render(container);
     }

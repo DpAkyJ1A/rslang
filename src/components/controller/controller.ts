@@ -1,4 +1,4 @@
-import { IWord, IUserWordResp } from '../api/interfaces';
+import { IWord, IUserWordResp, IStatistics } from '../api/interfaces';
 import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
 import Loader from '../view/pages/common/loader/loader';
@@ -8,11 +8,13 @@ export default class Controller extends TextbookModel {
     state: IState;
     drawView;
     drawNoAccessView;
-    constructor(state: IState, cbView: TCallback, noAccessView: T2Callback) {
+    drawStatsView;
+    constructor(state: IState, cbView: TCallback, noAccessView: T2Callback, drawStats: T3Callback) {
         super();
         this.state = state;
         this.drawView = cbView;
         this.drawNoAccessView = noAccessView;
+        this.drawStatsView = drawStats;
         this.handleWordsToogle = this.handleWordsToogle.bind(this);
         document.addEventListener('event', () => {
             this.handleLocation();
@@ -84,7 +86,11 @@ export default class Controller extends TextbookModel {
             }
         } else if (view === 'stats') {
             if (this.state.user.isAuth) {
-                super.getUserStats(this.state);
+                const loader = new Loader(document.body);
+                super.getUserStats(this.state).then((data) => {
+                    loader.destroy();
+                    this.drawStatsView(this.state, data);
+                });
                 this.drawView(this.state);
             } else {
                 this.drawNoAccessView('stats');
@@ -115,4 +121,8 @@ type TCallback = {
 
 type T2Callback = {
     (name: string): void;
+};
+
+type T3Callback = {
+    (props: IState, data?: IStatistics | null): void;
 };

@@ -11,7 +11,8 @@ export class App {
         this.controller = new Controller(
             state,
             (state, data?) => this.view.drawCurrentView(state, data),
-            (name) => this.view.drawNoAccessPage(name)
+            (name) => this.view.drawNoAccessPage(name),
+            (state, data?) => this.view.drawStatsPage(state, data)
         );
     }
 
