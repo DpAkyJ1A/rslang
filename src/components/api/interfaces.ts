@@ -61,16 +61,22 @@ export interface ISettings {
 
 export interface IStatistics {
     learnedWords: number;
-    optional: {
-        newLearnedWordSprint?: number;
-        newWordsPerDaySprint?: number;
-        percentCorrectOfAnswersSprint?: number;
-        longerSeriaOfAnswersSprint?: number;
-        newWordsPerDayAudio?: number;
-        percentCorrectOfAnswersAudio?: number;
-        longerSeriaOfAnswersAudio?: number;
-        newWordsPerDay?: number;
-        countLearnedWordsPerDay?: number;
-        percentCorrectOfAnswersPerDay?: number;
-    };
+    optional: IOptionalStats;
+}
+
+export interface IStatsPerDay {
+    date: string;
+    stat: number;
+}
+
+export interface IGameStats {
+    learnedWords: IStatsPerDay[];
+    numberOfQuestions: IStatsPerDay[];
+    numberOfCorrectAnswers: IStatsPerDay[];
+    longerSeriesOfAnswers: IStatsPerDay[];
+}
+
+export interface IOptionalStats {
+    sprint?: IGameStats;
+    audio?: IGameStats;
 }
