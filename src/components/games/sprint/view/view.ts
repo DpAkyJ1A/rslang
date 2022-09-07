@@ -28,7 +28,6 @@ export default class SprintView {
     }
 
     toggleFullscreen() {
-        console.log(document.fullscreenElement);
         if (!document.fullscreenElement) {
             this.wrapper.node.requestFullscreen();
         } else {
