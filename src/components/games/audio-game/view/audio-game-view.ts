@@ -54,7 +54,7 @@ export default class AudioView {
         const gameDescr = new Control(descr.node, 'span');
         const controlDescr = new Control(descr.node, 'span');
         gameDescr.node.innerHTML = `
-            "Аудиовызов" - это оччень крутая штука, описание нужно поискать.
+            "Аудиовызов" - это очень крутая штука, описание нужно поискать.
         `;
         controlDescr.node.innerHTML = `
                 <br>- Используйте мышь, чтобы выбрать.
@@ -94,7 +94,8 @@ export default class AudioView {
         const audioSource = new Control(audioIcon.node, 'audio');
         (audioSource.node as HTMLAudioElement).src = `${baseUrl}${gameWord.audio}`;
         audioIcon.node.onclick = this.playAnswer;
-        new Control(this.wrapper.content.node, 'h3', 'content__translate game-hidden', `${gameWord.wordTranslate}`);
+        new Control(this.wrapper.content.node, 'h3', 'content__translate_ru game-hidden', `${gameWord.wordTranslate}`);
+        new Control(this.wrapper.content.node, 'h3', 'content__translate_en game-hidden', `${gameWord.word}`);
         const wordImg = new Control(this.wrapper.content.node, 'div', 'content__img game-hidden');
         wordImg.node.innerHTML = `
             <img src="${baseUrl}${gameWord.img}" alt="${gameWord.wordTranslate}"></img>
@@ -108,7 +109,8 @@ export default class AudioView {
         const dismissBtn = new Control(
             this.wrapper.content.node,
             'button',
-            'content__answers-btn content__answers-btn_dismiss'
+            'content__answers-btn content__answers-btn_dismiss',
+            'пропустить'
         );
         dismissBtn.node.dataset['answer'] = 'dismiss';
         dismissBtn.node.onclick = this.fireAnswerClick;
@@ -170,6 +172,9 @@ export default class AudioView {
 
     closeGame = () => {
         this.wrapper.destroy();
+        (document.querySelector('.games-page')?.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+            node.style.display = 'flex';
+        })
     };
 
     restartGame() {

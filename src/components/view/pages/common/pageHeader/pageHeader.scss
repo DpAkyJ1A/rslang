@@ -7,7 +7,7 @@
   min-height: 50px;
   width: 100%;
   @include media-mobile{
-    flex-direction: column;
+    margin-left: 1em;
     margin-bottom: 20px;
   }
 }

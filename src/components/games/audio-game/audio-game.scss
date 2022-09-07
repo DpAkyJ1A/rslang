@@ -9,10 +9,15 @@
 }
 
 .audio-game__top-bar {
-  padding: 40px;
+  flex-direction: row-reverse;
+  padding: 18px;
+  text-align: right;
   display: flex;
-  flex-direction: column;
-  text-align: end;
+  justify-content: space-between;
+  align-items: center;
+  @include media-tablet {
+    padding: 8px;
+  }
 }
 
 .audio-game__close svg {
@@ -24,6 +29,22 @@
 
 .game-hidden {
   display: none;
+}
+.content__translate_ru {
+  color: #49769d;
+  margin: .5em;
+  text-transform: uppercase;
+  @include media-tablet {
+    margin: .2em;
+  }
+}
+.content__translate_en {
+  color: #FFCD93;
+  margin: .5em;
+  text-transform: uppercase;
+  @include media-tablet {
+    margin: .2em;
+  }
 }
 
 .audio-game__fullscreen svg {
@@ -38,23 +59,28 @@
 }
 
 .audio-game__content {
-  border: 1em solid $colorLink4;
-  border-radius: 60px;
-  width: 50vw;
-  height: 50vh;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: calc(100vh - 93Vh);
+  border: 1em solid #FA9490;
+    border-radius: 60px;
+    width: 50vw;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    @include media-tablet {
+      width: 90vw;
+    max-height: 90vh;
+    padding: 10px;
+    padding-top: 20vh;
+    }
 }
 
-.content {
+.content_audio {
   padding: 15px 25px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  color: #000000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #000000;
   animation-name: test;
   animation-duration: 1.5s;
   animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
@@ -63,21 +89,90 @@
 }
 
 .content__audio-icon svg {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   fill: $colorLink4;
+  cursor: pointer;
 }
-
+.content__audio-icon svg:hover {
+  fill: #404756;
+}
 .content__audio-icon {
   position: absolute;
   top: 45px;
   left: 45px;
+  @include media-mobile {
+    top: 43px;
+    left: 13px;
+  }
 }
 
 .content__img img {
+  width: 200px;
+  height: auto;
   border-radius: 25px;
+  @include media-mobile {
+    width: 150px;
+  }
 }
 
 .audio-game .content__success-list {
   margin-bottom: 10px;
+}
+.content__answers {
+  display: flex;
+    gap: 0.5em;
+    margin: 2em 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    @include media-tablet {
+      gap: 10px;
+    }
+}
+.content__answers-btn {
+padding: 10px 15px;
+color: #fff;
+cursor: pointer;
+min-width: 150px;
+background: none;
+background-color: #FA9490;
+border-color: #b56576;
+outline: none;
+border-radius: 25px;
+}
+.content__answers-btn:hover {
+  background-color: #404756;
+}
+
+.content__answers-btn_dismiss {
+  background-color: #404756;
+  margin-bottom: 1em;
+}
+.content__answers-btn_dismiss:hover { 
+  background-color: #FA9490;
+}
+
+@media screen and (max-width: 1200px) {  
+
+  .audio-game__content {
+    width: 85vw;
+    height: fit-content;
+  }
+  .content__answers {
+    justify-content: center;
+    margin: 1em 0;
+    gap: 15px;
+  }
+  .content__answers-btn_dismiss {
+    margin-bottom: 1em;
+  }
+}
+.content__results {
+  @include media-mobile {
+    margin-bottom: 15px;
+    color: #000000;
+    background-color: #fff;
+    min-width: 80%;
+    overflow-y: scroll;
+  }
 }

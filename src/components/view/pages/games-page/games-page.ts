@@ -34,6 +34,9 @@ export default class GamesPage extends Page {
             sprint.start();
         };
         btnAudio.node.onclick = () => {
+            (this.container.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+                node.style.display = 'none';
+            });
             const audio = new AudioGame(SprintGameLaunchMode.sideBar, user);
             audio.start(this.container);
         };
