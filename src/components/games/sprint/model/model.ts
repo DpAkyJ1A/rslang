@@ -148,7 +148,6 @@ export class SprintModel extends ApiService {
             this.handleStatsUpdate(
                 { id: user.id, token: user.token },
                 {
-                    gameName: gameName,
                     learnedWords: learnedWords,
                     numberOfQuestions: numberOfQuestions,
                     numberOfCorrectAnswers: data.right.length,
@@ -247,7 +246,6 @@ export class SprintModel extends ApiService {
     async handleStatsUpdate(
         user: { id: string; token: string },
         results: {
-            gameName: 'sprint' | 'audio';
             learnedWords: number;
             numberOfQuestions: number;
             numberOfCorrectAnswers: number;
@@ -263,10 +261,10 @@ export class SprintModel extends ApiService {
                     learnedWords: 0,
                     optional: {
                         sprint: {
-                            learnedWords: [{ date: '', stat: 0 }],
-                            numberOfQuestions: [{ date: '', stat: 0 }],
-                            numberOfCorrectAnswers: [{ date: '', stat: 0 }],
-                            longerSeriesOfAnswers: [{ date: '', stat: 0 }],
+                            learnedWords: [{ date: currentDate, stat: 0 }],
+                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
                         },
                     },
                 };
@@ -280,10 +278,10 @@ export class SprintModel extends ApiService {
             }
 
             const newGameStats: IGameStats = {
-                learnedWords: [{ date: '', stat: 0 }],
-                numberOfQuestions: [{ date: '', stat: 0 }],
-                numberOfCorrectAnswers: [{ date: '', stat: 0 }],
-                longerSeriesOfAnswers: [{ date: '', stat: 0 }],
+                learnedWords: [{ date: currentDate, stat: 0 }],
+                numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
             };
             //Обновление выученных слов вообще
             const learnedWordsUpd = userStats.learnedWords || 0 + results.learnedWords;
@@ -351,8 +349,7 @@ export class SprintModel extends ApiService {
                     optional: {
                         sprint: newGameStats,
                     },
-                })
-                .then((data) => console.log('user stat updated', data));
+                });
         } catch (e) {
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
@@ -367,8 +364,7 @@ export class SprintModel extends ApiService {
                             longerSeriesOfAnswers: [{ date: currentDate, stat: results.longerSeriesOfAnswers }],
                         },
                     },
-                })
-                .then((data) => console.log('user stat created', data));
+                });
         }
     }
 }
