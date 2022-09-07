@@ -8,7 +8,7 @@ import StatsPage from './pages/stats-page/stats-page';
 import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
-import { IWord } from '../api/interfaces';
+import { IStatistics, IWord } from '../api/interfaces';
 // import SprintGame from '../games/sprint/sprint';
 // import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
@@ -81,6 +81,10 @@ export default class AppView {
     drawNoAccessPage(name: string) {
         this.main.node.innerHTML = ``;
         this.noAccessPage.render(this.main.node, name);
+    }
+    drawStatsPage(state: IState, data: IStatistics | null | undefined) {
+        this.main.node.innerHTML = ``;
+        this.statsPage.render(this.main.node, data);
     }
     drawAuthPage() {
         const auth = new AuthInit(this.main.node);

@@ -85,7 +85,7 @@ export default class SprintView {
             «Спринт» - это тренировка для повторения заученных слов из вашего словаря.
         `;
         controlDescr.node.innerHTML = `
-                <br>- Используйте мышь, чтобы выбрать.
+                - Используйте мышь, чтобы выбрать.
                 <br> - Используйте клавиши:<br>
                  - "s" для старта<br>
                  - "<" для выбора "true"<br>
@@ -190,6 +190,10 @@ export default class SprintView {
     }
 
     closeGame() {
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+            node.style.display = '';
+        });
         this.timer?.reset();
         this.wrapper.destroy();
     }

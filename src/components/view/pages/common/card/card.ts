@@ -76,13 +76,10 @@ export default class Card {
         }
 
         if (this.isAuth) {
-            console.log('im here2');
             const badge = createBadge(this.data.status || undefined);
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);
-            console.log(this.data.sprintAppearance);
             if (this.data.sprintAppearance) {
-                console.log('tcnm');
                 const counter = createWordGameCounterEl(this.data.sprintAppearance);
                 this.node.append(counter);
             }

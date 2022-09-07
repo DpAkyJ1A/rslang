@@ -5,6 +5,8 @@
   left: 15px;
   top: 15px;
   z-index: 10;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .timer__wrapper {
@@ -51,8 +53,10 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   .timer {
+    top: 5px;
+    left: 5px;
     width: 120px;
     height: 120px;
   }
@@ -60,7 +64,7 @@
 
 @media screen and (max-width: 768px) {
   .timer {
-    top: -130px;
+    top: 3vh;
     left: calc(50% - 60px);
   }
 }

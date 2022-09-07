@@ -26,6 +26,9 @@ export default class GamesPage extends Page {
         new Control(divGame2.node, 'h3', 'games__title', 'sprint');
         let sprint: SprintGame | null;
         btn.node.onclick = () => {
+            (this.container.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+                node.style.display = 'none';
+            });
             sprint = new SprintGame(SprintGameLaunchMode.sideBar, this.container, user, undefined);
             sprint.start();
         };
