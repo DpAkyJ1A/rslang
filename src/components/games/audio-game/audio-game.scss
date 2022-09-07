@@ -65,10 +65,15 @@
     min-height: 500px;
     margin-left: auto;
     margin-right: auto;
+    @include media-tablet {
+      width: 90vw;
+    max-height: 90vh;
+    padding: 10px;
+    padding-top: 20vh;
+    }
 }
 
 .content_audio {
-  width: fit-content;
   padding: 15px 25px;
     position: relative;
     display: flex;
@@ -82,13 +87,7 @@
   background: #fff;
   box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
 }
-.content__controls {
 
-  @include media-tablet {
-  flex-wrap: wrap;
-    gap: 10px;
-}
-}
 .content__audio-icon svg {
   width: 100px;
   height: 100px;
@@ -102,12 +101,19 @@
   position: absolute;
   top: 45px;
   left: 45px;
+  @include media-mobile {
+    top: 43px;
+    left: 13px;
+  }
 }
 
 .content__img img {
   width: 200px;
   height: auto;
   border-radius: 25px;
+  @include media-mobile {
+    width: 150px;
+  }
 }
 
 .audio-game .content__success-list {
@@ -118,6 +124,7 @@
     gap: 0.5em;
     margin: 2em 0;
     flex-wrap: wrap;
+    justify-content: center;
     @include media-tablet {
       gap: 10px;
     }
@@ -148,7 +155,7 @@ border-radius: 25px;
 @media screen and (max-width: 1200px) {  
 
   .audio-game__content {
-    width: 60vw;
+    width: 85vw;
     height: fit-content;
   }
   .content__answers {
@@ -158,5 +165,14 @@ border-radius: 25px;
   }
   .content__answers-btn_dismiss {
     margin-bottom: 1em;
+  }
+}
+.content__results {
+  @include media-mobile {
+    margin-bottom: 15px;
+    color: #000000;
+    background-color: #fff;
+    min-width: 80%;
+    overflow-y: scroll;
   }
 }
