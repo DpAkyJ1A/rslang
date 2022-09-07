@@ -95,7 +95,7 @@ export default class SprintController extends SprintModel {
     updateGameContentField(word?: IGameWord) {
         this.drawContent(this.state, word || undefined, this.gameState || undefined, this.gameResult);
         if (this.state.stage === 2 && this.state.user?.id)
-            super.updateDataForStats(this.state.user, this.gameState.score, this.gameResult);
+            super.updateDataForStats(this.state.user, 'sprint', this.gameState.score, this.gameResult);
     }
 
     async startGame(group?: number) {

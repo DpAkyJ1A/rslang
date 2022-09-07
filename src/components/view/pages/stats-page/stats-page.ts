@@ -13,15 +13,56 @@ export default class StatsPage extends Page {
     public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
         if (data) {
-            console.log(data.optional.newWordsPerDay);
+            // console.log(data)
+            const date = new Date();
+            const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
 
-            const learnedWords = data.learnedWords;
-            const correctAnswerPercent = data.optional.percentCorrectOfAnswersSprint || 0;
+            const sprintGameStats = data.optional.sprint;
+            let sprintNumberOfQuestions = 0;
+            let sprintNumberOfCorrectAnswers = 0;
+            let sprintCorrectAnswerPercent = 0;
+            let sprintLearnedWords = 0;
+            let sprintLongestSeries = 0;
+            if (currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date) {
+                sprintNumberOfQuestions =
+                    sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].stat || 0;
+                sprintNumberOfCorrectAnswers =
+                    sprintGameStats?.numberOfCorrectAnswers[sprintGameStats?.numberOfCorrectAnswers.length - 1].stat || 0;
+                sprintCorrectAnswerPercent =
+                    Math.round((sprintNumberOfCorrectAnswers / sprintNumberOfQuestions) * 100) || 0;
+                sprintLearnedWords =
+                    sprintGameStats?.learnedWords[sprintGameStats?.learnedWords.length - 1].stat || 0;
+                sprintLongestSeries =
+                    sprintGameStats?.longerSeriesOfAnswers[sprintGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
+            }
+
+            const audioGameStats = data.optional.audio;
+            let audioNumberOfQuestions = 0
+            let audioNumberOfCorrectAnswers = 0;
+            let audioCorrectAnswerPercent = 0;
+            let audioLearnedWords = 0;
+            let audioLongestSeries = 0;
+            if (currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date) { 
+                audioNumberOfQuestions =
+                    audioGameStats?.numberOfQuestions[audioGameStats?.numberOfQuestions.length - 1].stat || 0;
+                audioNumberOfCorrectAnswers =
+                    audioGameStats?.numberOfCorrectAnswers[audioGameStats?.numberOfCorrectAnswers.length - 1].stat || 0;
+                audioCorrectAnswerPercent =
+                    Math.round((audioNumberOfCorrectAnswers / audioNumberOfQuestions) * 100) || 0;
+                audioLearnedWords = audioGameStats?.learnedWords[audioGameStats?.learnedWords.length - 1].stat || 0;
+                audioLongestSeries =
+                    audioGameStats?.longerSeriesOfAnswers[audioGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
+            }
+
+            const learnedWords = sprintLearnedWords + audioLearnedWords;
+            const correctAnswerPercent =
+                Math.round(
+                    ((sprintNumberOfCorrectAnswers + audioNumberOfCorrectAnswers) /
+                        (sprintNumberOfQuestions + audioNumberOfQuestions)) *
+                        100
+                ) || 0;
+
             this.createStatsForToday(learnedWords, correctAnswerPercent);
-
-            const sprintLearnedWords = data.optional.newLearnedWordSprint || 0;
-            const sprintCorrectAnswerPercent = data.optional.percentCorrectOfAnswersSprint || 0;
-            const sprintLongestSeries = data.optional.longerSeriaOfAnswersSprint || 0;
 
             const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
             this.createGameStats(
@@ -31,10 +72,6 @@ export default class StatsPage extends Page {
                 sprintCorrectAnswerPercent,
                 sprintLongestSeries
             );
-
-            const audioLearnedWords = 0;
-            const audioCorrectAnswerPercent = data.optional.percentCorrectOfAnswersAudio || 0;
-            const audioLongestSeries = data.optional.longerSeriaOfAnswersAudio || 0;
 
             this.createGameStats(
                 gameCardsContainer,
@@ -49,8 +86,34 @@ export default class StatsPage extends Page {
 
             const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
             let header = 'New words per day';
-            const datesLabels = ['21.08', '26.08', '27.08', '31.08', '02.09', '03.09'];
-            const wordsNumber = [12, 5, 13, 21, 3, 8];
+
+            const lengthSprint = data.optional.sprint?.learnedWords.length || 0;
+            const lengthAudio = data.optional.audio?.learnedWords.length || 0;
+
+            const length = lengthSprint > lengthAudio ? lengthSprint : lengthAudio;
+            let datesLabels: string[] = [];
+
+            const sprintDatesLabels: string[] = [];
+            for (let i = 0; i < lengthSprint; i++) {
+                const temp = data.optional.sprint?.learnedWords[i].date || '';
+                sprintDatesLabels.push(temp);
+            }
+
+            const audioDatesLabels: string[] = [];
+            for (let i = 0; i < length; i++) {
+                const temp = data.optional.audio?.learnedWords[i].date || '';
+                audioDatesLabels.push(temp);
+            }
+            datesLabels.push(...sprintDatesLabels, ...audioDatesLabels);
+            datesLabels = Array.from(new Set(datesLabels));
+
+            const wordsNumber: number[] = [];
+            for (let i = 0; i < length; i++) {
+                const sprintWords = data.optional.sprint?.learnedWords[i].stat || 0;
+                const audioWords = data.optional.audio?.learnedWords[i].stat || 0;
+                wordsNumber[i] = sprintWords + audioWords;
+            }
+
             const fontColor = '#fff';
             let borderColor = 'rgb(75, 192, 192)';
 
@@ -149,6 +212,13 @@ export default class StatsPage extends Page {
         new Chart(chartCanvas as HTMLCanvasElement, {
             type: 'line',
             data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            },
         });
     }
 }

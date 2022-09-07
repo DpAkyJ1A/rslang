@@ -11,15 +11,18 @@ export default class AudioView {
     public wrapper: WrapperGamePage;
     constructor() {
         this.wrapper = new WrapperGamePage();
-        this.wrapper.fullScreenBtn.node.onclick = this.enableFullscreen;
+        this.toggleFullscreen = this.toggleFullscreen.bind(this);
+        this.wrapper.fullScreenBtn.node.onclick = this.toggleFullscreen;
         this.wrapper.closeBtn.node.onclick = this.closeGame;
     }
 
-    enableFullscreen = () => {
-        if (this.wrapper.node.requestFullscreen) {
+    toggleFullscreen() {
+        if (!document.fullscreenElement) {
             this.wrapper.node.requestFullscreen();
+        } else {
+            document.exitFullscreen();
         }
-    };
+    }
 
     drawWrapper(container: HTMLElement) {
         container.append(this.wrapper.node);

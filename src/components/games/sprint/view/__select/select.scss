@@ -17,9 +17,6 @@
   padding: 10px 15px;
   border: 2px solid $colorLink4;
   border-radius: 25px;
-  @include media-mobile{
-    width: 220px;
-  }
 }
 
 .select__list {
@@ -52,4 +49,10 @@
 
 .select__placeholder:hover {
   border-color: #e56b6f;
+}
+
+@media screen and (max-width: 480px) {
+  .select__placeholder{
+    width: 220px;
+  }
 }

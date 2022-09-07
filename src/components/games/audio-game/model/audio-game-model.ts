@@ -1,5 +1,12 @@
 import ApiService from '../../../api/api';
-import { IUserWord, IUserWordResp, IWord } from '../../../api/interfaces';
+import {
+    IStatistics,
+    IUserWord,
+    IUserWordResp,
+    IWord,
+    IStatsPerDay,
+    IGameStats,
+    IOptionalStats, } from '../../../api/interfaces';
 import { shuffleArray } from '../../../utils/shuffleArray';
 import { IGameResult, IGameWord } from '../../../games/sprint/types/index';
 
@@ -76,7 +83,7 @@ export class AudioGameModel extends ApiService {
     updateDataForStats(user: { id: string; token: string }, score: number, data: IGameResult) {
         let newWords = 0;
         let learnedWords = 0;
-        const rightProcent = (data.right.length / (data.right.length + data.wrong.length)) * 100;
+        const numberOfQuestions = data.right.length + data.wrong.length;
 
         const testPromises = data.right.map((word: IGameWord) =>
             this.getUserWordById(user.id, word.id, user.token).then((wordU) => {
@@ -126,7 +133,12 @@ export class AudioGameModel extends ApiService {
         Promise.allSettled(testPromises).then(() =>
             this.handleStatsUpdate(
                 { id: user.id, token: user.token },
-                { newWords: newWords, learnedWords: learnedWords, rightProc: rightProcent, longestRow: data.longestRow }
+                {
+                    learnedWords: learnedWords,
+                    numberOfQuestions: numberOfQuestions,
+                    numberOfCorrectAnswers: data.right.length,
+                    longerSeriesOfAnswers: data.longestRow
+                }
             )
         );
 
@@ -219,41 +231,126 @@ export class AudioGameModel extends ApiService {
 
     async handleStatsUpdate(
         user: { id: string; token: string },
-        results: { newWords: number; learnedWords: number; rightProc: number; longestRow: number }
+        results: {
+            learnedWords: number;
+            numberOfQuestions: number;
+            numberOfCorrectAnswers: number;
+            longerSeriesOfAnswers: number;
+        }
     ) {
         try {
-            const userStat = await super.getUserStatistics(user.id, user.token);
-            const learnedWordsUpd = userStat.learnedWords + results.learnedWords;
-            const newWords = (userStat.newWordsPerDaySprint = results.newWords);
-            const percentCorrectOfAnswersSprintUpd =
-                userStat.percentCorrectOfAnswersSprint > results.rightProc
-                    ? userStat.percentCorrectOfAnswersSprint
-                    : results.rightProc;
-            const longerSeriaOfAnswersSprintUpd =
-                userStat.longerSeriaOfAnswersSprint > results.longestRow
-                    ? userStat.longerSeriaOfAnswersSprint
-                    : results.longestRow;
+            const date = new Date();
+            const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
+            let userStats = (await super.getUserStatistics(user.id, user.token)) as IStatistics;
+            if (!userStats) {
+                userStats = {
+                    learnedWords: 0,
+                    optional: {
+                        audio: {
+                            learnedWords: [{ date: currentDate, stat: 0 }],
+                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+                        },
+                    },
+                };
+            }
+            // Выбираю игру
+            const userGameStats: IGameStats = userStats.optional.audio as IGameStats;
+
+            let userLastUpdDate = '';
+            if (userGameStats.numberOfQuestions) {
+                userLastUpdDate = userGameStats.numberOfQuestions[userGameStats.numberOfQuestions.length].date;
+            }
+
+            const newGameStats: IGameStats = {
+                learnedWords: [{ date: currentDate, stat: 0 }],
+                numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+            };
+            //Обновление выученных слов вообще
+            const learnedWordsUpd = userStats.learnedWords || 0 + results.learnedWords;
+            // Если дата последнего изменения сегодняшняя, обновляем данные
+            if (currentDate === userLastUpdDate) {
+                // Обновление колличества выученных слов в игре
+                const learnedWords = userGameStats.learnedWords as IStatsPerDay[];
+                const learnedWordsToday = learnedWords[learnedWords.length - 1].stat;
+                learnedWords[learnedWords.length - 1].stat = learnedWordsToday + results.learnedWords;
+                newGameStats.learnedWords = learnedWords;
+                // Обновление колличества заданных вопросов
+                const numberOfQuestions = userGameStats.numberOfQuestions as IStatsPerDay[];
+                const numberOfQuestionsToday = numberOfQuestions[numberOfQuestions.length - 1].stat;
+                numberOfQuestions[numberOfQuestions.length - 1].stat =
+                    numberOfQuestionsToday + results.numberOfQuestions;
+                newGameStats.numberOfQuestions = numberOfQuestions;
+                // Обновление колличества вопросов на которые был дан правильный ответ
+                const numberOfCorrectAnswers = userGameStats.numberOfCorrectAnswers as IStatsPerDay[];
+                const numberOfCorrectAnswersToday = numberOfCorrectAnswers[numberOfCorrectAnswers.length - 1].stat;
+                numberOfCorrectAnswers[numberOfCorrectAnswers.length - 1].stat =
+                    numberOfCorrectAnswersToday + results.numberOfCorrectAnswers;
+                newGameStats.numberOfCorrectAnswers = numberOfCorrectAnswers;
+                // Обновление самой длинной последовательности правильных ответов
+                const longerSeriesOfAnswers = userGameStats.longerSeriesOfAnswers as IStatsPerDay[];
+                const longerSeriesOfAnswersToday = longerSeriesOfAnswers[longerSeriesOfAnswers.length - 1].stat;
+                longerSeriesOfAnswers[longerSeriesOfAnswers.length - 1].stat =
+                    longerSeriesOfAnswersToday > results.longerSeriesOfAnswers
+                        ? longerSeriesOfAnswersToday
+                        : results.longerSeriesOfAnswers;
+                newGameStats.longerSeriesOfAnswers = longerSeriesOfAnswers;
+            }
+            // Если даты нет или она не совпадает с текущей, создаем новые обьекты типа IStatsPerDay с текущей датой
+            else {
+                // Обновление колличества выученных слов в игре
+                const learnedWords = userGameStats.learnedWords as IStatsPerDay[];
+                const learnedWordsToday = { date: currentDate, stat: results.learnedWords } as IStatsPerDay;
+                learnedWords.push(learnedWordsToday);
+                newGameStats.learnedWords = learnedWords;
+                // Обновление колличества заданных вопросов
+                const numberOfQuestions = userGameStats.numberOfQuestions as IStatsPerDay[];
+                const numberOfQuestionsToday = { date: currentDate, stat: results.numberOfQuestions } as IStatsPerDay;
+                numberOfQuestions.push(numberOfQuestionsToday);
+                newGameStats.numberOfQuestions = numberOfQuestions;
+                // Обновление колличества вопросов на которые был дан правильный ответ
+                const numberOfCorrectAnswers = userGameStats.numberOfCorrectAnswers as IStatsPerDay[];
+                const numberOfCorrectAnswersToday = {
+                    date: currentDate,
+                    stat: results.numberOfCorrectAnswers,
+                } as IStatsPerDay;
+                numberOfCorrectAnswers.push(numberOfCorrectAnswersToday);
+                newGameStats.numberOfCorrectAnswers = numberOfCorrectAnswers;
+                // Обновление самой длинной последовательности правильных ответов
+                const longerSeriesOfAnswers = userGameStats.longerSeriesOfAnswers as IStatsPerDay[];
+                const longerSeriesOfAnswersToday = {
+                    date: currentDate,
+                    stat: results.longerSeriesOfAnswers,
+                } as IStatsPerDay;
+                longerSeriesOfAnswers.push(longerSeriesOfAnswersToday);
+                newGameStats.longerSeriesOfAnswers = longerSeriesOfAnswers;
+            }
+
             super
                 .putUserStatistics(user.id, user.token, {
                     learnedWords: learnedWordsUpd,
                     optional: {
-                        newLearnedWordSprint: newWords,
-                        percentCorrectOfAnswersSprint: percentCorrectOfAnswersSprintUpd,
-                        longerSeriaOfAnswersSprint: longerSeriaOfAnswersSprintUpd,
+                        audio: newGameStats,
                     },
-                })
-                .then((data) => console.log('user stat updated', data));
-        } catch {
+                });
+        } catch (e) {
+            const date = new Date();
+            const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
             super
                 .putUserStatistics(user.id, user.token, {
-                    learnedWords: results.learnedWords,
+                    learnedWords: 0,
                     optional: {
-                        newLearnedWordSprint: results.newWords,
-                        percentCorrectOfAnswersSprint: results.rightProc,
-                        longerSeriaOfAnswersSprint: results.longestRow,
+                        audio: {
+                            learnedWords: [{ date: currentDate, stat: results.learnedWords }],
+                            numberOfQuestions: [{ date: currentDate, stat: results.numberOfQuestions }],
+                            numberOfCorrectAnswers: [{ date: currentDate, stat: results.numberOfCorrectAnswers }],
+                            longerSeriesOfAnswers: [{ date: currentDate, stat: results.longerSeriesOfAnswers }],
+                        },
                     },
-                })
-                .then((data) => console.log('user stat created', data));
+                });
         }
     }
 }
