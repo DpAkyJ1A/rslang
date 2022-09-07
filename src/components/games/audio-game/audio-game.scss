@@ -1,0 +1,83 @@
+.audio-game {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background:	#404756;
+}
+
+.audio-game__top-bar {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.audio-game__close svg {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  fill: $colorLink4;
+}
+
+.game-hidden {
+  display: none;
+}
+
+.audio-game__fullscreen svg {
+  transform: translateX(5px);
+}
+
+.audio-game__fullscreen svg {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  fill: $colorLink4;
+}
+
+.audio-game__content {
+  border: 1em solid $colorLink4;
+  border-radius: 60px;
+  width: 50vw;
+  height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: calc(100vh - 93Vh);
+}
+
+.content {
+  padding: 15px 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000000;
+  animation-name: test;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
+  background: #fff;
+  box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
+}
+
+.content__audio-icon svg {
+  width: 80px;
+  height: 80px;
+  fill: $colorLink4;
+}
+
+.content__audio-icon {
+  position: absolute;
+  top: 45px;
+  left: 45px;
+}
+
+.content__img img {
+  border-radius: 25px;
+}
+
+.audio-game .content__success-list {
+  margin-bottom: 10px;
+}

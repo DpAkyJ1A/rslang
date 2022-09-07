@@ -1,3 +1,5 @@
+import AudioGame from '../../../../games/audio-game/audio-game';
+import { AudioGameLaunchMode } from 'components/games/audio-game/types';
 import SprintGame from '../../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../../games/sprint/types/index';
 import Control from '../../../control';
@@ -26,7 +28,10 @@ export const createGameLinks = (group: number, page: number, user: { id: string;
         route(e);
         startGame(e, { group, page, user });
     };
-    // audioGame.node.onclick = startGame;
+    audioGame.node.onclick = (e: Event) => {
+        route(e);
+        startGame(e, { group, page, user });
+    };
     return wrapper.node;
 };
 
@@ -41,6 +46,10 @@ const startGame = (e: Event, props: { group: number; page: number; user: { id: s
         });
         sprint.start();
     } else {
-        // audiocall
+        const audio = new AudioGame(SprintGameLaunchMode.textbook, props.user, {
+            group: props.group,
+            page: props.page,
+        });
+        audio.start(container);
     }
 };
