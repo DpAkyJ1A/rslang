@@ -9,10 +9,15 @@
 }
 
 .audio-game__top-bar {
-  padding: 40px;
+  flex-direction: row-reverse;
+  padding: 18px;
+  text-align: right;
   display: flex;
-  flex-direction: column;
-  text-align: end;
+  justify-content: space-between;
+  align-items: center;
+  @include media-tablet {
+    padding: 8px;
+  }
 }
 
 .audio-game__close svg {
@@ -24,6 +29,22 @@
 
 .game-hidden {
   display: none;
+}
+.content__translate_ru {
+  color: #49769d;
+  margin: .5em;
+  text-transform: uppercase;
+  @include media-tablet {
+    margin: .2em;
+  }
+}
+.content__translate_en {
+  color: #FFCD93;
+  margin: .5em;
+  text-transform: uppercase;
+  @include media-tablet {
+    margin: .2em;
+  }
 }
 
 .audio-game__fullscreen svg {
@@ -38,36 +59,45 @@
 }
 
 .audio-game__content {
-  border: 1em solid $colorLink4;
-  border-radius: 60px;
-  width: 50vw;
-  height: 50vh;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: calc(100vh - 93Vh);
+  border: 1em solid #FA9490;
+    border-radius: 60px;
+    width: 50vw;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.content {
+.content_audio {
+  width: fit-content;
   padding: 15px 25px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  color: #000000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #000000;
   animation-name: test;
   animation-duration: 1.5s;
   animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
   background: #fff;
   box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
 }
+.content__controls {
 
-.content__audio-icon svg {
-  width: 80px;
-  height: 80px;
-  fill: $colorLink4;
+  @include media-tablet {
+  flex-wrap: wrap;
+    gap: 10px;
 }
-
+}
+.content__audio-icon svg {
+  width: 100px;
+  height: 100px;
+  fill: $colorLink4;
+  cursor: pointer;
+}
+.content__audio-icon svg:hover {
+  fill: #404756;
+}
 .content__audio-icon {
   position: absolute;
   top: 45px;
@@ -75,9 +105,58 @@
 }
 
 .content__img img {
+  width: 200px;
+  height: auto;
   border-radius: 25px;
 }
 
 .audio-game .content__success-list {
   margin-bottom: 10px;
+}
+.content__answers {
+  display: flex;
+    gap: 0.5em;
+    margin: 2em 0;
+    flex-wrap: wrap;
+    @include media-tablet {
+      gap: 10px;
+    }
+}
+.content__answers-btn {
+padding: 10px 15px;
+color: #fff;
+cursor: pointer;
+min-width: 150px;
+background: none;
+background-color: #FA9490;
+border-color: #b56576;
+outline: none;
+border-radius: 25px;
+}
+.content__answers-btn:hover {
+  background-color: #404756;
+}
+
+.content__answers-btn_dismiss {
+  background-color: #404756;
+  margin-bottom: 1em;
+}
+.content__answers-btn_dismiss:hover { 
+  background-color: #FA9490;
+}
+
+@media screen and (max-width: 1200px) {  
+
+  .audio-game__content {
+    width: 60vw;
+    height: fit-content;
+  }
+  .content__answers {
+    justify-content: center;
+    margin: 1em 0;
+    gap: 15px;
+  }
+  .content__answers-btn_dismiss {
+    margin-bottom: 1em;
+  }
 }
