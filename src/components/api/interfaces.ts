@@ -42,7 +42,7 @@ export interface IUserWord {
         // textMeaning: string;
         // textExample: string;
         sprintAppearances: number;
-        audioAppearances?: number;
+        audioAppearances: number;
         rightAnswers: number;
     };
 }

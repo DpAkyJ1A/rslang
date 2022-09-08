@@ -79,8 +79,8 @@ export default class Card {
             const badge = createBadge(this.data.status || undefined);
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);
-            if (this.data.sprintAppearance) {
-                const counter = createWordGameCounterEl(this.data.sprintAppearance);
+            if (this.data.sprintAppearance || this.data.audioAppearance) {
+                const counter = createWordGameCounterEl(this.data.sprintAppearance, this.data.audioAppearance);
                 this.node.append(counter);
             }
         }

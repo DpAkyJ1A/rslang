@@ -89,6 +89,7 @@ export default class Controller extends TextbookModel {
                 const loader = new Loader(document.body);
                 super.getUserStats(this.state).then((data) => {
                     loader.destroy();
+                    console.log(data);
                     this.drawStatsView(this.state, data);
                 });
                 this.drawView(this.state);
