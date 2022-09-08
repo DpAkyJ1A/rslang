@@ -164,6 +164,7 @@ export default class SprintController extends SprintModel {
                     break;
                 default:
             }
+            this.gameResult.longestRow = this.gameResult.currentRow;
             this.gameResult.right.push(data.word);
         } else {
             if (this.gameResult.currentRow > this.gameResult.longestRow) {

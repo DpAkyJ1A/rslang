@@ -107,6 +107,8 @@ export default class AudioGameController extends AudioGameModel {
 
     updateGameContentField(word?: IAudioGameWord) {
         this.view.drawContent(this.state.stage, this.state.mode, word, this.gameState, this.gameResult);
+        if (this.state.stage === AudioGameStages.results && this.state.user?.id)
+            super.updateDataForStats(this.state.user, 'sprint', this.gameState.score, this.gameResult);
     }
 
     playSound(answer: boolean) {
@@ -140,6 +142,7 @@ export default class AudioGameController extends AudioGameModel {
                     break;
                 default:
             }
+            this.gameResult.longestRow = this.gameResult.currentRow;
             this.gameResult.right.push(word);
         } else {
             if (this.gameResult.currentRow > this.gameResult.longestRow) {

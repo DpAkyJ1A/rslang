@@ -13,7 +13,6 @@ export default class StatsPage extends Page {
     public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
         if (data) {
-            // console.log(data)
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
 
@@ -23,26 +22,30 @@ export default class StatsPage extends Page {
             let sprintCorrectAnswerPercent = 0;
             let sprintLearnedWords = 0;
             let sprintLongestSeries = 0;
-            if (currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date) {
+            if (
+                currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date
+            ) {
                 sprintNumberOfQuestions =
                     sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].stat || 0;
                 sprintNumberOfCorrectAnswers =
-                    sprintGameStats?.numberOfCorrectAnswers[sprintGameStats?.numberOfCorrectAnswers.length - 1].stat || 0;
+                    sprintGameStats?.numberOfCorrectAnswers[sprintGameStats?.numberOfCorrectAnswers.length - 1].stat ||
+                    0;
                 sprintCorrectAnswerPercent =
                     Math.round((sprintNumberOfCorrectAnswers / sprintNumberOfQuestions) * 100) || 0;
-                sprintLearnedWords =
-                    sprintGameStats?.learnedWords[sprintGameStats?.learnedWords.length - 1].stat || 0;
+                sprintLearnedWords = sprintGameStats?.learnedWords[sprintGameStats?.learnedWords.length - 1].stat || 0;
                 sprintLongestSeries =
                     sprintGameStats?.longerSeriesOfAnswers[sprintGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
             }
 
             const audioGameStats = data.optional.audio;
-            let audioNumberOfQuestions = 0
+            let audioNumberOfQuestions = 0;
             let audioNumberOfCorrectAnswers = 0;
             let audioCorrectAnswerPercent = 0;
             let audioLearnedWords = 0;
             let audioLongestSeries = 0;
-            if (currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date) { 
+            if (
+                currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date
+            ) {
                 audioNumberOfQuestions =
                     audioGameStats?.numberOfQuestions[audioGameStats?.numberOfQuestions.length - 1].stat || 0;
                 audioNumberOfCorrectAnswers =
@@ -53,6 +56,7 @@ export default class StatsPage extends Page {
                 audioLongestSeries =
                     audioGameStats?.longerSeriesOfAnswers[audioGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
             }
+            console.log(audioGameStats, sprintGameStats);
 
             const learnedWords = sprintLearnedWords + audioLearnedWords;
             const correctAnswerPercent =

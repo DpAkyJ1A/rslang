@@ -20,14 +20,13 @@ export default class TextbookModel extends ApiService {
             return data.reduce((acc: IWord[], curr: IWord) => {
                 userWords.forEach((word: IUserWordResp) => {
                     if (curr.id === word.wordId) {
-                        console.log(word, !!word.optional);
                         word.optional
                             ? Object.assign(curr, {
                                   status: word.difficulty,
                                   sprintAppearance: word.optional.sprintAppearances,
+                                  audioAppearance: word.optional.audioAppearances,
                               })
                             : Object.assign(curr, { status: word.difficulty });
-                        console.log(curr);
                     }
                 });
                 acc.push(curr);

@@ -6,9 +6,11 @@ import {
     IWord,
     IStatsPerDay,
     IGameStats,
-    IOptionalStats, } from '../../../api/interfaces';
+    IOptionalStats,
+} from '../../../api/interfaces';
 import { shuffleArray } from '../../../utils/shuffleArray';
 import { IGameResult, IGameWord } from '../../../games/sprint/types/index';
+import { IAudioGameResult, IAudioGameWord } from '../types';
 
 export class AudioGameModel extends ApiService {
     constructor() {
@@ -18,7 +20,7 @@ export class AudioGameModel extends ApiService {
         const pageToLoad = page ? page : Math.floor(Math.random() * 30);
         const wordsInit = await super.getWords(pageToLoad, group);
         const output = this.shuffleWordsForAudioGame(wordsInit);
-        return shuffleArray(output).slice(-10);
+        return shuffleArray(output);
     }
 
     async getWordsForGameAuth(group: number, page: number, user: { id: string; token: string }) {
@@ -38,7 +40,7 @@ export class AudioGameModel extends ApiService {
             currPage--;
         }
         const output = this.shuffleWordsForAudioGame(noLearnedWords);
-        return shuffleArray(output).slice(-10);
+        return shuffleArray(output);
     }
 
     private reduceLearnedWords(wordsInit: IWord[], userWords: IUserWordResp[]) {
@@ -80,55 +82,79 @@ export class AudioGameModel extends ApiService {
         return output;
     }
 
-    updateDataForStats(user: { id: string; token: string }, score: number, data: IGameResult) {
+    updateDataForStats(
+        user: { id: string; token: string },
+        gameName: 'sprint' | 'audio',
+        score: number,
+        data: IAudioGameResult
+    ) {
         let newWords = 0;
         let learnedWords = 0;
         const numberOfQuestions = data.right.length + data.wrong.length;
 
-        const testPromises = data.right.map((word: IGameWord) =>
-            this.getUserWordById(user.id, word.id, user.token).then((wordU) => {
-                if (wordU.optional) {
-                    if (wordU.optional.rightAnswers === 3) {
+        const testPromises = data.right.map((word) =>
+            this.getUserWordById(user.id, word.id, user.token)
+                .then((wordU) => {
+                    if (wordU.optional) {
                         const answerCount = wordU.optional.rightAnswers + 1;
-                        const gameCount = wordU.optional.sprintAppearances + 1;
+                        const gameCount = wordU.optional.audioAppearances + 1;
+                        const sprintGame = wordU.optional.sprintAppearances || 0;
+                        if (answerCount === 3) {
+                            this.updateUserWord(
+                                user.id,
+                                {
+                                    difficulty: 'learned',
+                                    optional: {
+                                        rightAnswers: answerCount,
+                                        sprintAppearances: sprintGame,
+                                        audioAppearances: gameCount,
+                                    },
+                                },
+                                word.id,
+                                user.token
+                            ).then((data) => console.log('add to learned', data));
+                            learnedWords++;
+                        } else {
+                            this.updateUserWord(
+                                user.id,
+                                {
+                                    difficulty: 'hard',
+                                    optional: {
+                                        rightAnswers: answerCount,
+                                        sprintAppearances: sprintGame,
+                                        audioAppearances: gameCount,
+                                    },
+                                },
+                                word.id,
+                                user.token
+                            ).then((data) => console.log('updated', data));
+                        }
+                    } else {
                         this.updateUserWord(
                             user.id,
                             {
-                                difficulty: 'hard',
-                                optional: { rightAnswers: answerCount, sprintAppearances: gameCount },
+                                difficulty: 'process',
+                                optional: { rightAnswers: 1, sprintAppearances: 0, audioAppearances: 1 },
                             },
                             word.id,
                             user.token
-                        ).then(() => console.log('updated'));
-                    } else {
-                        const gameCount = wordU.optional.sprintAppearances + 1;
-                        this.updateUserWord(
-                            user.id,
-                            { difficulty: 'learned', optional: { rightAnswers: 3, sprintAppearances: gameCount } },
-                            word.id,
-                            user.token
-                        ).then(() => console.log('add to learned'));
-                        learnedWords++;
+                        );
                     }
-                } else {
-                    this.updateUserWord(
-                        user.id,
-                        { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
-                        word.id,
-                        user.token
-                    ).catch((error) => {
-                        if ((error as Error).message === '404') {
-                            this.createUserWord(
-                                user.id,
-                                word.id,
-                                { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
-                                user.token
-                            ).then(() => console.log('new word!!'));
-                            newWords++;
-                        }
-                    });
-                }
-            })
+                })
+                .catch((error) => {
+                    if ((error as Error).message === '404') {
+                        this.createUserWord(
+                            user.id,
+                            word.id,
+                            {
+                                difficulty: 'process',
+                                optional: { rightAnswers: 1, sprintAppearances: 0, audioAppearances: 1 },
+                            },
+                            user.token
+                        ).then(() => console.log('new word!!'));
+                        newWords++;
+                    }
+                })
         );
         Promise.allSettled(testPromises).then(() =>
             this.handleStatsUpdate(
@@ -137,68 +163,22 @@ export class AudioGameModel extends ApiService {
                     learnedWords: learnedWords,
                     numberOfQuestions: numberOfQuestions,
                     numberOfCorrectAnswers: data.right.length,
-                    longerSeriesOfAnswers: data.longestRow
+                    longerSeriesOfAnswers: data.longestRow,
                 }
             )
         );
 
-        // data.right.forEach(async (word: IGameWord) => {
-        //     try {
-        //         const wordU = (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
-        //         if (wordU.optional) {
-        //             if (wordU.optional.rightAnswers === 3) {
-        //                 const answerCount = wordU.optional.rightAnswers + 1;
-        //                 const gameCount = wordU.optional.sprintAppearances + 1;
-        //                 this.updateUserWord(
-        //                     user.id,
-        //                     {
-        //                         difficulty: 'hard',
-        //                         optional: { rightAnswers: answerCount, sprintAppearances: gameCount },
-        //                     },
-        //                     word.id,
-        //                     user.token
-        //                 ).then(() => console.log('updated'));
-        //             } else {
-        //                 const gameCount = wordU.optional.sprintAppearances + 1;
-        //                 this.updateUserWord(
-        //                     user.id,
-        //                     { difficulty: 'learned', optional: { rightAnswers: 3, sprintAppearances: gameCount } },
-        //                     word.id,
-        //                     user.token
-        //                 ).then(() => console.log('add to learned'));
-        //                 learnedWords++;
-        //             }
-        //         } else {
-        //             this.updateUserWord(
-        //                 user.id,
-        //                 { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
-        //                 word.id,
-        //                 user.token
-        //             );
-        //         }
-        //     } catch (error) {
-        //         if ((error as Error).message === '404') {
-        //             await this.createUserWord(
-        //                 user.id,
-        //                 word.id,
-        //                 { difficulty: 'process', optional: { rightAnswers: 1, sprintAppearances: 1 } },
-        //                 user.token
-        //             ).then(() => console.log('new word!!'));
-        //             newWords++;
-        //         }
-        //     }
-        // });
-
-        data.wrong.forEach(async (word: IGameWord) => {
+        data.wrong.forEach(async (word: IAudioGameWord) => {
             try {
                 const wordU = (await this.getUserWordById(user.id, word.id, user.token)) as IUserWord;
                 if (wordU.optional) {
-                    const gameCount = wordU.optional.sprintAppearances + 1;
+                    const gameCount = wordU.optional.audioAppearances + 1;
+                    const sprintGame = wordU.optional.sprintAppearances || 0;
                     this.updateUserWord(
                         user.id,
                         {
                             difficulty: 'hard',
-                            optional: { rightAnswers: 0, sprintAppearances: gameCount },
+                            optional: { rightAnswers: 0, sprintAppearances: sprintGame, audioAppearances: gameCount },
                         },
                         word.id,
                         user.token
@@ -206,17 +186,23 @@ export class AudioGameModel extends ApiService {
                 } else {
                     this.updateUserWord(
                         user.id,
-                        { difficulty: 'hard', optional: { rightAnswers: 0, sprintAppearances: 1 } },
+                        {
+                            optional: { rightAnswers: 0, sprintAppearances: 0, audioAppearances: 1 },
+                            difficulty: 'hard',
+                        },
                         word.id,
                         user.token
-                    ).then(() => console.log('add to hard'));
+                    ).then((data) => console.log(data, 'add to hard'));
                 }
             } catch (error) {
                 if ((error as Error).message === '404') {
                     await this.createUserWord(
                         user.id,
                         word.id,
-                        { difficulty: 'hard', optional: { rightAnswers: 0, sprintAppearances: 1 } },
+                        {
+                            difficulty: 'hard',
+                            optional: { rightAnswers: 0, sprintAppearances: 0, audioAppearances: 1 },
+                        },
                         user.token
                     ).then(() => console.log('new word!! but hard'));
                     newWords++;
@@ -246,6 +232,12 @@ export class AudioGameModel extends ApiService {
                 userStats = {
                     learnedWords: 0,
                     optional: {
+                        sprint: {
+                            learnedWords: [{ date: currentDate, stat: 0 }],
+                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+                        },
                         audio: {
                             learnedWords: [{ date: currentDate, stat: 0 }],
                             numberOfQuestions: [{ date: currentDate, stat: 0 }],
@@ -328,29 +320,34 @@ export class AudioGameModel extends ApiService {
                 longerSeriesOfAnswers.push(longerSeriesOfAnswersToday);
                 newGameStats.longerSeriesOfAnswers = longerSeriesOfAnswers;
             }
-
-            super
-                .putUserStatistics(user.id, user.token, {
-                    learnedWords: learnedWordsUpd,
-                    optional: {
-                        audio: newGameStats,
-                    },
-                });
+            const sprintOldStat = userStats.optional.sprint;
+            super.putUserStatistics(user.id, user.token, {
+                learnedWords: learnedWordsUpd,
+                optional: {
+                    sprint: sprintOldStat,
+                    audio: newGameStats,
+                },
+            });
         } catch (e) {
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
-            super
-                .putUserStatistics(user.id, user.token, {
-                    learnedWords: 0,
-                    optional: {
-                        audio: {
-                            learnedWords: [{ date: currentDate, stat: results.learnedWords }],
-                            numberOfQuestions: [{ date: currentDate, stat: results.numberOfQuestions }],
-                            numberOfCorrectAnswers: [{ date: currentDate, stat: results.numberOfCorrectAnswers }],
-                            longerSeriesOfAnswers: [{ date: currentDate, stat: results.longerSeriesOfAnswers }],
-                        },
+            super.putUserStatistics(user.id, user.token, {
+                learnedWords: 0,
+                optional: {
+                    sprint: {
+                        learnedWords: [{ date: currentDate, stat: 0 }],
+                        numberOfQuestions: [{ date: currentDate, stat: 0 }],
+                        numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+                        longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
                     },
-                });
+                    audio: {
+                        learnedWords: [{ date: currentDate, stat: results.learnedWords }],
+                        numberOfQuestions: [{ date: currentDate, stat: results.numberOfQuestions }],
+                        numberOfCorrectAnswers: [{ date: currentDate, stat: results.numberOfCorrectAnswers }],
+                        longerSeriesOfAnswers: [{ date: currentDate, stat: results.longerSeriesOfAnswers }],
+                    },
+                },
+            });
         }
     }
 }
