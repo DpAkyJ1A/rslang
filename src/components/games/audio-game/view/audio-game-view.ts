@@ -109,14 +109,23 @@ export default class AudioView {
             answerBtn.node.dataset['answer'] = word === gameWord.wordTranslate ? 'true' : 'false';
             answerBtn.node.onclick = this.fireAnswerClick;
         });
+        const dismissBlock = new Control(this.wrapper.content.node, 'div', 'content__dismiss');
+        const nextBtn = new Control(
+            dismissBlock.node,
+            'button',
+            'content__answers-btn content__answer-btn_next game-hidden',
+            'далее'
+        );
         const dismissBtn = new Control(
             this.wrapper.content.node,
             'button',
             'content__answers-btn content__answers-btn_dismiss',
             'пропустить'
         );
+        nextBtn.node.dataset['answer'] = 'next';
         dismissBtn.node.dataset['answer'] = 'dismiss';
         dismissBtn.node.onclick = this.fireAnswerClick;
+        nextBtn.node.onclick = this.fireAnswerClick;
     }
 
     drawResults(gameScore: IAudioGameScore, gameResult: IAudioGameResult) {
@@ -177,7 +186,7 @@ export default class AudioView {
         this.wrapper.destroy();
         (document.querySelector('.games-page')?.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
             node.style.display = 'flex';
-        })
+        });
     };
 
     restartGame() {
@@ -187,13 +196,23 @@ export default class AudioView {
     }
 
     fireAnswerClick = (e: Event) => {
-        console.log('znen');
-        this.wrapper.content.node.querySelectorAll('.game-hidden').forEach((el) => {
-            el.classList.remove('game-hidden');
-        });
         const target = e.target as HTMLElement;
+        const answer = target.dataset['answer'];
+        if (answer === 'dismiss') {
+            this.wrapper.content.node.querySelectorAll('.game-hidden').forEach((el) => {
+                el.classList.remove('game-hidden');
+            });
+            this.wrapper.content.node.querySelectorAll('.content__answers-btn').forEach((el) => {
+                if (!el.classList.contains('content__answer-btn_next'))
+                    el.classList.add('content__answers-btn_disabled');
+            });
+        } else {
+            this.wrapper.content.node.querySelectorAll('.game-hidden').forEach((el) => {
+                if (!el.classList.contains('content__answer-btn_next')) el.classList.remove('game-hidden');
+            });
+        }
         const event = new CustomEvent('answerBtn', {
-            detail: { answer: target.dataset['answer'] },
+            detail: { answer: answer },
         });
         target.dispatchEvent(event);
     };
