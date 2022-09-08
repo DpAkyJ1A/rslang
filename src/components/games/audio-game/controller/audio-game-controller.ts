@@ -81,18 +81,20 @@ export default class AudioGameController extends AudioGameModel {
         this.gameResult.right = [];
         this.gameResult.wrong = [];
         const loop = () => {
-            console.log('z d gtnkt');
             if (i < words.length) {
                 this.updateGameContentField(words[i]);
                 document.querySelector('audio')?.play();
                 (document.querySelectorAll('.content__answers-btn') as NodeList).forEach((btn) => {
                     btn.addEventListener('answerBtn', ((event: CustomEvent) => {
-                        const answer = event.detail.answer === 'false' ? false : true;
-                        this.playSound(answer);
-                        this.handleAnswer(answer, words[i]);
-                        i++;
-                        setTimeout(loop, 1500);
-                        // loop();
+                        if (event.detail.answer === 'dismiss') {
+                            playLoose.play();
+                        } else {
+                            const answer = event.detail.answer === 'true' ? true : false;
+                            this.playSound(answer);
+                            this.handleAnswer(answer, words[i]);
+                            i++;
+                            setTimeout(loop, 1500);
+                        }
                     }) as EventListener);
                 });
             } else {
@@ -104,7 +106,6 @@ export default class AudioGameController extends AudioGameModel {
     }
 
     updateGameContentField(word?: IAudioGameWord) {
-        console.log('upd gamef');
         this.view.drawContent(this.state.stage, this.state.mode, word, this.gameState, this.gameResult);
     }
 

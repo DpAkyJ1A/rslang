@@ -176,3 +176,8 @@ border-radius: 25px;
     overflow-y: scroll;
   }
 }
+
+.content__answers-btn_disabled {
+  pointer-events: none;
+  background-color: #404756;
+}
