@@ -9,6 +9,7 @@
 }
 
 .card {
+  border-radius: 25px;
   position: relative;
   background-color: $colorLink5;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -27,6 +28,8 @@
 }
 
 .card__preview{
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
   min-width: 320px;
   min-height: 270px;
   overflow: hidden;

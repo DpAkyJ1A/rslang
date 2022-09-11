@@ -6,12 +6,18 @@
   color: #fff;
   font-size: 1.3rem;
   gap: 5px;
+  flex-direction: column;
 }
 
 .played-qty__sprint-icon, 
 .played-qty__audio-icon {
   height: 25px;
   width: 25px
+}
+
+.played-qty__played,
+.played-qty__answer {
+  display: flex;
 }
 
 
