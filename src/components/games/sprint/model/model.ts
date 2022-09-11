@@ -100,69 +100,72 @@ export class SprintModel extends ApiService {
         const numberOfQuestions = data.right.length + data.wrong.length;
 
         const testPromises = data.right.map((word) =>
-            this.getUserWordById(user.id, word.id, user.token).then((wordU) => {
-                if (wordU.optional) {
-                    if (wordU.optional.rightAnswers === 3) {
-                        const answerCount = wordU.optional.rightAnswers + 1;
-                        const gameCount = wordU.optional.sprintAppearances + 1;
-                        const audioGame = wordU.optional.audioAppearances || 0;
-                        this.updateUserWord(
-                            user.id,
-                            {
-                                difficulty: 'hard',
-                                optional: {
-                                    rightAnswers: answerCount,
-                                    sprintAppearances: gameCount,
-                                    audioAppearances: audioGame,
-                                },
-                            },
-                            word.id,
-                            user.token
-                        ).then(() => console.log('updated'));
-                    } else {
-                        const gameCount = wordU.optional.sprintAppearances + 1;
-                        const audioGame = wordU.optional.audioAppearances || 0;
-                        this.updateUserWord(
-                            user.id,
-                            {
-                                difficulty: 'learned',
-                                optional: {
-                                    rightAnswers: 3,
-                                    sprintAppearances: gameCount,
-                                    audioAppearances: audioGame,
-                                },
-                            },
-                            word.id,
-                            user.token
-                        ).then(() => console.log('add to learned'));
-                        learnedWords++;
-                    }
-                } else {
-                    const audioGame = wordU.optional.audioAppearances || 0;
-                    this.updateUserWord(
-                        user.id,
-                        {
-                            difficulty: 'process',
-                            optional: { rightAnswers: 1, sprintAppearances: 1, audioAppearances: audioGame },
-                        },
-                        word.id,
-                        user.token
-                    ).catch((error) => {
-                        if ((error as Error).message === '404') {
-                            this.createUserWord(
+            this.getUserWordById(user.id, word.id, user.token)
+                .then((wordU) => {
+                    console.log('i/m 1st prom then', wordU);
+                    if (wordU.optional) {
+                        if (wordU.optional.rightAnswers === 3) {
+                            const answerCount = wordU.optional.rightAnswers + 1;
+                            const gameCount = wordU.optional.sprintAppearances + 1;
+                            const audioGame = wordU.optional.audioAppearances || 0;
+                            this.updateUserWord(
                                 user.id,
-                                word.id,
                                 {
-                                    difficulty: 'process',
-                                    optional: { rightAnswers: 1, sprintAppearances: 1, audioAppearances: 0 },
+                                    difficulty: 'hard',
+                                    optional: {
+                                        rightAnswers: answerCount,
+                                        sprintAppearances: gameCount,
+                                        audioAppearances: audioGame,
+                                    },
                                 },
+                                word.id,
                                 user.token
-                            ).then(() => console.log('new word!!'));
-                            newWords++;
+                            ).then(() => console.log('updated'));
+                        } else {
+                            const gameCount = wordU.optional.sprintAppearances + 1;
+                            const audioGame = wordU.optional.audioAppearances || 0;
+                            this.updateUserWord(
+                                user.id,
+                                {
+                                    difficulty: 'learned',
+                                    optional: {
+                                        rightAnswers: 3,
+                                        sprintAppearances: gameCount,
+                                        audioAppearances: audioGame,
+                                    },
+                                },
+                                word.id,
+                                user.token
+                            ).then(() => console.log('add to learned'));
+                            learnedWords++;
                         }
-                    });
-                }
-            })
+                    } else {
+                        const audioGame = wordU.optional.audioAppearances || 0;
+                        this.updateUserWord(
+                            user.id,
+                            {
+                                difficulty: 'process',
+                                optional: { rightAnswers: 1, sprintAppearances: 1, audioAppearances: audioGame },
+                            },
+                            word.id,
+                            user.token
+                        );
+                    }
+                })
+                .catch((error) => {
+                    if ((error as Error).message === '404') {
+                        this.createUserWord(
+                            user.id,
+                            word.id,
+                            {
+                                difficulty: 'process',
+                                optional: { rightAnswers: 1, sprintAppearances: 1, audioAppearances: 0 },
+                            },
+                            user.token
+                        ).then(() => console.log('new word!!'));
+                        newWords++;
+                    }
+                })
         );
         Promise.allSettled(testPromises).then(() =>
             this.handleStatsUpdate(
@@ -264,10 +267,6 @@ export class SprintModel extends ApiService {
                 }
             }
         });
-        // this.handleStatsUpdate(
-        //     { id: user.id, token: user.token },
-        //     { newWords: newWords, learnedWords: learnedWords, rightProc: rightProcent, longestRow: data.longestRow }
-        // );
     }
 
     async handleStatsUpdate(
@@ -282,33 +281,33 @@ export class SprintModel extends ApiService {
         try {
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
-            let userStats = (await super.getUserStatistics(user.id, user.token)) as IStatistics;
-            console.log(userStats);
-            if (!userStats) {
-                userStats = {
-                    learnedWords: 0,
-                    optional: {
-                        sprint: {
-                            learnedWords: [{ date: currentDate, stat: 0 }],
-                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
-                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
-                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
-                        },
-                        audio: {
-                            learnedWords: [{ date: currentDate, stat: 0 }],
-                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
-                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
-                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
-                        },
-                    },
-                };
-            }
+            const userStats = (await super.getUserStatistics(user.id, user.token)) as IStatistics;
+            // console.log(userStats);
+            // if (!userStats) {
+            //     userStats = {
+            //         learnedWords: 0,
+            //         optional: {
+            //             sprint: {
+            //                 learnedWords: [{ date: currentDate, stat: 0 }],
+            //                 numberOfQuestions: [{ date: currentDate, stat: 0 }],
+            //                 numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+            //                 longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+            //             },
+            //             audio: {
+            //                 learnedWords: [{ date: currentDate, stat: 0 }],
+            //                 numberOfQuestions: [{ date: currentDate, stat: 0 }],
+            //                 numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+            //                 longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+            //             },
+            //         },
+            //     };
+            // }
             // Выбираю игру
             const userGameStats: IGameStats = userStats.optional.sprint as IGameStats;
 
             let userLastUpdDate = '';
             if (userGameStats.numberOfQuestions) {
-                userLastUpdDate = userGameStats.numberOfQuestions[userGameStats.numberOfQuestions.length].date;
+                userLastUpdDate = userGameStats.numberOfQuestions[userGameStats.numberOfQuestions.length - 1].date;
             }
 
             const newGameStats: IGameStats = {
@@ -377,6 +376,7 @@ export class SprintModel extends ApiService {
                 newGameStats.longerSeriesOfAnswers = longerSeriesOfAnswers;
             }
             const oldAudio = userStats.optional.audio;
+            console.log(oldAudio, newGameStats);
             super.putUserStatistics(user.id, user.token, {
                 learnedWords: learnedWordsUpd,
                 optional: {
@@ -385,6 +385,7 @@ export class SprintModel extends ApiService {
                 },
             });
         } catch (e) {
+            console.log(e);
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
             super.putUserStatistics(user.id, user.token, {

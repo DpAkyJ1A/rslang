@@ -20,7 +20,7 @@ export class AudioGameModel extends ApiService {
         const pageToLoad = page ? page : Math.floor(Math.random() * 30);
         const wordsInit = await super.getWords(pageToLoad, group);
         const output = this.shuffleWordsForAudioGame(wordsInit);
-        return shuffleArray(output);
+        return shuffleArray(output).slice(15);
     }
 
     async getWordsForGameAuth(group: number, page: number, user: { id: string; token: string }) {
@@ -40,7 +40,7 @@ export class AudioGameModel extends ApiService {
             currPage--;
         }
         const output = this.shuffleWordsForAudioGame(noLearnedWords);
-        return shuffleArray(output);
+        return shuffleArray(output).slice(15);
     }
 
     private reduceLearnedWords(wordsInit: IWord[], userWords: IUserWordResp[]) {
@@ -95,6 +95,7 @@ export class AudioGameModel extends ApiService {
         const testPromises = data.right.map((word) =>
             this.getUserWordById(user.id, word.id, user.token)
                 .then((wordU) => {
+                    console.log(wordU);
                     if (wordU.optional) {
                         const answerCount = wordU.optional.rightAnswers + 1;
                         const gameCount = wordU.optional.audioAppearances + 1;
@@ -227,32 +228,32 @@ export class AudioGameModel extends ApiService {
         try {
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
-            let userStats = (await super.getUserStatistics(user.id, user.token)) as IStatistics;
-            if (!userStats) {
-                userStats = {
-                    learnedWords: 0,
-                    optional: {
-                        sprint: {
-                            learnedWords: [{ date: currentDate, stat: 0 }],
-                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
-                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
-                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
-                        },
-                        audio: {
-                            learnedWords: [{ date: currentDate, stat: 0 }],
-                            numberOfQuestions: [{ date: currentDate, stat: 0 }],
-                            numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
-                            longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
-                        },
-                    },
-                };
-            }
+            const userStats = (await super.getUserStatistics(user.id, user.token)) as IStatistics;
+            // if (!userStats) {
+            //     userStats = {
+            //         learnedWords: 0,
+            //         optional: {
+            //             sprint: {
+            //                 learnedWords: [{ date: currentDate, stat: 0 }],
+            //                 numberOfQuestions: [{ date: currentDate, stat: 0 }],
+            //                 numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+            //                 longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+            //             },
+            //             audio: {
+            //                 learnedWords: [{ date: currentDate, stat: 0 }],
+            //                 numberOfQuestions: [{ date: currentDate, stat: 0 }],
+            //                 numberOfCorrectAnswers: [{ date: currentDate, stat: 0 }],
+            //                 longerSeriesOfAnswers: [{ date: currentDate, stat: 0 }],
+            //             },
+            //         },
+            //     };
+            // }
             // Выбираю игру
             const userGameStats: IGameStats = userStats.optional.audio as IGameStats;
 
             let userLastUpdDate = '';
             if (userGameStats.numberOfQuestions) {
-                userLastUpdDate = userGameStats.numberOfQuestions[userGameStats.numberOfQuestions.length].date;
+                userLastUpdDate = userGameStats.numberOfQuestions[userGameStats.numberOfQuestions.length - 1].date;
             }
 
             const newGameStats: IGameStats = {
@@ -321,6 +322,7 @@ export class AudioGameModel extends ApiService {
                 newGameStats.longerSeriesOfAnswers = longerSeriesOfAnswers;
             }
             const sprintOldStat = userStats.optional.sprint;
+            console.log(sprintOldStat, newGameStats);
             super.putUserStatistics(user.id, user.token, {
                 learnedWords: learnedWordsUpd,
                 optional: {
