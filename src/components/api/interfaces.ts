@@ -19,6 +19,7 @@ export interface IWord {
     status?: BadgeType;
     sprintAppearance: number;
     audioAppearance?: number;
+    rightAnswers?: number;
 }
 
 export interface IUser {

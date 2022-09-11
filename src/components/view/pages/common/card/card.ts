@@ -80,7 +80,11 @@ export default class Card {
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);
             if (this.data.sprintAppearance || this.data.audioAppearance) {
-                const counter = createWordGameCounterEl(this.data.sprintAppearance, this.data.audioAppearance);
+                const counter = createWordGameCounterEl(
+                    this.data.sprintAppearance,
+                    this.data.audioAppearance,
+                    this.data.rightAnswers
+                );
                 this.node.append(counter);
             }
         }
