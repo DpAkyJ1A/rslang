@@ -20,7 +20,7 @@ export class AudioGameModel extends ApiService {
         const pageToLoad = page ? page : Math.floor(Math.random() * 30);
         const wordsInit = await super.getWords(pageToLoad, group);
         const output = this.shuffleWordsForAudioGame(wordsInit);
-        return shuffleArray(output).slice(15);
+        return shuffleArray(output);
     }
 
     async getWordsForGameAuth(group: number, page: number, user: { id: string; token: string }) {
@@ -40,7 +40,7 @@ export class AudioGameModel extends ApiService {
             currPage--;
         }
         const output = this.shuffleWordsForAudioGame(noLearnedWords);
-        return shuffleArray(output).slice(15);
+        return shuffleArray(output);
     }
 
     private reduceLearnedWords(wordsInit: IWord[], userWords: IUserWordResp[]) {
