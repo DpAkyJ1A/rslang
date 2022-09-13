@@ -35,6 +35,10 @@
   overflow: hidden;
   background-position: center;
   background-size: cover;
+  @include media-mobile{
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 25px;
+  }
 }
 
 
