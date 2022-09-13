@@ -18,6 +18,10 @@ export const createBadge = (type?: BadgeType) => {
         'div',
         `card__badge-icon card__badge-icon_hard card__badge-icon_disabled`
     );
+    // const iconStat = new Control(wrapper.node, 'div', 'card__badge-icon_stat');
+    // iconStat.node.innerHTML = `
+    // <svg viewBox="0 0 512 512"><title/><path d="M104,496H72a24,24,0,0,1-24-24V328a24,24,0,0,1,24-24h32a24,24,0,0,1,24,24V472A24,24,0,0,1,104,496Z"/><path d="M328,496H296a24,24,0,0,1-24-24V232a24,24,0,0,1,24-24h32a24,24,0,0,1,24,24V472A24,24,0,0,1,328,496Z"/><path d="M440,496H408a24,24,0,0,1-24-24V120a24,24,0,0,1,24-24h32a24,24,0,0,1,24,24V472A24,24,0,0,1,440,496Z"/><path d="M216,496H184a24,24,0,0,1-24-24V40a24,24,0,0,1,24-24h32a24,24,0,0,1,24,24V472A24,24,0,0,1,216,496Z"/></svg>
+    // `;
     iconHard.node.innerHTML = `
       <svg viewBox="0 0 32 32" xml:space="preserve"><style type="text/css">
         .st0{fill:#FFFFFF;}
@@ -30,6 +34,7 @@ export const createBadge = (type?: BadgeType) => {
     iconLearned.node.setAttribute('data-process', 'learned');
     new Control(iconHard.node, 'span', 'card__badge-tooltip', 'Add to Dictionary');
     new Control(iconLearned.node, 'span', 'card__badge-tooltip', 'Tag as learned');
+    // new Control(iconStat.node, 'span', 'card__badge-tooltip', 'Word statistics');
     if (type && type !== 'process') {
         (wrapper.node.querySelector(`[data-process="${type}"]`) as HTMLElement).classList.remove(
             'card__badge-icon_disabled'

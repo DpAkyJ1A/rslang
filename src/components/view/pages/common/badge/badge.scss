@@ -13,6 +13,13 @@
   width: 40px;
 }
 
+.card__badge-icon_stat {
+  position: relative;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+}
+
 .card__badge-tooltip {
     min-width: 170px;
     padding: 5px 10px;
@@ -35,11 +42,24 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #fff transparent transparent #fff;
+  border-color: #fff #fff transparent transparent;
 }
 
 .card__badge-icon:hover .card__badge-tooltip {
   display: inline-block;
+}
+
+.card__badge-icon_stat:hover .card__badge-tooltip {
+  display: inline-block;
+}
+
+.card__badge-icon_stat svg{
+  fill: $color-dark-xl;
+  transition: all 0.2s ease-in-out;
+}
+
+.card__badge-icon_stat:hover svg {
+  fill: chocolate;
 }
 
 // .card__badge_hard svg {

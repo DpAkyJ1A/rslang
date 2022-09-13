@@ -57,14 +57,15 @@ export default class AudioView {
         const gameDescr = new Control(descr.node, 'span');
         const controlDescr = new Control(descr.node, 'span');
         gameDescr.node.innerHTML = `
-            "Аудиовызов" - это очень крутая штука, описание нужно поискать.
+            "Аудиовызов" - это тренировка для восприятия на слух новых и уже изученных слов из вашего словаря.
         `;
         controlDescr.node.innerHTML = `
                 <br>- Используйте мышь, чтобы выбрать.
                 <br> - Используйте клавиши:<br>
                  - "s" для старта<br>
-                 - "<" для выбора "true"<br>
-                 - ">" для выбора "false"<br>
+                 - "1-5" для выбора варианта ответа<br>
+                 - "˅" для пропуска слова<br>
+                 - ">" для перехода к следующему слову (после пропуска слова)<br>
                  - "space" чтобы сыграть заново
                  `;
         const controls = createStartGameControls(launchMode);
@@ -104,11 +105,17 @@ export default class AudioView {
             <img src="${baseUrl}${gameWord.img}" alt="${gameWord.wordTranslate}"></img>
         `;
         const optionsBlock = new Control(this.wrapper.content.node, 'div', 'content__answers');
-        gameWord.options.forEach((word: string) => {
-            const answerBtn = new Control(optionsBlock.node, 'button', 'content__answers-btn', `${word}`);
-            answerBtn.node.dataset['answer'] = word === gameWord.wordTranslate ? 'true' : 'false';
+        for (let i = 0; i < gameWord.options.length; i++) {
+            const answerBtn = new Control(
+                optionsBlock.node,
+                'button',
+                'content__answers-btn',
+                `${i + 1}. ${gameWord.options[i]}`
+            );
+            answerBtn.node.dataset['answer'] = gameWord.options[i] === gameWord.wordTranslate ? 'true' : 'false';
+            answerBtn.node.dataset['game'] = i.toString();
             answerBtn.node.onclick = this.fireAnswerClick;
-        });
+        }
         const dismissBlock = new Control(this.wrapper.content.node, 'div', 'content__dismiss');
         const nextBtn = new Control(
             dismissBlock.node,
@@ -123,7 +130,9 @@ export default class AudioView {
             'пропустить'
         );
         nextBtn.node.dataset['answer'] = 'next';
+        nextBtn.node.dataset['game'] = 'next';
         dismissBtn.node.dataset['answer'] = 'dismiss';
+        dismissBtn.node.dataset['game'] = 'dismiss';
         dismissBtn.node.onclick = this.fireAnswerClick;
         nextBtn.node.onclick = this.fireAnswerClick;
     }

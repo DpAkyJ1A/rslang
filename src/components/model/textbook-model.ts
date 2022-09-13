@@ -25,6 +25,7 @@ export default class TextbookModel extends ApiService {
                                   status: word.difficulty,
                                   sprintAppearance: word.optional.sprintAppearances,
                                   audioAppearance: word.optional.audioAppearances,
+                                  rightAnswers: word.optional.rightAnswers,
                               })
                             : Object.assign(curr, { status: word.difficulty });
                     }

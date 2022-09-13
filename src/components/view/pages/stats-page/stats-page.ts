@@ -13,6 +13,7 @@ export default class StatsPage extends Page {
     public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
         if (data) {
+            console.log(data);
             const date = new Date();
             const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
 
@@ -104,7 +105,7 @@ export default class StatsPage extends Page {
             }
 
             const audioDatesLabels: string[] = [];
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < lengthAudio; i++) {
                 const temp = data.optional.audio?.learnedWords[i].date || '';
                 audioDatesLabels.push(temp);
             }
@@ -112,10 +113,19 @@ export default class StatsPage extends Page {
             datesLabels = Array.from(new Set(datesLabels));
 
             const wordsNumber: number[] = [];
-            for (let i = 0; i < length; i++) {
+            // длина массивов у разнх иигр разная может быть, вылетает ошибон
+            const sprintLearnedWordsArr = data.optional.sprint?.learnedWords as Array<object>;
+            const audioLearnedWordsArr = data.optional.audio?.learnedWords as Array<object>;
+
+            for (let i = 0; i < sprintLearnedWordsArr?.length; i++) {
                 const sprintWords = data.optional.sprint?.learnedWords[i].stat || 0;
+                wordsNumber.push(sprintWords);
+            }
+
+            for (let i = 0; i < audioLearnedWordsArr.length; i++) {
                 const audioWords = data.optional.audio?.learnedWords[i].stat || 0;
-                wordsNumber[i] = sprintWords + audioWords;
+                wordsNumber.push(audioWords);
+
             }
 
             const fontColor = '#fff';

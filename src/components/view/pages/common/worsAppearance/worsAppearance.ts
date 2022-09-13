@@ -1,9 +1,11 @@
 import Control from 'control';
 
-export const createWordGameCounterEl = (sprintQty = 0, audioQty = 0) => {
+export const createWordGameCounterEl = (sprintQty = 0, audioQty = 0, answers = 0) => {
     const wrapper = new Control(null, 'div', 'card__played-qty played-qty');
-    const sprint = new Control(wrapper.node, 'div', 'played-qty__sprint');
-    const audio = new Control(wrapper.node, 'div', 'played-qty__audio');
+    const played = new Control(wrapper.node, 'div', 'played-qty__played', 'Played: ');
+    const rightAnsw = new Control(wrapper.node, 'div', 'played-qty__answer', `Right answers: ${answers}`);
+    const sprint = new Control(played.node, 'div', 'played-qty__sprint');
+    const audio = new Control(played.node, 'div', 'played-qty__audio');
     const sprintIcon = new Control(sprint.node, 'div', 'played-qty__sprint-icon');
     const audioIcon = new Control(audio.node, 'div', 'played-qty__audio-icon');
     new Control(sprint.node, 'div', 'played-qty__sprint-counter', `/ ${sprintQty}`);
