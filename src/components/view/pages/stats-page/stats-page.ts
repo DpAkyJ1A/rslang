@@ -125,7 +125,6 @@ export default class StatsPage extends Page {
             for (let i = 0; i < audioLearnedWordsArr.length; i++) {
                 const audioWords = data.optional.audio?.learnedWords[i].stat || 0;
                 wordsNumber.push(audioWords);
-
             }
 
             const fontColor = '#fff';
