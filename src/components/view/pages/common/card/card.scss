@@ -19,7 +19,7 @@
   }
   @include media-mobile{
     flex-direction: column;
-    min-width: 320px;
+    min-width: 300px;
   }
 }
 
@@ -30,7 +30,7 @@
 .card__preview{
   border-bottom-left-radius: 25px;
   border-top-left-radius: 25px;
-  min-width: 320px;
+  min-width: 300px;
   min-height: 270px;
   overflow: hidden;
   background-position: center;
