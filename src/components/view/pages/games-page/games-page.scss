@@ -49,6 +49,7 @@
     @include media-mobile {
         width: 320px;
         height: 250px;
+        border: 0.5em solid $colorLink5;
     }
     cursor: pointer;
 }
@@ -62,6 +63,7 @@
     @include media-mobile {
         width: 320px;
         height: 250px;
+        border: 0.5em solid $colorLink4;
     }
     cursor: pointer;
 }

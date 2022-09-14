@@ -1,6 +1,6 @@
 .select {
   position: relative;
-  width: 250px;
+  width: 220px;
 }
 
 .select_disabled {
@@ -49,10 +49,4 @@
 
 .select__placeholder:hover {
   border-color: #e56b6f;
-}
-
-@media screen and (max-width: 480px) {
-  .select__placeholder{
-    width: 220px;
-  }
 }
