@@ -1,9 +1,12 @@
 .card__badge {
-  position: absolute;
   display: flex;
-  bottom: 10px;
-  right: 10px;
   gap: 10px;
+  margin-top: auto;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  @include media-mobile{
+    margin-left: auto;
+  }
 }
 
 .card__badge-icon {
