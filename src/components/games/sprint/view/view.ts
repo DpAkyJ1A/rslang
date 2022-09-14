@@ -192,6 +192,7 @@ export default class SprintView {
 
     closeGame() {
         const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = '';
         (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
             node.style.display = '';
         });

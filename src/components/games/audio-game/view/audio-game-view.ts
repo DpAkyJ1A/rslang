@@ -192,8 +192,10 @@ export default class AudioView {
 
     closeGame = () => {
         this.wrapper.destroy();
-        (document.querySelector('.games-page')?.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
-            node.style.display = 'flex';
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = '';
+        (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+            node.style.display = '';
         });
     };
 
