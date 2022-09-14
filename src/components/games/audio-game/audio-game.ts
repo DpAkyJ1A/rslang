@@ -17,6 +17,5 @@ export default class AudioGame {
     start(container: HTMLElement) {
         container.append(this.view.wrapper.node);
         this.controller.updateGameContentField();
-        this.controller.listen();
     }
 }

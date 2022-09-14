@@ -3,7 +3,7 @@ import Control from 'control';
 export const createWordGameCounterEl = (sprintQty = 0, audioQty = 0, answers = 0) => {
     const wrapper = new Control(null, 'div', 'card__played-qty played-qty');
     const played = new Control(wrapper.node, 'div', 'played-qty__played', 'Played: ');
-    const rightAnsw = new Control(wrapper.node, 'div', 'played-qty__answer', `Right answers: ${answers}`);
+    new Control(wrapper.node, 'div', 'played-qty__answer', `Right answers: ${answers}`);
     const sprint = new Control(played.node, 'div', 'played-qty__sprint');
     const audio = new Control(played.node, 'div', 'played-qty__audio');
     const sprintIcon = new Control(sprint.node, 'div', 'played-qty__sprint-icon');

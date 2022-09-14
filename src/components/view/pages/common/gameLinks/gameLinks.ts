@@ -1,5 +1,4 @@
 import AudioGame from '../../../../games/audio-game/audio-game';
-import { AudioGameLaunchMode } from 'components/games/audio-game/types';
 import SprintGame from '../../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../../games/sprint/types/index';
 import Control from '../../../control';

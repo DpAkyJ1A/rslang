@@ -3,7 +3,6 @@ import Control from './components/view/control';
 import { App } from './components/app/app';
 import { IState } from './components/controller/controller';
 import ApiService from './components/api/api';
-import { ISignin } from './components/api/interfaces';
 
 const body = document.body as HTMLBodyElement;
 let root = document.querySelector('#root') as HTMLElement | null;
@@ -45,11 +44,10 @@ const updateUserData = async (state: IState) => {
             // При неудаче обновляю токен
             try {
                 const refreshToken = JSON.parse(localStorage['tokenDataKata']).refreshToken;
-                let data = await apiService.getNewToken(state.user.id, refreshToken);
+                const data = await apiService.getNewToken(state.user.id, refreshToken);
                 localStorage.setItem('tokenDataKata', JSON.stringify(data));
-            }
-            // При второй неудаче логаут
-            catch {
+            } catch {
+                // При второй неудаче логаут
                 state.user.isAuth = false;
             }
         }

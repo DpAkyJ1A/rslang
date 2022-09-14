@@ -1,6 +1,6 @@
 import Control from 'control';
 import { IWord } from '../../../../api/interfaces';
-import { BadgeType, createBadge } from '../badge/badge';
+import { createBadge } from '../badge/badge';
 import { createWordGameCounterEl } from '../worsAppearance/worsAppearance';
 
 export default class Card {

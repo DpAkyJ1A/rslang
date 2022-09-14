@@ -1,15 +1,6 @@
 import ApiService from '../../../api/api';
-import {
-    IStatistics,
-    IUserWord,
-    IUserWordResp,
-    IWord,
-    IStatsPerDay,
-    IGameStats,
-    IOptionalStats,
-} from '../../../api/interfaces';
+import { IStatistics, IUserWord, IUserWordResp, IWord, IStatsPerDay, IGameStats } from '../../../api/interfaces';
 import { shuffleArray } from '../../../utils/shuffleArray';
-import { IGameResult, IGameWord } from '../../../games/sprint/types/index';
 import { IAudioGameResult, IAudioGameWord } from '../types';
 
 export class AudioGameModel extends ApiService {
@@ -88,7 +79,7 @@ export class AudioGameModel extends ApiService {
         score: number,
         data: IAudioGameResult
     ) {
-        let newWords = 0;
+        // let newWords = 0;
         let learnedWords = 0;
         const numberOfQuestions = data.right.length + data.wrong.length;
 
@@ -153,7 +144,7 @@ export class AudioGameModel extends ApiService {
                             },
                             user.token
                         ).then(() => console.log('new word!!'));
-                        newWords++;
+                        // newWords++;
                     }
                 })
         );
@@ -206,7 +197,7 @@ export class AudioGameModel extends ApiService {
                         },
                         user.token
                     ).then(() => console.log('new word!! but hard'));
-                    newWords++;
+                    // newWords++;
                 }
             }
         });

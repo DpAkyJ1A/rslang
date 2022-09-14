@@ -1,5 +1,4 @@
 import Control from '../../../view/control';
-import SprintGame from '../sprint';
 import Timer from '../timer.ts/timer';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';

@@ -1,4 +1,4 @@
-import { SprintGameLaunchMode, SprintGameStages } from 'components/games/sprint/types';
+import { SprintGameLaunchMode } from 'components/games/sprint/types';
 import { AudioGameModel } from '../model/audio-game-model';
 import { AudioGameStages, IAudioGameResult, IAudioGameWord } from '../types';
 import AudioView from '../view/audio-game-view';
@@ -191,6 +191,4 @@ export default class AudioGameController extends AudioGameModel {
             this.gameState.row = 0;
         }
     }
-
-    listen() {}
 }
