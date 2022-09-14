@@ -191,4 +191,6 @@ export default class AudioGameController extends AudioGameModel {
             this.gameState.row = 0;
         }
     }
+
+    listen() {}
 }
