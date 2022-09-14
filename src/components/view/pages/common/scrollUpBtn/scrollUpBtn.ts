@@ -8,7 +8,7 @@ export const createScrollUpBtn = (main: HTMLElement) => {
     };
 
     function scrollFunction() {
-        if (main.scrollTop > 200 || main.scrollTop > 200) {
+        if (window.innerWidth < 1200 && (main.scrollTop > 200 || main.scrollTop > 200)) {
             btn.node.style.display = 'block';
         } else {
             btn.node.style.display = 'none';

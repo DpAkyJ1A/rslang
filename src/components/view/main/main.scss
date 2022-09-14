@@ -21,7 +21,7 @@
 
 ::-webkit-scrollbar {
   width: 15px;
-  @include media-mobile{
+  @include media-tablet{
     width: 0;
   }
 }
