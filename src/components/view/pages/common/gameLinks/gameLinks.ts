@@ -1,5 +1,4 @@
 import AudioGame from '../../../../games/audio-game/audio-game';
-import { AudioGameLaunchMode } from 'components/games/audio-game/types';
 import SprintGame from '../../../../games/sprint/sprint';
 import { SprintGameLaunchMode } from '../../../../games/sprint/types/index';
 import Control from '../../../control';
@@ -27,10 +26,14 @@ export const createGameLinks = (group: number, page: number, user: { id: string;
     sprintGame.node.onclick = (e: Event) => {
         route(e);
         startGame(e, { group, page, user });
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = 'none';
     };
     audioGame.node.onclick = (e: Event) => {
         route(e);
         startGame(e, { group, page, user });
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = 'none';
     };
     return wrapper.node;
 };

@@ -9,8 +9,6 @@ import ErrorPage from './pages/error-page/error-page';
 import Control from './control';
 import { IState } from '../controller/controller';
 import { IStatistics, IWord } from '../api/interfaces';
-// import SprintGame from '../games/sprint/sprint';
-// import { SprintGameLaunchMode } from '../games/sprint/types/index';
 import AuthInit from './pages/auth/authinit';
 import MainPage from './pages/main-page/main-page';
 import GamesPage from './pages/games-page/games-page';

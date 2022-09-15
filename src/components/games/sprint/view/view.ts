@@ -1,5 +1,4 @@
 import Control from '../../../view/control';
-import SprintGame from '../sprint';
 import Timer from '../timer.ts/timer';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';
@@ -193,6 +192,7 @@ export default class SprintView {
 
     closeGame() {
         const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = '';
         (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
             node.style.display = '';
         });

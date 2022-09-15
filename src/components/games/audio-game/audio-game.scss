@@ -1,23 +1,15 @@
 .audio-game {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background:	#404756;
+  background: #404756;
+  padding-bottom: 15px;
 }
 
 .audio-game__top-bar {
   flex-direction: row-reverse;
-  padding: 18px;
   text-align: right;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @include media-tablet {
-    padding: 8px;
-  }
+  margin-bottom: 10px;
 }
 
 .audio-game__close svg {
@@ -32,18 +24,18 @@
 }
 .content__translate_ru {
   color: #49769d;
-  margin: .5em;
+  margin: 0.5em;
   text-transform: uppercase;
   @include media-tablet {
-    margin: .2em;
+    margin: 0.2em;
   }
 }
 .content__translate_en {
-  color: #FFCD93;
-  margin: .5em;
+  color: #ffcd93;
+  margin: 0.5em;
   text-transform: uppercase;
   @include media-tablet {
-    margin: .2em;
+    margin: 0.2em;
   }
 }
 
@@ -59,31 +51,33 @@
 }
 
 .audio-game__content {
-  border: 1em solid #FA9490;
-    border-radius: 60px;
-    width: 50vw;
-    min-height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    @include media-tablet {
-      width: 90vw;
-    max-height: 90vh;
-    padding: 10px;
-    padding-top: 20vh;
-    }
+  border: 1em solid #fa9490;
+  border-radius: 60px;
+  width: 50vw;
+  min-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-tablet {
+    width: 80vw;
+  }
+
+  @include media-mobile {
+    width: 100%;
+    border: 0.5em solid $colorLink4;
+  }
 }
 
 .content_audio {
   padding: 15px 25px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    color: #000000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000000;
   animation-name: test;
   animation-duration: 1.5s;
-  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); 
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
   background: #fff;
   box-shadow: rgba(232, 90, 79, 0.4) 5px 5px, rgba(232, 90, 79, 0.3) 10px 10px, rgba(232, 90, 79, 0.2) 15px 15px, rgba(232, 90, 79, 0.1) 20px 20px, rgba(232, 90, 79, 0.05) 25px 25px;
 }
@@ -94,16 +88,18 @@
   fill: $colorLink4;
   cursor: pointer;
 }
+
 .content__audio-icon svg:hover {
   fill: #404756;
 }
+
 .content__audio-icon {
   position: absolute;
   top: 45px;
   left: 45px;
   @include media-mobile {
-    top: 43px;
-    left: 13px;
+    top: 20px;
+    left: 15px;
   }
 }
 
@@ -119,27 +115,33 @@
 .audio-game .content__success-list {
   margin-bottom: 10px;
 }
+
 .content__answers {
   display: flex;
-    gap: 0.5em;
-    margin: 2em 0;
-    flex-wrap: wrap;
-    justify-content: center;
-    @include media-tablet {
-      gap: 10px;
-    }
+  gap: 0.5em;
+  margin: 2em 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include media-tablet {
+    gap: 10px;
+  }
 }
+
 .content__answers-btn {
-padding: 10px 15px;
-color: #fff;
-cursor: pointer;
-min-width: 150px;
-background: none;
-background-color: #FA9490;
-border-color: #b56576;
-outline: none;
-border-radius: 25px;
+  padding: 10px 15px;
+  color: #fff;
+  cursor: pointer;
+  min-width: 150px;
+  background: none;
+  background-color: #fa9490;
+  border-color: #b56576;
+  outline: none;
+  border-radius: 25px;
+  @include media-mobile {
+    width: 220px;
+  }
 }
+
 .content__answers-btn:hover {
   background-color: #404756;
 }
@@ -148,25 +150,11 @@ border-radius: 25px;
   background-color: #404756;
   margin-bottom: 1em;
 }
-.content__answers-btn_dismiss:hover { 
-  background-color: #FA9490;
+
+.content__answers-btn_dismiss:hover {
+  background-color: #fa9490;
 }
 
-@media screen and (max-width: 1200px) {  
-
-  .audio-game__content {
-    width: 85vw;
-    height: fit-content;
-  }
-  .content__answers {
-    justify-content: center;
-    margin: 1em 0;
-    gap: 15px;
-  }
-  .content__answers-btn_dismiss {
-    margin-bottom: 1em;
-  }
-}
 .content__results {
   @include media-mobile {
     margin-bottom: 15px;

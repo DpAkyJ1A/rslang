@@ -1,7 +1,6 @@
 import Control from 'control';
 import Page from '../page';
 import { Chart, registerables } from 'chart.js';
-import { IState } from 'components/controller/controller';
 import { IStatistics } from '../../../api/interfaces';
 Chart.register(...registerables);
 
@@ -95,7 +94,6 @@ export default class StatsPage extends Page {
             const lengthSprint = data.optional.sprint?.learnedWords.length || 0;
             const lengthAudio = data.optional.audio?.learnedWords.length || 0;
 
-            const length = lengthSprint > lengthAudio ? lengthSprint : lengthAudio;
             let datesLabels: string[] = [];
 
             const sprintDatesLabels: string[] = [];
@@ -125,7 +123,6 @@ export default class StatsPage extends Page {
             for (let i = 0; i < audioLearnedWordsArr.length; i++) {
                 const audioWords = data.optional.audio?.learnedWords[i].stat || 0;
                 wordsNumber.push(audioWords);
-
             }
 
             const fontColor = '#fff';

@@ -1,4 +1,3 @@
-import { SprintGameLaunchMode } from 'components/games/sprint/types';
 import Control from 'control';
 
 export default class WrapperGamePage extends Control {

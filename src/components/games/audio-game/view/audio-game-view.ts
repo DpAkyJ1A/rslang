@@ -1,8 +1,7 @@
-import { IState } from 'components/controller/controller';
-import { IGameResult, IGameWord, SprintGameLaunchMode } from 'components/games/sprint/types';
+import { SprintGameLaunchMode } from 'components/games/sprint/types';
 import { createStartGameControls } from '../../../games/sprint/view/__controls/controls';
 import Control from '../../../view/control';
-import { AudioGameLaunchMode, AudioGameStages, IAudioGameResult, IAudioGameScore, IAudioGameWord } from '../types';
+import { AudioGameStages, IAudioGameResult, IAudioGameScore, IAudioGameWord } from '../types';
 import WrapperGamePage from './welcome-page-view';
 
 const baseUrl = 'https://rs-lang-team-156.herokuapp.com/';
@@ -193,8 +192,10 @@ export default class AudioView {
 
     closeGame = () => {
         this.wrapper.destroy();
-        (document.querySelector('.games-page')?.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
-            node.style.display = 'flex';
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = '';
+        (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+            node.style.display = '';
         });
     };
 

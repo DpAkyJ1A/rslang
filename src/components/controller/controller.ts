@@ -1,4 +1,4 @@
-import { IWord, IUserWordResp, IStatistics } from '../api/interfaces';
+import { IWord, IStatistics } from '../api/interfaces';
 import TextbookModel from '../model/textbook-model';
 import { parseHashString } from '../utils/parseHashString';
 import Loader from '../view/pages/common/loader/loader';

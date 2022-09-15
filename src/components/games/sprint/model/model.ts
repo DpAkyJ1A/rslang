@@ -1,13 +1,5 @@
 import ApiService from '../../../api/api';
-import {
-    IStatistics,
-    IUserWord,
-    IUserWordResp,
-    IWord,
-    IStatsPerDay,
-    IGameStats,
-    IOptionalStats,
-} from '../../../api/interfaces';
+import { IStatistics, IUserWord, IUserWordResp, IWord, IStatsPerDay, IGameStats } from '../../../api/interfaces';
 import { shuffleArray } from '../../../utils/shuffleArray';
 import { IGameResult, IGameWord } from '../types/index';
 
@@ -95,7 +87,7 @@ export class SprintModel extends ApiService {
         score: number,
         data: IGameResult
     ) {
-        let newWords = 0;
+        // let newWords = 0;
         let learnedWords = 0;
         const numberOfQuestions = data.right.length + data.wrong.length;
 
@@ -163,7 +155,7 @@ export class SprintModel extends ApiService {
                             },
                             user.token
                         ).then(() => console.log('new word!!'));
-                        newWords++;
+                        // newWords++;
                     }
                 })
         );
@@ -263,7 +255,7 @@ export class SprintModel extends ApiService {
                         },
                         user.token
                     ).then(() => console.log('new word!! but hard'));
-                    newWords++;
+                    // newWords++;
                 }
             }
         });
