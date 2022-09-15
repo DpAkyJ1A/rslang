@@ -7,6 +7,18 @@
   font-size: 1.3rem;
   gap: 5px;
   flex-direction: column;
+  @include media-tablet{
+    font-size: 0.9rem;
+    right: 5px;
+    top: 50px;
+  }
+  @include media-mobile{
+    font-size: 0.9rem;
+    right: unset;
+    left: 5px;
+    top: unset;
+    bottom: 5px;
+  }
 }
 
 .played-qty__sprint-icon, 
@@ -20,6 +32,22 @@
   display: flex;
 }
 
+.played-qty__played{
+  @include media-tablet{
+    flex-wrap: wrap;
+    color: transparent;
+    *{
+      color: #fff;
+    }
+  }
+}
+
+.played-qty__answer{
+  @include media-tablet{
+    width: fit-content;
+    margin-left: 40px;
+  }
+}
 
 .played-qty__sprint-icon svg,
 .played-qty__audio-icon svg {

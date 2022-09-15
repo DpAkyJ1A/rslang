@@ -4,7 +4,7 @@
   white-space: nowrap;
   position: absolute;
   top: 15px;
-  @include media-mobile{
+  @include media-tablet{
     white-space: unset;
     position: static;
   }
@@ -110,7 +110,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding-top: 50px;
-  @include media-mobile{
+  @include media-tablet{
     padding-top: 15px;
   }
 }
