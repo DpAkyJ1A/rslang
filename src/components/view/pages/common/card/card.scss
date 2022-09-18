@@ -1,6 +1,13 @@
 .card__header {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  position: absolute;
+  top: 15px;
+  @include media-tablet{
+    white-space: unset;
+    position: static;
+  }
 }
 
 .card__word {
@@ -9,6 +16,7 @@
 }
 
 .card {
+  border-radius: 25px;
   position: relative;
   background-color: $colorLink5;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -18,36 +26,48 @@
   }
   @include media-mobile{
     flex-direction: column;
-    min-width: 320px;
+    min-width: 300px;
   }
 }
+
 
 .card:nth-child(20){
   margin-bottom: 10px;
 }
 
 .card__preview{
-  min-width: 320px;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+  min-width: 300px;
   min-height: 270px;
   overflow: hidden;
   background-position: center;
   background-size: cover;
+  @include media-mobile{
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 25px;
+  }
 }
 
 
 .card__icon {
   margin-right: 10px;
-  height: 20px; 
-  width: 30px;
+  max-height: 22px; 
+  max-width: 25px;
   transform: scale(1.3);
+}
+
+.play-mode{
+  max-width: 20px;
+  max-height: 20px;
 }
 
 .card__icon-container{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: fit-content;
+  height: fit-content;
   margin-left: 10px;
 }
 
@@ -77,6 +97,9 @@
 .card__translation_disabled {
   display: none;
 }
+.card__example{
+  margin-top: 15px;
+}
 .card__example > h3 > i {
   color: $colorLink0;
 }
@@ -86,8 +109,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 50px;
+  padding-top: 50px;
+  @include media-tablet{
+    padding-top: 15px;
+  }
 }
+
 
 .card__word {
   width: fit-content;

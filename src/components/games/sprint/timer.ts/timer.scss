@@ -5,6 +5,14 @@
   left: 15px;
   top: 15px;
   z-index: 10;
+  background-color: #fff;
+  border-radius: 50%;
+  @include media-mobile{
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    left: -20px;
+  }
 }
 
 .timer__wrapper {
@@ -25,7 +33,7 @@
 }
 
 .timer__display {
-  color: #fff;
+  color: $color-gray-dark;
   font-size: 1.5rem;
 }
 
@@ -50,4 +58,3 @@
       box-shadow: rgba(232, 90, 70, 0.1) 0px 0px 0px 15px;
     }
 }
-

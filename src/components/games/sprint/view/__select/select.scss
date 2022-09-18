@@ -1,7 +1,6 @@
 .select {
   position: relative;
-  width: 200px;
-  margin-right: 30px;
+  width: 220px;
 }
 
 .select_disabled {
@@ -16,20 +15,22 @@
   cursor: pointer;
   position: relative;
   padding: 10px 15px;
-  border: 2px solid #b56576;
+  border: 2px solid $colorLink4;
+  border-radius: 25px;
 }
 
 .select__list {
+  padding: 45px 0 10px 0;
+  border-radius: 25px;
   left: 0;
   right: 0;
   position: absolute;
-  background-color: #e56b6f;
-  border: 2px solid #e56b6f;
-  border-top: none;
+  background-color: $colorLink4;
+  border: 2px solid $colorLink4;
 }
 
 .select__item {
-  padding: 5px 10px;
+  padding: 5px 15px;
   cursor: pointer;
 }
 

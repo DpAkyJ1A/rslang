@@ -158,7 +158,7 @@ export default class ApiService {
     }
 
     // в методе нет фильтрации
-    async getAggregatedWords(id: string, group: number, token: string, page?: number, wordsPerPage?: number) {
+    async getAggregatedWords(id: string, group: number, token: string, page?: number) {
         return await fetch(`${this.baseUrl}/users/${id}/aggregatedWords?group=${group}&page=${page}`, {
             method: 'GET',
             headers: {

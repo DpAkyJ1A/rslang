@@ -1,7 +1,7 @@
 import Control from 'control';
 import Page from '../page';
 import { Chart, registerables } from 'chart.js';
-import { IState } from 'components/controller/controller';
+import { IStatistics } from '../../../api/interfaces';
 Chart.register(...registerables);
 
 export default class StatsPage extends Page {
@@ -9,48 +9,145 @@ export default class StatsPage extends Page {
         super('stats-page');
     }
 
-    public render(container: HTMLElement) {
+    public render(container: HTMLElement, data?: IStatistics | null | undefined) {
         this.container.innerHTML = '';
+        if (data) {
+            console.log(data);
+            const date = new Date();
+            const currentDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` as string;
 
-        const learnedWords = 10;
-        const correctAnswerPercent = 21;
-        this.createStatsForToday(learnedWords, correctAnswerPercent);
+            const sprintGameStats = data.optional.sprint;
+            let sprintNumberOfQuestions = 0;
+            let sprintNumberOfCorrectAnswers = 0;
+            let sprintCorrectAnswerPercent = 0;
+            let sprintLearnedWords = 0;
+            let sprintLongestSeries = 0;
+            if (
+                currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date
+            ) {
+                sprintNumberOfQuestions =
+                    sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].stat || 0;
+                sprintNumberOfCorrectAnswers =
+                    sprintGameStats?.numberOfCorrectAnswers[sprintGameStats?.numberOfCorrectAnswers.length - 1].stat ||
+                    0;
+                sprintCorrectAnswerPercent =
+                    Math.round((sprintNumberOfCorrectAnswers / sprintNumberOfQuestions) * 100) || 0;
+                sprintLearnedWords = sprintGameStats?.learnedWords[sprintGameStats?.learnedWords.length - 1].stat || 0;
+                sprintLongestSeries =
+                    sprintGameStats?.longerSeriesOfAnswers[sprintGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
+            }
 
-        const sprintLearnedWords = 5;
-        const sprintCorrectAnswerPercent = 12;
-        const longestSeries = 6;
+            const audioGameStats = data.optional.audio;
+            let audioNumberOfQuestions = 0;
+            let audioNumberOfCorrectAnswers = 0;
+            let audioCorrectAnswerPercent = 0;
+            let audioLearnedWords = 0;
+            let audioLongestSeries = 0;
+            if (
+                currentDate === sprintGameStats?.numberOfQuestions[sprintGameStats?.numberOfQuestions.length - 1].date
+            ) {
+                audioNumberOfQuestions =
+                    audioGameStats?.numberOfQuestions[audioGameStats?.numberOfQuestions.length - 1].stat || 0;
+                audioNumberOfCorrectAnswers =
+                    audioGameStats?.numberOfCorrectAnswers[audioGameStats?.numberOfCorrectAnswers.length - 1].stat || 0;
+                audioCorrectAnswerPercent =
+                    Math.round((audioNumberOfCorrectAnswers / audioNumberOfQuestions) * 100) || 0;
+                audioLearnedWords = audioGameStats?.learnedWords[audioGameStats?.learnedWords.length - 1].stat || 0;
+                audioLongestSeries =
+                    audioGameStats?.longerSeriesOfAnswers[audioGameStats?.longerSeriesOfAnswers.length - 1].stat || 0;
+            }
+            console.log(audioGameStats, sprintGameStats);
 
-        const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
-        this.createGameStats(
-            gameCardsContainer,
-            'Sprint',
-            sprintLearnedWords,
-            sprintCorrectAnswerPercent,
-            longestSeries
-        );
-        this.createGameStats(gameCardsContainer, 'Pip', sprintLearnedWords, sprintCorrectAnswerPercent, longestSeries);
+            const learnedWords = sprintLearnedWords + audioLearnedWords;
+            const correctAnswerPercent =
+                Math.round(
+                    ((sprintNumberOfCorrectAnswers + audioNumberOfCorrectAnswers) /
+                        (sprintNumberOfQuestions + audioNumberOfQuestions)) *
+                        100
+                ) || 0;
 
-        new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
-        const chartsContainer = new Control(this.container, 'div', 'charts-container').node;
+            this.createStatsForToday(learnedWords, correctAnswerPercent);
 
-        const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
-        let header = 'New words per day';
-        const datesLabels = ['21.08', '26.08', '27.08', '31.08', '02.09', '03.09'];
-        const wordsNumber = [12, 5, 13, 21, 3, 8];
-        const fontColor = '#fff';
-        let borderColor = 'rgb(75, 192, 192)';
+            const gameCardsContainer = new Control(this.container, 'div', 'game-cards-container').node;
+            this.createGameStats(
+                gameCardsContainer,
+                'Sprint',
+                sprintLearnedWords,
+                sprintCorrectAnswerPercent,
+                sprintLongestSeries
+            );
 
-        this.createLongTermStats(chart1Container, header, datesLabels, wordsNumber, fontColor, borderColor);
+            this.createGameStats(
+                gameCardsContainer,
+                'Audio',
+                audioLearnedWords,
+                audioCorrectAnswerPercent,
+                audioLongestSeries
+            );
 
-        const chart2Container = new Control(chartsContainer, 'div', 'chart2-container').node;
-        header = 'Number of new words';
-        const wordsNumber2 = [wordsNumber[0]];
-        for (let i = 1; i < wordsNumber.length; i++) {
-            wordsNumber2[i] = wordsNumber2[i - 1] + wordsNumber[i];
+            new Control(this.container, 'h2', 'stats-page__header', `Stats for all time`);
+            const chartsContainer = new Control(this.container, 'div', 'charts-container').node;
+
+            const chart1Container = new Control(chartsContainer, 'div', 'chart1-container').node;
+            let header = 'New words per day';
+
+            const lengthSprint = data.optional.sprint?.learnedWords.length || 0;
+            const lengthAudio = data.optional.audio?.learnedWords.length || 0;
+
+            let datesLabels: string[] = [];
+
+            const sprintDatesLabels: string[] = [];
+            for (let i = 0; i < lengthSprint; i++) {
+                const temp = data.optional.sprint?.learnedWords[i].date || '';
+                sprintDatesLabels.push(temp);
+            }
+
+            const audioDatesLabels: string[] = [];
+            for (let i = 0; i < lengthAudio; i++) {
+                const temp = data.optional.audio?.learnedWords[i].date || '';
+                audioDatesLabels.push(temp);
+            }
+            datesLabels.push(...sprintDatesLabels, ...audioDatesLabels);
+            datesLabels = Array.from(new Set(datesLabels));
+
+            const wordsNumber: number[] = [];
+            // длина массивов у разнх иигр разная может быть, вылетает ошибон
+            const sprintLearnedWordsArr = data.optional.sprint?.learnedWords as Array<object>;
+            const audioLearnedWordsArr = data.optional.audio?.learnedWords as Array<object>;
+
+            for (let i = 0; i < sprintLearnedWordsArr?.length; i++) {
+                const sprintWords = data.optional.sprint?.learnedWords[i].stat || 0;
+                wordsNumber.push(sprintWords);
+            }
+
+            for (let i = 0; i < audioLearnedWordsArr.length; i++) {
+                const audioWords = data.optional.audio?.learnedWords[i].stat || 0;
+                wordsNumber.push(audioWords);
+            }
+
+            const fontColor = '#fff';
+            let borderColor = 'rgb(75, 192, 192)';
+
+            this.createLongTermStats(chart1Container, header, datesLabels, wordsNumber, fontColor, borderColor);
+
+            const chart2Container = new Control(chartsContainer, 'div', 'chart2-container').node;
+            header = 'Number of new words';
+            const wordsNumber2 = [wordsNumber[0]];
+            for (let i = 1; i < wordsNumber.length; i++) {
+                wordsNumber2[i] = wordsNumber2[i - 1] + wordsNumber[i];
+            }
+            borderColor = '#ff4d89';
+
+            this.createLongTermStats(chart2Container, header, datesLabels, wordsNumber2, fontColor, borderColor);
+        } else {
+            new Control(this.container, 'div', 'dictionary-page__error').node.innerHTML = `
+            Unfortunately there are no stats yet<br>
+            To start tracking your progress, try to play any game
+            <p class="card__translation">
+            К сожалению статистики пока нет<br>
+            Чтобы начать отслеживать свой прогресс, попробуй сыграть в игру 
+            </p>`;
         }
-        borderColor = '#ff4d89';
-
-        this.createLongTermStats(chart2Container, header, datesLabels, wordsNumber2, fontColor, borderColor);
 
         super.render(container);
     }
@@ -126,6 +223,13 @@ export default class StatsPage extends Page {
         new Chart(chartCanvas as HTMLCanvasElement, {
             type: 'line',
             data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            },
         });
     }
 }

@@ -17,6 +17,9 @@ export interface IWord {
     textExampleTranslate: string;
     // для учебника
     status?: BadgeType;
+    sprintAppearance: number;
+    audioAppearance?: number;
+    rightAnswers?: number;
 }
 
 export interface IUser {
@@ -39,13 +42,13 @@ export interface IUserWord {
         // word: string;
         // textMeaning: string;
         // textExample: string;
-        wasInGame: boolean;
+        sprintAppearances: number;
+        audioAppearances: number;
         rightAnswers: number;
     };
 }
 
-export interface IUserWordResp {
-    difficulty: string;
+export interface IUserWordResp extends IUserWord {
     id: string;
     wordId: string;
 }
@@ -59,16 +62,22 @@ export interface ISettings {
 
 export interface IStatistics {
     learnedWords: number;
-    optional: {
-        newLearnedWordSprint?: number;
-        newWordsPerDaySprint?: number;
-        percentCorrectOfAnswersSprint?: number;
-        longerSeriaOfAnswersSprint?: number;
-        newWordsPerDayAudio?: number;
-        percentCorrectOfAnswersAudio?: number;
-        longerSeriaOfAnswersAudio?: number;
-        newWordsPerDay?: number;
-        countLearnedWordsPerDay?: number;
-        percentCorrectOfAnswersPerDay?: number;
-    };
+    optional: IOptionalStats;
+}
+
+export interface IStatsPerDay {
+    date: string;
+    stat: number;
+}
+
+export interface IGameStats {
+    learnedWords: IStatsPerDay[];
+    numberOfQuestions: IStatsPerDay[];
+    numberOfCorrectAnswers: IStatsPerDay[];
+    longerSeriesOfAnswers: IStatsPerDay[];
+}
+
+export interface IOptionalStats {
+    sprint?: IGameStats;
+    audio?: IGameStats;
 }

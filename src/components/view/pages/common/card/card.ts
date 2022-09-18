@@ -1,6 +1,7 @@
 import Control from 'control';
 import { IWord } from '../../../../api/interfaces';
-import { BadgeType, createBadge } from '../badge/badge';
+import { createBadge } from '../badge/badge';
+import { createWordGameCounterEl } from '../worsAppearance/worsAppearance';
 
 export default class Card {
     data: IWord;
@@ -75,10 +76,17 @@ export default class Card {
         }
 
         if (this.isAuth) {
-            console.log('im here2');
             const badge = createBadge(this.data.status || undefined);
             this.node.setAttribute('data-id', `${this.data.id}`);
             this.node.append(badge);
+            if (this.data.sprintAppearance || this.data.audioAppearance) {
+                const counter = createWordGameCounterEl(
+                    this.data.sprintAppearance,
+                    this.data.audioAppearance,
+                    this.data.rightAnswers
+                );
+                this.node.append(counter);
+            }
         }
 
         return this.node;

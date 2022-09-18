@@ -7,8 +7,11 @@
   min-height: 50px;
   width: 100%;
   @include media-mobile{
-    flex-direction: column;
+    padding-left: 1em;
     margin-bottom: 20px;
+  }
+  @include media-mobile2{
+    padding-left: 0;
   }
 }
 
@@ -33,15 +36,17 @@
 
 .settings {
   margin-left: auto;
-  @include media-mobile{
-    margin-left: 0;
-    margin-top: 15px;
-  }
 }
 
 .settings__label {
   color: $color-light-xl;
   margin-right: 15px;
+}
+
+@media screen and (max-width: 500px){
+  .settings__label {
+    display: none;
+  }
 }
 
 .settings__switch {

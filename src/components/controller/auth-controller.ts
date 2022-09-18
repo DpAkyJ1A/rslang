@@ -62,7 +62,6 @@ export default class AuthController {
             this.view.signInView.inputName.node.value = '';
             this.view.signInView.inputMail.node.value = '';
             this.view.signInView.inputPass.node.value = '';
-            console.log('res');
         });
 
         this.view.drawAuthInView();
@@ -73,7 +72,7 @@ export default class AuthController {
         event.preventDefault();
         const email = this.view.authView.inputMail.node.value;
         const password = this.view.authView.inputPass.node.value;
-        this.model.sendSighInUserDataToBase({ email, password }).then((res) => {
+        this.model.sendSighInUserDataToBase({ email, password }).then(() => {
             this.view.authView.inputMail.node.value = '';
             this.view.authView.inputPass.node.value = '';
             // на мейн

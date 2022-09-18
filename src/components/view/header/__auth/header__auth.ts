@@ -1,6 +1,5 @@
 import Control from 'control';
 import { route } from '../../side-menu/side-menu-item/side-menu-item';
-import state from '../../../utils/state';
 import AuthController from '../../../controller/auth-controller';
 
 export const createHeaderAuth = (header: HTMLElement, data: { isAuth: boolean; name: string }) => {

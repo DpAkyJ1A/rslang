@@ -1,5 +1,4 @@
 import Control from '../../../view/control';
-import SprintGame from '../sprint';
 import Timer from '../timer.ts/timer';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';
@@ -16,7 +15,7 @@ export default class SprintView {
         this.closeGame = this.closeGame.bind(this);
         this.restartGame = this.restartGame.bind(this);
         this.playAudio = this.playAudio.bind(this);
-        this.enableFullscreen = this.enableFullscreen.bind(this);
+        this.toggleFullscreen = this.toggleFullscreen.bind(this);
         this.toggleSound = this.toggleSound.bind(this);
         this.timer = new Timer();
     }
@@ -27,9 +26,11 @@ export default class SprintView {
         document.dispatchEvent(event);
     }
 
-    enableFullscreen() {
-        if (this.wrapper.node.requestFullscreen) {
+    toggleFullscreen() {
+        if (!document.fullscreenElement) {
             this.wrapper.node.requestFullscreen();
+        } else {
+            document.exitFullscreen();
         }
     }
 
@@ -51,7 +52,7 @@ export default class SprintView {
         closeBtn.node.innerHTML = `
         <svg viewBox="0 0 24 24"><g id="info"/><g id="icons"><path d="M14.8,12l3.6-3.6c0.8-0.8,0.8-2,0-2.8c-0.8-0.8-2-0.8-2.8,0L12,9.2L8.4,5.6c-0.8-0.8-2-0.8-2.8,0   c-0.8,0.8-0.8,2,0,2.8L9.2,12l-3.6,3.6c-0.8,0.8-0.8,2,0,2.8C6,18.8,6.5,19,7,19s1-0.2,1.4-0.6l3.6-3.6l3.6,3.6   C16,18.8,16.5,19,17,19s1-0.2,1.4-0.6c0.8-0.8,0.8-2,0-2.8L14.8,12z" id="exit"/></g></svg>
         `;
-        fullScreen.node.onclick = this.enableFullscreen;
+        fullScreen.node.onclick = this.toggleFullscreen;
         soundControl.node.onclick = this.toggleSound;
         closeBtn.node.onclick = this.closeGame;
         this.wrapper.node.prepend(closeWrapper.node);
@@ -85,7 +86,7 @@ export default class SprintView {
             «Спринт» - это тренировка для повторения заученных слов из вашего словаря.
         `;
         controlDescr.node.innerHTML = `
-                <br>- Используйте мышь, чтобы выбрать.
+                - Используйте мышь, чтобы выбрать.
                 <br> - Используйте клавиши:<br>
                  - "s" для старта<br>
                  - "<" для выбора "true"<br>
@@ -190,6 +191,11 @@ export default class SprintView {
     }
 
     closeGame() {
+        const gamesPage = document.querySelector('.games-page') as HTMLElement;
+        gamesPage.style.display = '';
+        (gamesPage.childNodes as NodeListOf<HTMLElement>).forEach((node) => {
+            node.style.display = '';
+        });
         this.timer?.reset();
         this.wrapper.destroy();
     }

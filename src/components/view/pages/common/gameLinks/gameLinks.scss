@@ -3,7 +3,7 @@
   min-height: 100px;
   position: fixed;
   bottom: 30px;
-  right: 4vw;
+  left: 120px;
   border-radius: 50px;
   // background-color: #e56b6f;
   display: flex;
@@ -15,6 +15,7 @@
     min-height: 70px;
     top: unset;
     bottom: 100px;
+    left: 20px;
   }
 }
 
