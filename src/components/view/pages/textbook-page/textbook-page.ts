@@ -7,9 +7,10 @@ import { createPgnEl } from '../common/pagination/pagination';
 import { IWord } from '../../../api/interfaces';
 import { createGameLinks } from '../common/gameLinks/gameLinks';
 import { IState } from '../../../controller/controller';
+import { address } from '../../../api/address';
 
 // пока без апи
-const URL = 'https://rs-lang-team-156.herokuapp.com/';
+const URL = `${address}/`;
 
 export default class TextbookPage extends Page {
     constructor() {

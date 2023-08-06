@@ -3,8 +3,9 @@ import { createStartGameControls } from '../../../games/sprint/view/__controls/c
 import Control from '../../../view/control';
 import { AudioGameStages, IAudioGameResult, IAudioGameScore, IAudioGameWord } from '../types';
 import WrapperGamePage from './welcome-page-view';
+import { address } from '../../../api/address';
 
-const baseUrl = 'https://rs-lang-team-156.herokuapp.com/';
+const baseUrl = `${address}/`;
 
 export default class AudioView {
     public wrapper: WrapperGamePage;

@@ -4,9 +4,9 @@ import Card from '../common/card/card';
 import { createPageHeader } from '../common/pageHeader/pageHeader';
 
 import { IWord } from '../../../api/interfaces';
+import { address } from '../../../api/address';
 
-// пока без апи
-const URL = 'https://rs-lang-team-156.herokuapp.com/';
+const URL = `${address}/`;
 
 export default class DictionaryPage extends Page {
     constructor() {

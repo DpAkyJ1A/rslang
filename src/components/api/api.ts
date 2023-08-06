@@ -1,7 +1,8 @@
 import { ISettings, IStatistics, IUser, IUserWord } from './interfaces';
+import { address } from './address';
 
 export default class ApiService {
-    baseUrl = 'https://rs-lang-team-156.herokuapp.com';
+    baseUrl = address;
 
     async getWords(page: number, group: number) {
         return await fetch(`${this.baseUrl}/words?page=${page}&group=${group}`).then((res) => res.json());

@@ -2,8 +2,9 @@ import Control from '../../../view/control';
 import Timer from '../timer.ts/timer';
 import { IGameProps, IGameResult, IGameWord, ISprintGameState, SprintGameLaunchMode } from '../types/index';
 import { createStartGameControls } from './__controls/controls';
+import { address } from '../../../api/address';
 
-const baseUrl = 'https://rs-lang-team-156.herokuapp.com/';
+const baseUrl = `${address}/`;
 
 export default class SprintView {
     private content: Control;
